@@ -1,0 +1,22 @@
+                                         Table "public.wttj_jobs"
+    Column    |            Type             | Collation | Nullable |                Default                
+--------------+-----------------------------+-----------+----------+---------------------------------------
+ id           | integer                     |           | not null | nextval('wttj_jobs_id_seq'::regclass)
+ title        | character varying(500)      |           | not null | 
+ company      | character varying(200)      |           | not null | 
+ location     | character varying(200)      |           |          | 
+ description  | text                        |           |          | 
+ contract     | character varying(100)      |           |          | 
+ salary       | character varying(100)      |           |          | 
+ telework     | character varying(100)      |           |          | 
+ source       | character varying(50)       |           |          | 'wttj'::character varying
+ source_id    | character varying(200)      |           |          | 
+ url          | text                        |           |          | 
+ scraped_at   | timestamp without time zone |           |          | now()
+ created_at   | timestamp without time zone |           |          | now()
+ published_at | timestamp without time zone |           |          | 
+ tags         | jsonb                       |           |          | 
+Indexes:
+    "wttj_jobs_pkey" PRIMARY KEY, btree (id)
+    "wttj_jobs_source_id_key" UNIQUE CONSTRAINT, btree (source_id)
+

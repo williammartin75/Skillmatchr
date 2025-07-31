@@ -1,0 +1,12 @@
+{
+  "apec": {
+    "totalJobs": 36,
+    "lastExecution": "2025-07-28T09:36:26.444Z",
+    "dailyStats": {
+      "2025-07-28": {
+        "jobs": 36,
+        "executionTime": "2025-07-28T09:36:26.444Z"
+      }
+    }
+  }
+}

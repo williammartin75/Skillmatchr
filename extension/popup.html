@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkillMatchr - Assistant de Candidature</title>
+    <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="logo">
+                <img src="icons/icon32.png" alt="SkillMatchr" class="logo-icon">
+                <h1>SkillMatchr</h1>
+            </div>
+            <div class="status-indicator" id="statusIndicator">
+                <span class="status-dot"></span>
+                <span class="status-text">Prêt</span>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <!-- Section Configuration -->
+            <section class="config-section">
+                <h2>Configuration</h2>
+                
+                <div class="form-group">
+                    <label for="apiUrl">URL de l'API SkillMatchr:</label>
+                    <input type="url" id="apiUrl" placeholder="http://localhost:3001" value="http://localhost:3001">
+                </div>
+
+                <div class="form-group">
+                    <label for="userId">ID Utilisateur:</label>
+                    <input type="text" id="userId" placeholder="Votre ID utilisateur">
+                </div>
+
+                <div class="form-group">
+                    <label for="apiKey">Clé API:</label>
+                    <input type="password" id="apiKey" placeholder="Votre clé API">
+                </div>
+            </section>
+
+            <!-- Section Identifiants de connexion -->
+            <section class="credentials-section">
+                <h2>Identifiants de connexion</h2>
+                
+                <div class="credentials-tabs">
+                    <button class="tab-button active" data-tab="apec">APEC</button>
+                    <button class="tab-button" data-tab="linkedin">LinkedIn</button>
+                    <button class="tab-button" data-tab="indeed">Indeed</button>
+                    <button class="tab-button" data-tab="poleemploi">Pôle Emploi</button>
+                </div>
+
+                <div class="tab-content active" id="apec-tab">
+                    <div class="form-group">
+                        <label for="apecEmail">Email APEC:</label>
+                        <input type="email" id="apecEmail" placeholder="votre.email@example.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="apecPassword">Mot de passe APEC:</label>
+                        <input type="password" id="apecPassword" placeholder="Votre mot de passe">
+                    </div>
+                    <div class="form-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="apecEnabled">
+                            <span class="checkmark"></span>
+                            Activer la candidature automatique APEC
+                        </label>
+                    </div>
+                </div>
+
+                <div class="tab-content" id="linkedin-tab">
+                    <div class="form-group">
+                        <label for="linkedinEmail">Email LinkedIn:</label>
+                        <input type="email" id="linkedinEmail" placeholder="votre.email@example.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="linkedinPassword">Mot de passe LinkedIn:</label>
+                        <input type="password" id="linkedinPassword" placeholder="Votre mot de passe">
+                    </div>
+                    <div class="form-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="linkedinEnabled">
+                            <span class="checkmark"></span>
+                            Activer la candidature automatique LinkedIn
+                        </label>
+                    </div>
+                </div>
+
+                <div class="tab-content" id="indeed-tab">
+                    <div class="form-group">
+                        <label for="indeedEmail">Email Indeed:</label>
+                        <input type="email" id="indeedEmail" placeholder="votre.email@example.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="indeedPassword">Mot de passe Indeed:</label>
+                        <input type="password" id="indeedPassword" placeholder="Votre mot de passe">
+                    </div>
+                    <div class="form-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="indeedEnabled">
+                            <span class="checkmark"></span>
+                            Activer la candidature automatique Indeed
+                        </label>
+                    </div>
+                </div>
+
+                <div class="tab-content" id="poleemploi-tab">
+                    <div class="form-group">
+                        <label for="poleemploiEmail">Email Pôle Emploi:</label>
+                        <input type="email" id="poleemploiEmail" placeholder="votre.email@example.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="poleemploiPassword">Mot de passe Pôle Emploi:</label>
+                        <input type="password" id="poleemploiPassword" placeholder="Votre mot de passe">
+                    </div>
+                    <div class="form-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="poleemploiEnabled">
+                            <span class="checkmark"></span>
+                            Activer la candidature automatique Pôle Emploi
+                        </label>
+                    </div>
+                </div>
+
+                <div class="credentials-actions">
+                    <button id="saveCredentials" class="btn-primary">
+                        💾 Sauvegarder les identifiants
+                    </button>
+                    <button id="testConnection" class="btn-secondary">
+                        🔗 Tester la connexion
+                    </button>
+                </div>
+            </section>
+
+            <!-- Section Profils -->
+            <section class="profiles-section">
+                <h2>Profils de Candidature</h2>
+                
+                <div class="profile-selector">
+                    <label for="profileSelect">Profil actif:</label>
+                    <select id="profileSelect">
+                        <option value="">Sélectionner un profil</option>
+                    </select>
+                    <button id="refreshProfiles" class="btn-secondary">🔄</button>
+                </div>
+
+                <div class="profile-info" id="profileInfo" style="display: none;">
+                    <div class="profile-details">
+                        <p><strong>CV:</strong> <span id="cvName">-</span></p>
+                        <p><strong>Lettre de motivation:</strong> <span id="coverLetterName">-</span></p>
+                        <p><strong>Compétences:</strong> <span id="skills">-</span></p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section Actions -->
+            <section class="actions-section">
+                <h2>Actions</h2>
+                
+                <div class="action-buttons">
+                    <button id="detectJob" class="btn-primary">
+                        🔍 Détecter l'offre
+                    </button>
+                    
+                    <button id="applyJob" class="btn-success" disabled>
+                        📝 Postuler automatiquement
+                    </button>
+                    
+                    <button id="saveJob" class="btn-secondary">
+                        💾 Sauvegarder l'offre
+                    </button>
+                </div>
+
+                <div class="job-info" id="jobInfo" style="display: none;">
+                    <h3>Offre détectée:</h3>
+                    <div class="job-details">
+                        <p><strong>Titre:</strong> <span id="jobTitle">-</span></p>
+                        <p><strong>Entreprise:</strong> <span id="jobCompany">-</span></p>
+                        <p><strong>Localisation:</strong> <span id="jobLocation">-</span></p>
+                        <p><strong>Type:</strong> <span id="jobType">-</span></p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section Statut -->
+            <section class="status-section">
+                <h2>Statut</h2>
+                
+                <div class="status-log" id="statusLog">
+                    <div class="log-entry">
+                        <span class="log-time">12:00</span>
+                        <span class="log-message">Extension prête</span>
+                    </div>
+                </div>
+
+                <div class="progress-container" id="progressContainer" style="display: none;">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                    <span class="progress-text" id="progressText">0%</span>
+                </div>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <div class="footer-links">
+                <a href="#" id="openDashboard">Dashboard</a>
+                <a href="#" id="openSettings">Paramètres</a>
+                <a href="#" id="openHelp">Aide</a>
+            </div>
+        </footer>
+    </div>
+
+    <script src="popup.js"></script>
+</body>
+</html> 

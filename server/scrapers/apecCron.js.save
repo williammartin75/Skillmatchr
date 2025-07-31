@@ -1,0 +1,7 @@
+wget -O server/scrapers/apecCron.js https://raw.githubusercontent.com/example/apec-scraper/main/apecCron.js
+pwd
+echo "const { chromium } = require('playwright');" > server/scrapers/apecCron.js
+cp server/scrapers/apecCron_fixed.js server/scrapers/apecCron.js
+cp server/scrapers/apecCron_fixed.js server/scrapers/apecCron.js && echo "Fichier copié avec succès"
+echo "const { chromium } = require('playwright');" > server/scrapers/apecCron.js
+

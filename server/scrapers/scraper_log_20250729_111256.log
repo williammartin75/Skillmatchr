@@ -1,0 +1,26 @@
+
+🚀 DÉBUT DU SCRAPING APEC CRON
+⏰ Heure de début: 29/07/2025 11:12:56
+🔄 Début de la mise à jour de la date de dernière exécution...
+📅 Date actuelle: 2025-07-29T11:12:56.239Z
+🔧 Création/vérification de la table apec_scraping_stats...
+✅ Table apec_scraping_stats prête
+📝 Mise à jour de l'enregistrement existant...
+✅ Enregistrement mis à jour: {
+  last_execution_time: 2025-07-29T11:12:56.239Z,
+  scraper_name: 'apec_cron'
+}
+✅ Date de dernière exécution APEC mise à jour
+🗄️ Initialisation de la base de données APEC...
+✅ Base de données 'apec_database' existe déjà
+📋 Création des tables APEC...
+✅ Tables APEC créées avec succès
+✅ Base de données APEC initialisée avec succès
+✅ Connexion à la base de données PostgreSQL réussie
+📚 Chargement des villes françaises depuis la base de données des jobs...
+❌ Erreur lors du chargement des villes depuis la base de données: database "jobs_database" does not exist
+
+📄 Scraping page 1...
+🌐 52/52 proxies disponibles
+🌐 Tentative 1/5 avec proxy: 156.228.189.249:3129
+🔗 Navigation vers: https://www.apec.fr/candidat/recherche-emploi.html/emploi?typesConvention=143706&anciennetePublication=101850&sortsType=DATE&page=0

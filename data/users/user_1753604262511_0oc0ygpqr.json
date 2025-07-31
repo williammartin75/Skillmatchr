@@ -1,0 +1,464 @@
+{
+  "id": "user_1753604262511_0oc0ygpqr",
+  "firstName": "Antoine",
+  "lastName": "Lorence",
+  "email": "alorence@flokod.com",
+  "password": "aaaaaa",
+  "createdAt": "2025-07-27T08:17:42.511Z",
+  "profile": {
+    "firstName": "Antoine",
+    "lastName": "Lorence",
+    "email": "alorence@flokod.com",
+    "phone": "0670055137",
+    "address": "",
+    "skills": [],
+    "experience": [],
+    "education": []
+  },
+  "documents": [
+    {
+      "id": "doc_1753604262512",
+      "name": "cv-lorence-antoine.pdf",
+      "type": "cv",
+      "path": "/uploads/users/user_1753604262511_0oc0ygpqr/cv-1753604262511-cv-lorence-antoine.pdf",
+      "uploadedAt": "2025-07-27T08:17:42.512Z",
+      "extractedInfo": {
+        "firstName": "Antoine",
+        "lastName": "Lorence",
+        "email": "alorence@flokod.com",
+        "phone": "0670055137"
+      }
+    }
+  ],
+  "matchingResults": {
+    "success": true,
+    "message": "Matching terminé avec succès",
+    "data": {
+      "userId": "user_1753604262511_0oc0ygpqr",
+      "timestamp": "2025-07-27T08:17:43.020Z",
+      "cvAnalysis": {
+        "skills": [
+          "Python",
+          "Django",
+          "Flask",
+          "FastAPI",
+          "Vue.js",
+          "Vanilla JS",
+          "HTML",
+          "CSS",
+          "PostgreSQL",
+          "C++",
+          "Qt",
+          "CMake",
+          "Ansible",
+          "Docker",
+          "Swarm",
+          "GitHub Actions",
+          "Gitlab CI",
+          "Drone CI",
+          "Grafana",
+          "Graylog",
+          "Traefik"
+        ],
+        "experiences": [
+          {
+            "title": "Développeur Django",
+            "company": "LA POSTE",
+            "yearsAgo": 1,
+            "temporalWeight": 1,
+            "description": "Maintenance applicative de la plateforme Xaas"
+          },
+          {
+            "title": "Développeur Django",
+            "company": "LENGOW",
+            "yearsAgo": 3,
+            "temporalWeight": 0.8,
+            "description": "Maintenance du module de gestion des marketplaces"
+          },
+          {
+            "title": "Développeur Python",
+            "company": "OVHCLOUD",
+            "yearsAgo": 5,
+            "temporalWeight": 0.6,
+            "description": "Renouvellement des outils interne de collaboration"
+          },
+          {
+            "title": "Développeur Django",
+            "company": "IMBRIKATION",
+            "yearsAgo": 5,
+            "temporalWeight": 0.6,
+            "description": "Développement du portail web Vigicube.fr"
+          },
+          {
+            "title": "Formateur Python/Django",
+            "company": "IMIE",
+            "yearsAgo": 6,
+            "temporalWeight": 0.4,
+            "description": "Préparation et animation de formations"
+          }
+        ],
+        "education": {
+          "degree": "Master Informatique",
+          "institution": "INSA Rennes",
+          "year": 2012,
+          "specialization": "Développement logiciel"
+        },
+        "location": "Paris",
+        "contractPreferences": [
+          "CDI",
+          "Freelance"
+        ],
+        "salaryRange": "45k-70k€",
+        "remotePreference": true
+      },
+      "matchedJobs": [
+        {
+          "id": 1,
+          "title": "Développeur Full Stack",
+          "company": "TechCorp",
+          "location": "Paris",
+          "type": "CDI",
+          "salary": "45k-65k€",
+          "description": "Nous recherchons un développeur Full Stack expérimenté pour rejoindre notre équipe...",
+          "skills": [
+            "React",
+            "Node.js",
+            "PostgreSQL",
+            "AWS"
+          ],
+          "postedDate": "2024-01-15",
+          "remote": true,
+          "source": "LinkedIn",
+          "matchPercentage": 77,
+          "matchingSkills": [
+            "PostgreSQL"
+          ]
+        },
+        {
+          "id": 31,
+          "title": "Développeur Full Stack Senior",
+          "company": "LyonTech",
+          "location": "Villeurbanne",
+          "type": "CDI",
+          "salary": "65k-85k€",
+          "description": "Lead technique pour projets complexes...",
+          "skills": [
+            "React",
+            "Node.js",
+            "PostgreSQL",
+            "AWS"
+          ],
+          "postedDate": "2024-01-16",
+          "remote": true,
+          "source": "Indeed",
+          "matchPercentage": 67,
+          "matchingSkills": [
+            "PostgreSQL"
+          ]
+        },
+        {
+          "id": 15,
+          "title": "Développeur Game",
+          "company": "GameStudio",
+          "location": "Angers",
+          "type": "CDI",
+          "salary": "40k-60k€",
+          "description": "Créez des jeux vidéo passionnants...",
+          "skills": [
+            "Unity",
+            "C#",
+            "Game Design",
+            "3D Modeling"
+          ],
+          "postedDate": "2024-01-01",
+          "remote": true,
+          "source": "Indeed",
+          "matchPercentage": 65,
+          "matchingSkills": []
+        },
+        {
+          "id": 19,
+          "title": "Développeur IoT",
+          "company": "IoT Solutions",
+          "location": "Saint-Étienne",
+          "type": "CDI",
+          "salary": "50k-70k€",
+          "description": "Développez des solutions IoT innovantes...",
+          "skills": [
+            "Embedded Systems",
+            "MQTT",
+            "Raspberry Pi",
+            "Arduino"
+          ],
+          "postedDate": "2023-12-28",
+          "remote": true,
+          "source": "Indeed",
+          "matchPercentage": 65,
+          "matchingSkills": [
+            "MQTT"
+          ]
+        },
+        {
+          "id": 7,
+          "title": "Développeur Backend",
+          "company": "BackendPro",
+          "location": "Strasbourg",
+          "type": "CDI",
+          "salary": "45k-60k€",
+          "description": "Développez des APIs robustes et des services backend...",
+          "skills": [
+            "Java",
+            "Spring Boot",
+            "PostgreSQL",
+            "Redis"
+          ],
+          "postedDate": "2024-01-09",
+          "remote": false,
+          "source": "Indeed",
+          "matchPercentage": 64,
+          "matchingSkills": [
+            "PostgreSQL"
+          ]
+        },
+        {
+          "id": 5,
+          "title": "Développeur Frontend",
+          "company": "WebSolutions",
+          "location": "Nantes",
+          "type": "CDI",
+          "salary": "40k-55k€",
+          "description": "Créez des interfaces utilisateur modernes et performantes...",
+          "skills": [
+            "React",
+            "TypeScript",
+            "CSS",
+            "GraphQL"
+          ],
+          "postedDate": "2024-01-11",
+          "remote": false,
+          "source": "Apec",
+          "matchPercentage": 63,
+          "matchingSkills": [
+            "CSS"
+          ]
+        },
+        {
+          "id": 17,
+          "title": "Développeur Full Stack Senior",
+          "company": "SeniorTech",
+          "location": "Reims",
+          "type": "CDI",
+          "salary": "70k-90k€",
+          "description": "Lead technique pour des projets complexes...",
+          "skills": [
+            "Architecture",
+            "Mentoring",
+            "System Design",
+            "Microservices"
+          ],
+          "postedDate": "2023-12-30",
+          "remote": true,
+          "source": "LinkedIn",
+          "matchPercentage": 62,
+          "matchingSkills": []
+        },
+        {
+          "id": 10,
+          "title": "Développeur Mobile",
+          "company": "MobileApp",
+          "location": "Nice",
+          "type": "CDI",
+          "salary": "45k-65k€",
+          "description": "Créez des applications mobiles innovantes...",
+          "skills": [
+            "React Native",
+            "iOS",
+            "Android",
+            "Firebase"
+          ],
+          "postedDate": "2024-01-06",
+          "remote": false,
+          "source": "Apec",
+          "matchPercentage": 61,
+          "matchingSkills": []
+        },
+        {
+          "id": 13,
+          "title": "Développeur Blockchain",
+          "company": "BlockchainCorp",
+          "location": "Toulon",
+          "type": "CDI",
+          "salary": "60k-85k€",
+          "description": "Développez des solutions blockchain innovantes...",
+          "skills": [
+            "Solidity",
+            "Ethereum",
+            "Smart Contracts",
+            "Web3"
+          ],
+          "postedDate": "2024-01-03",
+          "remote": true,
+          "source": "LinkedIn",
+          "matchPercentage": 61,
+          "matchingSkills": []
+        },
+        {
+          "id": 41,
+          "title": "Développeur Web",
+          "company": "WebAgency",
+          "location": "Paris",
+          "type": "CDD / Temporaire",
+          "salary": "40k-55k€",
+          "description": "Développement web moderne...",
+          "skills": [
+            "JavaScript",
+            "React",
+            "Node.js",
+            "MongoDB"
+          ],
+          "postedDate": "2024-01-06",
+          "remote": true,
+          "source": "Apec",
+          "matchPercentage": 55,
+          "matchingSkills": []
+        }
+      ],
+      "topMatches": [
+        {
+          "id": 1,
+          "title": "Développeur Full Stack",
+          "company": "TechCorp",
+          "location": "Paris",
+          "type": "CDI",
+          "salary": "45k-65k€",
+          "description": "Nous recherchons un développeur Full Stack expérimenté pour rejoindre notre équipe...",
+          "skills": [
+            "React",
+            "Node.js",
+            "PostgreSQL",
+            "AWS"
+          ],
+          "postedDate": "2024-01-15",
+          "remote": true,
+          "source": "LinkedIn",
+          "matchPercentage": 77,
+          "matchingSkills": [
+            "PostgreSQL"
+          ]
+        },
+        {
+          "id": 31,
+          "title": "Développeur Full Stack Senior",
+          "company": "LyonTech",
+          "location": "Villeurbanne",
+          "type": "CDI",
+          "salary": "65k-85k€",
+          "description": "Lead technique pour projets complexes...",
+          "skills": [
+            "React",
+            "Node.js",
+            "PostgreSQL",
+            "AWS"
+          ],
+          "postedDate": "2024-01-16",
+          "remote": true,
+          "source": "Indeed",
+          "matchPercentage": 67,
+          "matchingSkills": [
+            "PostgreSQL"
+          ]
+        },
+        {
+          "id": 15,
+          "title": "Développeur Game",
+          "company": "GameStudio",
+          "location": "Angers",
+          "type": "CDI",
+          "salary": "40k-60k€",
+          "description": "Créez des jeux vidéo passionnants...",
+          "skills": [
+            "Unity",
+            "C#",
+            "Game Design",
+            "3D Modeling"
+          ],
+          "postedDate": "2024-01-01",
+          "remote": true,
+          "source": "Indeed",
+          "matchPercentage": 65,
+          "matchingSkills": []
+        },
+        {
+          "id": 19,
+          "title": "Développeur IoT",
+          "company": "IoT Solutions",
+          "location": "Saint-Étienne",
+          "type": "CDI",
+          "salary": "50k-70k€",
+          "description": "Développez des solutions IoT innovantes...",
+          "skills": [
+            "Embedded Systems",
+            "MQTT",
+            "Raspberry Pi",
+            "Arduino"
+          ],
+          "postedDate": "2023-12-28",
+          "remote": true,
+          "source": "Indeed",
+          "matchPercentage": 65,
+          "matchingSkills": [
+            "MQTT"
+          ]
+        },
+        {
+          "id": 7,
+          "title": "Développeur Backend",
+          "company": "BackendPro",
+          "location": "Strasbourg",
+          "type": "CDI",
+          "salary": "45k-60k€",
+          "description": "Développez des APIs robustes et des services backend...",
+          "skills": [
+            "Java",
+            "Spring Boot",
+            "PostgreSQL",
+            "Redis"
+          ],
+          "postedDate": "2024-01-09",
+          "remote": false,
+          "source": "Indeed",
+          "matchPercentage": 64,
+          "matchingSkills": [
+            "PostgreSQL"
+          ]
+        }
+      ],
+      "summary": {
+        "totalJobsAnalyzed": 10,
+        "averageMatchScore": 64,
+        "bestMatch": {
+          "id": 1,
+          "title": "Développeur Full Stack",
+          "company": "TechCorp",
+          "location": "Paris",
+          "type": "CDI",
+          "salary": "45k-65k€",
+          "description": "Nous recherchons un développeur Full Stack expérimenté pour rejoindre notre équipe...",
+          "skills": [
+            "React",
+            "Node.js",
+            "PostgreSQL",
+            "AWS"
+          ],
+          "postedDate": "2024-01-15",
+          "remote": true,
+          "source": "LinkedIn",
+          "matchPercentage": 77,
+          "matchingSkills": [
+            "PostgreSQL"
+          ]
+        }
+      }
+    }
+  }
+}

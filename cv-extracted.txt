@@ -1,0 +1,121 @@
+Antoine LORENCE
+
+Téléphone
+Courriel
+Adresse
+
+Développeur Python / Django
+Freelance
+
+06 70 05 51 37
+alorence@flokod.com
+161 rue de Fremur
+49000 ANGERS
+
+alorence.me
+antoine‐lorence
+
+alorence
+permis B
+
+COMPÉTENCES
+Développement
+
+DevOps
+
+Divers
+
+– Python, Django, Flask, FastAPI
+– Vue.js, Vanilla JS
+– C++, Qt, CMake
+– HTML, CSS
+– PostgreSQL
+
+– Ansible, Docker, Swarm
+– GitHub Actions, Gitlab CI, Drone CI
+– Grafana, Graylog
+– Traefik
+
+– Tests unitaires & fonctionnels
+– Méthodes agiles
+
+E XPÉRIENCES
+LA POSTE Développeur Django ﴾freelance﴿ 2023 ‐ 2024
+Maintenance applicative de la plateforme Xaas qui gère le pilotage de la gestion des ressources
+cloud interne.
+▪ Développement de nouvelles fonctionnalités API / frontend
+▪ Refactorisation du code legacy pour qu'il se rapproche des standards actuels
+
+LENGOW Développeur Django ﴾freelance﴿ 2021 ‐ 2022
+Intégré à l'équipe mktp, j'ai participé à la maintenance du module de gestion des marketplaces
+▪ Développement de nouveaux connecteurs marketplaces ﴾Mirakl et API spécifiques﴿
+▪ Correction de bugs
+
+OVHCLOUD Développeur Python ﴾freelance﴿ 2019 ‐ 2021
+Intégré à l'équipe Collaboration tools, j'ai participé au renouvellement des outils interne de
+collaboration : messagerie instantanée, visio‐conférences, réseau social d'entreprise
+▪ Création d'un bot de synchronisation de messages Jabber / Webex pour assurer la
+transition entre les deux outils
+▪ Création d'un outil DLP ﴾Data Loss Prevention﴿ pour Webex
+
+IMBRIKATION Développeur Django ﴾freelance﴿ 2019
+Développement du portail web Vigicube.fr dédié à la location de casiers de plage en libre
+service
+▪ Réalisation des 4 back‐offices dédiés aux collaborateurs travaillants sur le système :
+administrateurs, équipe production, équipe maintenance et support technique
+▪ Mise en production / déploiement de l'application
+Technos : Python, Django, Linux, Clever Cloud
+
+IMIE Formateur Python / Django ﴾freelance﴿ 2018 ‐ 2019
+Préparation et animation de 2 formations : Python ﴾1ère année﴿ et Django ﴾3e année, cursus
+"DEV"﴿
+▪ Préparation de la formation : rédaction des documents, création d'exercices pratiques et de
+l'examen final
+
+▪ Animation de la formation ﴾4 jours﴿
+▪ Correction de l'examen
+
+AFONE Développeur Python ﴾freelance﴿ 2018
+▪ Migration d'applications SVI vers un système modernisé ﴾Python / Asterisk﴿
+▪ Mise à niveau d'applications Flask internes liées à la sécurité, pour une mise en conformité
+PCI‐DSS
+Technos : Python, Asterisk, Flask, U2F
+
+FLUX:: Développeur C++/Python ﴾freelance﴿ 2015 – 2018
+▪ Ajout du support du format de plugins Waves WPAPI dans le framework interne
+▪ Création d'une application web de gestion des licences utilisateurs
+▪ Migration du système de compilation des projets
+▪ Mise en place d'un serveur d'intégration continue et automatisation des livraisons
+Technos : C++, Python, Django, CMake, Jenkins
+
+INSA Rennes Ingénieur de recherche 2012 – 2014
+▪ Maintenance et développement de nouvelles fonctionnalités pour le compilateur Open‐
+RVC CAL
+▪ Mise en place d’un serveur d’intégraton contnue et de tests automatisés
+▪ Refonte de l'interface graphique de l'éditeur de graphs intégré à Orcc ﴾Open‐RVC CAL
+Compiler﴿.
+Technos : Java, Eclipse, Xtext/Xtend, Graphiti, Jenkins
+
+SII Ingénieur développement C++ 2010 – 2011
+Développement d'un logiciel de diagnostic d'erreurs réseau. Mission de prestation pour Orange
+R&D. Technologies : C++, Qt, Réseau
+
+FORMATION
+MASTER INFORMATIQUE 2008 – 2010
+Institut de formation supérieure en informatique et communication ﴾IFSIC﴿, Université de Rennes 1
+Option Méthodes Informatiques, Technologies de l'Information et de la Communication ﴾MITIC﴿
+Master orienté génie logiciel, conception d'interfaces utilisateurs et communication.
+
+LICENCE INFORMATIQUE 2007 – 2008
+Institut de formation supérieure en informatique et communication ﴾IFSIC﴿, Université de Rennes 1
+
+DUT SRC 2005 – 2007
+IUT Cherbourg‐Manche, Saint‐Lô
+Spécialité Services et Réseaux de Communication
+Programmation, Multimedia, Communication, Conception Web
+
+L ANGUES
+Français : Lu, écrit, parlé
+Anglais : Lu, écrit parlé
+
+

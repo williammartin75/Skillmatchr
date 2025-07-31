@@ -1,0 +1,23 @@
+Lorence Antoine
+Développeur Full Stack
+
+Email: lorence.antoine@email.com
+Téléphone: 0123456789
+
+EXPERIENCE PROFESSIONNELLE
+Développeur JavaScript - Entreprise ABC (2020-2023)
+- Développement d'applications React et Node.js
+- Augmentation des performances de 25%
+- Gestion d'une équipe de 3 développeurs
+
+FORMATION
+Master en Informatique - Université XYZ (2018-2020)
+Licence en Mathématiques - Université ABC (2015-2018)
+
+COMPETENCES TECHNIQUES
+JavaScript, Python, Java, React, Angular, Vue, Node.js, SQL, Docker, Git
+
+PROJETS
+- Application e-commerce avec React (5000 utilisateurs)
+- API REST avec Node.js et Express
+- Base de données PostgreSQL optimisée 

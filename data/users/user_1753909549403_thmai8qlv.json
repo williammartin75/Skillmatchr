@@ -1,0 +1,33 @@
+{
+  "id": "user_1753909549403_thmai8qlv",
+  "firstName": "Antoine",
+  "lastName": "Lorence",
+  "email": "alorence@flokod.com",
+  "password": "111111",
+  "createdAt": "2025-07-30T21:05:49.403Z",
+  "profile": {
+    "firstName": "Antoine",
+    "lastName": "Lorence",
+    "email": "alorence@flokod.com",
+    "phone": "0670055137",
+    "address": "",
+    "skills": [],
+    "experience": [],
+    "education": []
+  },
+  "documents": [
+    {
+      "id": "doc_1753909549403",
+      "name": "cv-lorence-antoine.pdf",
+      "type": "cv",
+      "path": "/uploads/users/user_1753909549403_thmai8qlv/cv-1753909549403-cv-lorence-antoine.pdf",
+      "uploadedAt": "2025-07-30T21:05:49.403Z",
+      "extractedInfo": {
+        "firstName": "Antoine",
+        "lastName": "Lorence",
+        "email": "alorence@flokod.com",
+        "phone": "0670055137"
+      }
+    }
+  ]
+}

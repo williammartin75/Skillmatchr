@@ -1,0 +1,3284 @@
+
+🚀 DÉBUT DU SCRAPING JOBTEASER CRON
+============================================================
+🚀 Démarrage JobTeaserCronScraper
+============================================================
+🔧 Initialisation de la base de données JobTeaser...
+✅ Base de données jobteaser_database existe déjà
+📋 Création des tables JobTeaser...
+🔄 Suppression de l'ancienne table jobteaser_jobs...
+✅ Tables jobteaser_jobs et jobteaser_scraping_stats créées
+✅ Connexion à la base de données PostgreSQL réussie
+🌐 Proxies disponibles: 52/52
+
+📄 === PAGE 1/1 ===
+📄 Worker 1: Ouverture page 1 avec proxy...
+🌐 Worker 1: Proxy sélectionné: 156.253.168.60:3129 (index: 1)
+🌐 Worker 1: Navigation vers https://www.jobteaser.com/fr/job-offers?lat=48.681003000000004&lng=2.5301432269469717&localized_location=%C3%8Ele-de-France&localized_location=+France&location=France%3A%3A%C3%8Ele-de-France%3A%3A_niokF2GYrIdJqyG1iWWgB3QVN48%3D&sort=recency/fr/job-offers?page=1&sort=recency&utm_source=homepage avec proxy 156.253.168.60:3129
+   🔍 Worker 1: Sélecteur "[data-testid="jobad-card"]": 22 éléments
+   ✅ Worker 1: Utilisation du sélecteur "[data-testid="jobad-card"]" avec 22 jobs
+   🔍 Worker 1: Sélecteur "[data-testid="job-card"]": 0 éléments
+   🔍 Worker 1: Sélecteur ".job-card": 0 éléments
+   🔍 Worker 1: Sélecteur ".jobad-card": 0 éléments
+   🔍 Worker 1: Sélecteur "[class*="job-card"]": 0 éléments
+   🔍 Worker 1: Sélecteur "[class*="jobad-card"]": 0 éléments
+   🔍 Worker 1: Sélecteur "article[data-testid*="job"]": 0 éléments
+   🔍 Worker 1: Sélecteur "[data-testid*="job"]": 158 éléments
+   ✅ Worker 1: Utilisation du sélecteur "[data-testid*="job"]" avec 158 jobs
+   🔍 Worker 1: Sélecteur ".JobCard": 0 éléments
+   🔍 Worker 1: Sélecteur ".JobAdCard": 0 éléments
+   🔍 Worker 1: Page 1: 158 jobs trouvés au total
+🔍 Texte complet à analyser: ...
+📅 Aucune date trouvée, date par défaut: undefined
+💰 Analyse du texte pour le salaire (longueur: 0)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 URL de détail non disponible, extraction depuis le texte complet
+✅ Job extrait: {
+  title: '...',
+  company: '',
+  location: '',
+  contract: '',
+  salary: 'Non précisé',
+  publicationDate: undefined,
+  description: '...',
+  telework: 'Non précisé',
+  isFrench: '❌ NON',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🚫 Job ignoré (pas en France): ...
+🔍 Texte complet à analyser: ...
+📅 Aucune date trouvée, date par défaut: undefined
+💰 Analyse du texte pour le salaire (longueur: 0)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 URL de détail non disponible, extraction depuis le texte complet
+✅ Job extrait: {
+  title: '...',
+  company: '',
+  location: '',
+  contract: '',
+  salary: 'Non précisé',
+  publicationDate: undefined,
+  description: '...',
+  telework: 'Non précisé',
+  isFrench: '❌ NON',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🚫 Job ignoré (pas en France): ...
+🔍 Texte complet à analyser: Contrat0...
+📅 Aucune date trouvée, date par défaut: undefined
+💰 Analyse du texte pour le salaire (longueur: 8)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 URL de détail non disponible, extraction depuis le texte complet
+✅ Job extrait: {
+  title: '...',
+  company: '',
+  location: '',
+  contract: '',
+  salary: 'Non précisé',
+  publicationDate: undefined,
+  description: 'Contrat0...',
+  telework: 'Non précisé',
+  isFrench: '❌ NON',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🚫 Job ignoré (pas en France): ...
+🔍 Texte complet à analyser: Tous les filtres...
+📅 Aucune date trouvée, date par défaut: undefined
+💰 Analyse du texte pour le salaire (longueur: 16)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 URL de détail non disponible, extraction depuis le texte complet
+✅ Job extrait: {
+  title: '...',
+  company: '',
+  location: '',
+  contract: '',
+  salary: 'Non précisé',
+  publicationDate: undefined,
+  description: 'Tous les filtres...',
+  telework: 'Non précisé',
+  isFrench: '❌ NON',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🚫 Job ignoré (pas en France): ...
+🔍 Texte complet à analyser: La Poste GroupeLa Poste GroupeAlternance Chef de projet H/FAlternance 12 moisParis, FranceCandidature simplifiéeOffre de la semaineValeoValeoAlternance en Sales DevelopmentAlternance 10 à 12 moisSaint-Denis, FranceOffre de la semainePwC FrancePwC FranceAuditeur des systèmes d'information Junior | CD...
+📍 Localisation extraite: "Paris, France" → "Paris"
+🔍 Élément date trouvé avec le sélecteur: time
+📅 Texte date brut: "il y a 23 minutes"
+📅 Date de parution: "il y a 23 minutes" → 30/07/2025
+💰 Analyse du texte pour le salaire (longueur: 2999)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 Navigation vers: https://www.jobteaser.com/fr/job-offers?lat=48.681003000000004&lng=2.5301432269469717&localized_location=%C3%8Ele-de-France&localized_location=+France&location=France%3A%3A%C3%8Ele-de-France%3A%3A_niokF2GYrIdJqyG1iWWgB3QVN48%3D&sort=recency/fr/job-offers/e2e9f514-5ae0-4e64-801a-5b545916eb1c-la-poste-groupe-alternance-chef-de-projet-h-f
+⚠️ Erreur extraction description depuis page détail: Please use browser.newContext()
+✅ Job extrait: {
+  title: 'Alternance Chef de projet H/F...',
+  company: 'La Poste Groupe',
+  location: 'Paris',
+  contract: 'Alternance',
+  salary: 'Non précisé',
+  publicationDate: '30/07/2025',
+  description: 'La Poste GroupeLa Poste GroupeAlternance Chef de projet H/FAlternance 12 moisParis, FranceCandidature simplifiéeOffre de la semaineValeoValeoAlternance en Sales DevelopmentAlternance 10 à 12 moisSaint...',
+  telework: 'Non précisé',
+  isFrench: '🇫🇷 OUI',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🔍 Texte complet à analyser: La Poste GroupeLa Poste GroupeAlternance Chef de projet H/FAlternance 12 moisParis, FranceCandidature simplifiéeOffre de la semaine...
+📍 Localisation extraite: "Paris, France" → "Paris"
+📅 Aucune date trouvée, date par défaut: undefined
+💰 Analyse du texte pour le salaire (longueur: 131)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 Navigation vers: https://www.jobteaser.com/fr/job-offers?lat=48.681003000000004&lng=2.5301432269469717&localized_location=%C3%8Ele-de-France&localized_location=+France&location=France%3A%3A%C3%8Ele-de-France%3A%3A_niokF2GYrIdJqyG1iWWgB3QVN48%3D&sort=recency/fr/job-offers/e2e9f514-5ae0-4e64-801a-5b545916eb1c-la-poste-groupe-alternance-chef-de-projet-h-f
+⚠️ Erreur extraction description depuis page détail: Please use browser.newContext()
+✅ Job extrait: {
+  title: 'Alternance Chef de projet H/F...',
+  company: 'La Poste Groupe',
+  location: 'Paris',
+  contract: 'Alternance',
+  salary: 'Non précisé',
+  publicationDate: undefined,
+  description: 'La Poste GroupeLa Poste GroupeAlternance Chef de projet H/FAlternance 12 moisParis, FranceCandidature simplifiéeOffre de la semaine...',
+  telework: 'Non précisé',
+  isFrench: '🇫🇷 OUI',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🔍 Texte complet à analyser: ...
+📅 Aucune date trouvée, date par défaut: undefined
+💰 Analyse du texte pour le salaire (longueur: 0)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 URL de détail non disponible, extraction depuis le texte complet
+✅ Job extrait: {
+  title: '...',
+  company: '',
+  location: '',
+  contract: '',
+  salary: 'Non précisé',
+  publicationDate: undefined,
+  description: '...',
+  telework: 'Non précisé',
+  isFrench: '❌ NON',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🚫 Job ignoré (pas en France): ...
+🔍 Texte complet à analyser: La Poste Groupe...
+📅 Aucune date trouvée, date par défaut: undefined
+💰 Analyse du texte pour le salaire (longueur: 15)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 URL de détail non disponible, extraction depuis le texte complet
+✅ Job extrait: {
+  title: '...',
+  company: '',
+  location: '',
+  contract: '',
+  salary: 'Non précisé',
+  publicationDate: undefined,
+  description: 'La Poste Groupe...',
+  telework: 'Non précisé',
+  isFrench: '❌ NON',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🚫 Job ignoré (pas en France): ...
+🔍 Texte complet à analyser: La Poste Groupe...
+📅 Aucune date trouvée, date par défaut: undefined
+💰 Analyse du texte pour le salaire (longueur: 15)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 URL de détail non disponible, extraction depuis le texte complet
+✅ Job extrait: {
+  title: '...',
+  company: '',
+  location: '',
+  contract: '',
+  salary: 'Non précisé',
+  publicationDate: undefined,
+  description: 'La Poste Groupe...',
+  telework: 'Non précisé',
+  isFrench: '❌ NON',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🚫 Job ignoré (pas en France): ...
+🔍 Texte complet à analyser: Alternance 12 mois...
+📅 Aucune date trouvée, date par défaut: undefined
+💰 Analyse du texte pour le salaire (longueur: 18)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 URL de détail non disponible, extraction depuis le texte complet
+✅ Job extrait: {
+  title: '...',
+  company: '',
+  location: '',
+  contract: '',
+  salary: 'Non précisé',
+  publicationDate: undefined,
+  description: 'Alternance 12 mois...',
+  telework: 'Non précisé',
+  isFrench: '❌ NON',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🚫 Job ignoré (pas en France): ...
+🔍 Texte complet à analyser: Paris, France...
+📅 Aucune date trouvée, date par défaut: undefined
+💰 Analyse du texte pour le salaire (longueur: 13)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 URL de détail non disponible, extraction depuis le texte complet
+✅ Job extrait: {
+  title: '...',
+  company: '',
+  location: '',
+  contract: '',
+  salary: 'Non précisé',
+  publicationDate: undefined,
+  description: 'Paris, France...',
+  telework: 'Non précisé',
+  isFrench: '❌ NON',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🚫 Job ignoré (pas en France): ...
+🔍 Texte complet à analyser: Candidature simplifiée...
+📅 Aucune date trouvée, date par défaut: undefined
+💰 Analyse du texte pour le salaire (longueur: 22)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 URL de détail non disponible, extraction depuis le texte complet
+✅ Job extrait: {
+  title: '...',
+  company: '',
+  location: '',
+  contract: '',
+  salary: 'Non précisé',
+  publicationDate: undefined,
+  description: 'Candidature simplifiée.',
+  telework: 'Non précisé',
+  isFrench: '❌ NON',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🚫 Job ignoré (pas en France): ...
+🔍 Texte complet à analyser: Offre de la semaine...
+📅 Aucune date trouvée, date par défaut: undefined
+💰 Analyse du texte pour le salaire (longueur: 19)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 URL de détail non disponible, extraction depuis le texte complet
+✅ Job extrait: {
+  title: '...',
+  company: '',
+  location: '',
+  contract: '',
+  salary: 'Non précisé',
+  publicationDate: undefined,
+  description: 'Offre de la semaine.',
+  telework: 'Non précisé',
+  isFrench: '❌ NON',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🚫 Job ignoré (pas en France): ...
+🔍 Texte complet à analyser: ValeoValeoAlternance en Sales DevelopmentAlternance 10 à 12 moisSaint-Denis, FranceOffre de la semaine...
+📍 Localisation extraite: "Saint-Denis, France" → "Saint-Denis"
+📅 Aucune date trouvée, date par défaut: undefined
+💰 Analyse du texte pour le salaire (longueur: 102)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 Navigation vers: https://www.jobteaser.com/fr/job-offers?lat=48.681003000000004&lng=2.5301432269469717&localized_location=%C3%8Ele-de-France&localized_location=+France&location=France%3A%3A%C3%8Ele-de-France%3A%3A_niokF2GYrIdJqyG1iWWgB3QVN48%3D&sort=recency/fr/job-offers/19445524-af01-4aa2-b71c-df0040639e58-valeo-alternance-en-sales-development
+⚠️ Erreur extraction description depuis page détail: Please use browser.newContext()
+✅ Job extrait: {
+  title: 'Alternance en Sales Development...',
+  company: 'Valeo',
+  location: 'Saint-Denis',
+  contract: 'Alternance',
+  salary: 'Non précisé',
+  publicationDate: undefined,
+  description: 'ValeoValeoAlternance en Sales DevelopmentAlternance 10 à 12 moisSaint-Denis, FranceOffre de la semaine...',
+  telework: 'Non précisé',
+  isFrench: '❌ NON',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🚫 Job ignoré (pas en France): Alternance en Sales Development...
+🔍 Texte complet à analyser: ...
+📅 Aucune date trouvée, date par défaut: undefined
+💰 Analyse du texte pour le salaire (longueur: 0)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 URL de détail non disponible, extraction depuis le texte complet
+✅ Job extrait: {
+  title: '...',
+  company: '',
+  location: '',
+  contract: '',
+  salary: 'Non précisé',
+  publicationDate: undefined,
+  description: '...',
+  telework: 'Non précisé',
+  isFrench: '❌ NON',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🚫 Job ignoré (pas en France): ...
+🔍 Texte complet à analyser: Valeo...
+📅 Aucune date trouvée, date par défaut: undefined
+💰 Analyse du texte pour le salaire (longueur: 5)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 URL de détail non disponible, extraction depuis le texte complet
+✅ Job extrait: {
+  title: '...',
+  company: '',
+  location: '',
+  contract: '',
+  salary: 'Non précisé',
+  publicationDate: undefined,
+  description: 'Valeo...',
+  telework: 'Non précisé',
+  isFrench: '❌ NON',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🚫 Job ignoré (pas en France): ...
+🔍 Texte complet à analyser: Valeo...
+📅 Aucune date trouvée, date par défaut: undefined
+💰 Analyse du texte pour le salaire (longueur: 5)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 URL de détail non disponible, extraction depuis le texte complet
+✅ Job extrait: {
+  title: '...',
+  company: '',
+  location: '',
+  contract: '',
+  salary: 'Non précisé',
+  publicationDate: undefined,
+  description: 'Valeo...',
+  telework: 'Non précisé',
+  isFrench: '❌ NON',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🚫 Job ignoré (pas en France): ...
+🔍 Texte complet à analyser: Alternance 10 à 12 mois...
+📅 Aucune date trouvée, date par défaut: undefined
+💰 Analyse du texte pour le salaire (longueur: 23)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 URL de détail non disponible, extraction depuis le texte complet
+✅ Job extrait: {
+  title: '...',
+  company: '',
+  location: '',
+  contract: '',
+  salary: 'Non précisé',
+  publicationDate: undefined,
+  description: 'Alternance 10 à 12 mois.',
+  telework: 'Non précisé',
+  isFrench: '❌ NON',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🚫 Job ignoré (pas en France): ...
+🔍 Texte complet à analyser: Saint-Denis, France...
+📅 Aucune date trouvée, date par défaut: undefined
+💰 Analyse du texte pour le salaire (longueur: 19)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 URL de détail non disponible, extraction depuis le texte complet
+✅ Job extrait: {
+  title: '...',
+  company: '',
+  location: '',
+  contract: '',
+  salary: 'Non précisé',
+  publicationDate: undefined,
+  description: 'Saint-Denis, France.',
+  telework: 'Non précisé',
+  isFrench: '❌ NON',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🚫 Job ignoré (pas en France): ...
+🔍 Texte complet à analyser: Offre de la semaine...
+📅 Aucune date trouvée, date par défaut: undefined
+💰 Analyse du texte pour le salaire (longueur: 19)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 URL de détail non disponible, extraction depuis le texte complet
+✅ Job extrait: {
+  title: '...',
+  company: '',
+  location: '',
+  contract: '',
+  salary: 'Non précisé',
+  publicationDate: undefined,
+  description: 'Offre de la semaine.',
+  telework: 'Non précisé',
+  isFrench: '❌ NON',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🚫 Job ignoré (pas en France): ...
+🔍 Texte complet à analyser: PwC FrancePwC FranceAuditeur des systèmes d'information Junior | CDI | H/FCDINeuilly-sur-Seine, Franceil y a 23 minutes...
+📍 Localisation extraite: "Neuilly-sur-Seine, France" → "Neuilly-sur-Seine"
+🔍 Élément date trouvé avec le sélecteur: time
+📅 Texte date brut: "il y a 23 minutes"
+📅 Date de parution: "il y a 23 minutes" → 30/07/2025
+💰 Analyse du texte pour le salaire (longueur: 119)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 Navigation vers: https://www.jobteaser.com/fr/job-offers?lat=48.681003000000004&lng=2.5301432269469717&localized_location=%C3%8Ele-de-France&localized_location=+France&location=France%3A%3A%C3%8Ele-de-France%3A%3A_niokF2GYrIdJqyG1iWWgB3QVN48%3D&sort=recency/fr/job-offers/cce46cb7-a7a7-496f-bd2a-d606d96d4c3a-pwc-france-auditeur-des-systemes-d-information-junior-cdi-h-f
+⚠️ Erreur extraction description depuis page détail: Please use browser.newContext()
+✅ Job extrait: {
+  title: "Auditeur des systèmes d'information Junior | CDI |...",
+  company: 'PwC France',
+  location: 'Neuilly-sur-Seine',
+  contract: 'CDI',
+  salary: 'Non précisé',
+  publicationDate: '30/07/2025',
+  description: "PwC FrancePwC FranceAuditeur des systèmes d'information Junior | CDI | H/FCDINeuilly-sur-Seine, Franceil y a 23 minutes...",
+  telework: 'Non précisé',
+  isFrench: '❌ NON',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🚫 Job ignoré (pas en France): Auditeur des systèmes d'information Junior | CDI |...
+🔍 Texte complet à analyser: ...
+📅 Aucune date trouvée, date par défaut: undefined
+💰 Analyse du texte pour le salaire (longueur: 0)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 URL de détail non disponible, extraction depuis le texte complet
+✅ Job extrait: {
+  title: '...',
+  company: '',
+  location: '',
+  contract: '',
+  salary: 'Non précisé',
+  publicationDate: undefined,
+  description: '...',
+  telework: 'Non précisé',
+  isFrench: '❌ NON',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🚫 Job ignoré (pas en France): ...
+🔍 Texte complet à analyser: PwC France...
+📅 Aucune date trouvée, date par défaut: undefined
+💰 Analyse du texte pour le salaire (longueur: 10)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 URL de détail non disponible, extraction depuis le texte complet
+✅ Job extrait: {
+  title: '...',
+  company: '',
+  location: '',
+  contract: '',
+  salary: 'Non précisé',
+  publicationDate: undefined,
+  description: 'PwC France...',
+  telework: 'Non précisé',
+  isFrench: '❌ NON',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🚫 Job ignoré (pas en France): ...
+🔍 Texte complet à analyser: PwC France...
+📅 Aucune date trouvée, date par défaut: undefined
+💰 Analyse du texte pour le salaire (longueur: 10)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 URL de détail non disponible, extraction depuis le texte complet
+✅ Job extrait: {
+  title: '...',
+  company: '',
+  location: '',
+  contract: '',
+  salary: 'Non précisé',
+  publicationDate: undefined,
+  description: 'PwC France...',
+  telework: 'Non précisé',
+  isFrench: '❌ NON',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🚫 Job ignoré (pas en France): ...
+🔍 Texte complet à analyser: CDI...
+📅 Aucune date trouvée, date par défaut: undefined
+💰 Analyse du texte pour le salaire (longueur: 3)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 URL de détail non disponible, extraction depuis le texte complet
+✅ Job extrait: {
+  title: '...',
+  company: '',
+  location: '',
+  contract: '',
+  salary: 'Non précisé',
+  publicationDate: undefined,
+  description: 'CDI...',
+  telework: 'Non précisé',
+  isFrench: '❌ NON',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🚫 Job ignoré (pas en France): ...
+🔍 Texte complet à analyser: Neuilly-sur-Seine, France...
+📅 Aucune date trouvée, date par défaut: undefined
+💰 Analyse du texte pour le salaire (longueur: 25)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 URL de détail non disponible, extraction depuis le texte complet
+✅ Job extrait: {
+  title: '...',
+  company: '',
+  location: '',
+  contract: '',
+  salary: 'Non précisé',
+  publicationDate: undefined,
+  description: 'Neuilly-sur-Seine, France.',
+  telework: 'Non précisé',
+  isFrench: '❌ NON',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🚫 Job ignoré (pas en France): ...
+🔍 Texte complet à analyser: Groupe ADPGroupe ADPAlternance - Chargé de Pilotage d'Exploitation Aéroportuaire F/HAlternance 19 à 24 moisLe Bourget, FranceCandidature simplifiéeil y a 2 heures...
+📍 Localisation extraite: "Le Bourget, France" → "Le Bourget"
+🔍 Élément date trouvé avec le sélecteur: time
+📅 Texte date brut: "il y a 2 heures"
+📅 Date de parution: "il y a 2 heures" → 30/07/2025
+💰 Analyse du texte pour le salaire (longueur: 162)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 Navigation vers: https://www.jobteaser.com/fr/job-offers?lat=48.681003000000004&lng=2.5301432269469717&localized_location=%C3%8Ele-de-France&localized_location=+France&location=France%3A%3A%C3%8Ele-de-France%3A%3A_niokF2GYrIdJqyG1iWWgB3QVN48%3D&sort=recency/fr/job-offers/7388bad3-b24b-438b-91cd-0dd22e35a679-groupe-adp-alternance-charge-de-pilotage-d-exploitation-aeroportuaire-f-h
+⚠️ Erreur extraction description depuis page détail: Please use browser.newContext()
+✅ Job extrait: {
+  title: "Alternance - Chargé de Pilotage d'Exploitation Aér...",
+  company: 'Groupe ADP',
+  location: 'Le Bourget',
+  contract: 'Alternance',
+  salary: 'Non précisé',
+  publicationDate: '30/07/2025',
+  description: "Groupe ADPGroupe ADPAlternance - Chargé de Pilotage d'Exploitation Aéroportuaire F/HAlternance 19 à 24 moisLe Bourget, FranceCandidature simplifiéeil y a 2 heures...",
+  telework: 'Non précisé',
+  isFrench: '❌ NON',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🚫 Job ignoré (pas en France): Alternance - Chargé de Pilotage d'Exploitation Aér...
+🔍 Texte complet à analyser: ...
+📅 Aucune date trouvée, date par défaut: undefined
+💰 Analyse du texte pour le salaire (longueur: 0)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 URL de détail non disponible, extraction depuis le texte complet
+✅ Job extrait: {
+  title: '...',
+  company: '',
+  location: '',
+  contract: '',
+  salary: 'Non précisé',
+  publicationDate: undefined,
+  description: '...',
+  telework: 'Non précisé',
+  isFrench: '❌ NON',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🚫 Job ignoré (pas en France): ...
+🔍 Texte complet à analyser: Groupe ADP...
+📅 Aucune date trouvée, date par défaut: undefined
+💰 Analyse du texte pour le salaire (longueur: 10)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 URL de détail non disponible, extraction depuis le texte complet
+✅ Job extrait: {
+  title: '...',
+  company: '',
+  location: '',
+  contract: '',
+  salary: 'Non précisé',
+  publicationDate: undefined,
+  description: 'Groupe ADP...',
+  telework: 'Non précisé',
+  isFrench: '❌ NON',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🚫 Job ignoré (pas en France): ...
+🔍 Texte complet à analyser: Groupe ADP...
+📅 Aucune date trouvée, date par défaut: undefined
+💰 Analyse du texte pour le salaire (longueur: 10)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 URL de détail non disponible, extraction depuis le texte complet
+✅ Job extrait: {
+  title: '...',
+  company: '',
+  location: '',
+  contract: '',
+  salary: 'Non précisé',
+  publicationDate: undefined,
+  description: 'Groupe ADP...',
+  telework: 'Non précisé',
+  isFrench: '❌ NON',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🚫 Job ignoré (pas en France): ...
+🔍 Texte complet à analyser: Alternance 19 à 24 mois...
+📅 Aucune date trouvée, date par défaut: undefined
+💰 Analyse du texte pour le salaire (longueur: 23)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 URL de détail non disponible, extraction depuis le texte complet
+✅ Job extrait: {
+  title: '...',
+  company: '',
+  location: '',
+  contract: '',
+  salary: 'Non précisé',
+  publicationDate: undefined,
+  description: 'Alternance 19 à 24 mois.',
+  telework: 'Non précisé',
+  isFrench: '❌ NON',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🚫 Job ignoré (pas en France): ...
+🔍 Texte complet à analyser: Le Bourget, France...
+📅 Aucune date trouvée, date par défaut: undefined
+💰 Analyse du texte pour le salaire (longueur: 18)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 URL de détail non disponible, extraction depuis le texte complet
+✅ Job extrait: {
+  title: '...',
+  company: '',
+  location: '',
+  contract: '',
+  salary: 'Non précisé',
+  publicationDate: undefined,
+  description: 'Le Bourget, France...',
+  telework: 'Non précisé',
+  isFrench: '❌ NON',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🚫 Job ignoré (pas en France): ...
+🔍 Texte complet à analyser: Candidature simplifiée...
+📅 Aucune date trouvée, date par défaut: undefined
+💰 Analyse du texte pour le salaire (longueur: 22)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 URL de détail non disponible, extraction depuis le texte complet
+✅ Job extrait: {
+  title: '...',
+  company: '',
+  location: '',
+  contract: '',
+  salary: 'Non précisé',
+  publicationDate: undefined,
+  description: 'Candidature simplifiée.',
+  telework: 'Non précisé',
+  isFrench: '❌ NON',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🚫 Job ignoré (pas en France): ...
+🔍 Texte complet à analyser: Oxford EconomicsOxford EconomicsBusiness Development & Marketing Assistant (intern)Stage 5 à 6 moisParis, FranceCandidature simplifiéeil y a 2 heures...
+📍 Localisation extraite: "Paris, France" → "Paris"
+🔍 Élément date trouvé avec le sélecteur: time
+📅 Texte date brut: "il y a 2 heures"
+📅 Date de parution: "il y a 2 heures" → 30/07/2025
+💰 Analyse du texte pour le salaire (longueur: 149)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 Navigation vers: https://www.jobteaser.com/fr/job-offers?lat=48.681003000000004&lng=2.5301432269469717&localized_location=%C3%8Ele-de-France&localized_location=+France&location=France%3A%3A%C3%8Ele-de-France%3A%3A_niokF2GYrIdJqyG1iWWgB3QVN48%3D&sort=recency/fr/job-offers/f3d368af-f42a-4861-87af-48842824cbb1-oxford-economics-business-development-marketing-assistant-intern
+⚠️ Erreur extraction description depuis page détail: Please use browser.newContext()
+✅ Job extrait: {
+  title: 'Business Development & Marketing Assistant (intern...',
+  company: 'Oxford Economics',
+  location: 'Paris',
+  contract: 'Stage',
+  salary: 'Non précisé',
+  publicationDate: '30/07/2025',
+  description: 'Oxford EconomicsOxford EconomicsBusiness Development & Marketing Assistant (intern)Stage 5 à 6 moisParis, FranceCandidature simplifiéeil y a 2 heures...',
+  telework: 'Non précisé',
+  isFrench: '🇫🇷 OUI',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🔍 Texte complet à analyser: ...
+📅 Aucune date trouvée, date par défaut: undefined
+💰 Analyse du texte pour le salaire (longueur: 0)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 URL de détail non disponible, extraction depuis le texte complet
+✅ Job extrait: {
+  title: '...',
+  company: '',
+  location: '',
+  contract: '',
+  salary: 'Non précisé',
+  publicationDate: undefined,
+  description: '...',
+  telework: 'Non précisé',
+  isFrench: '❌ NON',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🚫 Job ignoré (pas en France): ...
+🔍 Texte complet à analyser: Oxford Economics...
+📅 Aucune date trouvée, date par défaut: undefined
+💰 Analyse du texte pour le salaire (longueur: 16)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 URL de détail non disponible, extraction depuis le texte complet
+✅ Job extrait: {
+  title: '...',
+  company: '',
+  location: '',
+  contract: '',
+  salary: 'Non précisé',
+  publicationDate: undefined,
+  description: 'Oxford Economics...',
+  telework: 'Non précisé',
+  isFrench: '❌ NON',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🚫 Job ignoré (pas en France): ...
+🔍 Texte complet à analyser: Oxford Economics...
+📅 Aucune date trouvée, date par défaut: undefined
+💰 Analyse du texte pour le salaire (longueur: 16)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 URL de détail non disponible, extraction depuis le texte complet
+✅ Job extrait: {
+  title: '...',
+  company: '',
+  location: '',
+  contract: '',
+  salary: 'Non précisé',
+  publicationDate: undefined,
+  description: 'Oxford Economics...',
+  telework: 'Non précisé',
+  isFrench: '❌ NON',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🚫 Job ignoré (pas en France): ...
+🔍 Texte complet à analyser: Stage 5 à 6 mois...
+📅 Aucune date trouvée, date par défaut: undefined
+💰 Analyse du texte pour le salaire (longueur: 16)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 URL de détail non disponible, extraction depuis le texte complet
+✅ Job extrait: {
+  title: '...',
+  company: '',
+  location: '',
+  contract: '',
+  salary: 'Non précisé',
+  publicationDate: undefined,
+  description: 'Stage 5 à 6 mois...',
+  telework: 'Non précisé',
+  isFrench: '❌ NON',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🚫 Job ignoré (pas en France): ...
+🔍 Texte complet à analyser: Paris, France...
+📅 Aucune date trouvée, date par défaut: undefined
+💰 Analyse du texte pour le salaire (longueur: 13)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 URL de détail non disponible, extraction depuis le texte complet
+✅ Job extrait: {
+  title: '...',
+  company: '',
+  location: '',
+  contract: '',
+  salary: 'Non précisé',
+  publicationDate: undefined,
+  description: 'Paris, France...',
+  telework: 'Non précisé',
+  isFrench: '❌ NON',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🚫 Job ignoré (pas en France): ...
+🔍 Texte complet à analyser: Candidature simplifiée...
+📅 Aucune date trouvée, date par défaut: undefined
+💰 Analyse du texte pour le salaire (longueur: 22)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 URL de détail non disponible, extraction depuis le texte complet
+✅ Job extrait: {
+  title: '...',
+  company: '',
+  location: '',
+  contract: '',
+  salary: 'Non précisé',
+  publicationDate: undefined,
+  description: 'Candidature simplifiée.',
+  telework: 'Non précisé',
+  isFrench: '❌ NON',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🚫 Job ignoré (pas en France): ...
+🔍 Texte complet à analyser: ...
+📅 Aucune date trouvée, date par défaut: undefined
+💰 Analyse du texte pour le salaire (longueur: 0)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 URL de détail non disponible, extraction depuis le texte complet
+✅ Job extrait: {
+  title: '...',
+  company: '',
+  location: '',
+  contract: '',
+  salary: 'Non précisé',
+  publicationDate: undefined,
+  description: '...',
+  telework: 'Non précisé',
+  isFrench: '❌ NON',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🚫 Job ignoré (pas en France): ...
+🔍 Texte complet à analyser: Capgemini...
+📅 Aucune date trouvée, date par défaut: undefined
+💰 Analyse du texte pour le salaire (longueur: 9)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 URL de détail non disponible, extraction depuis le texte complet
+✅ Job extrait: {
+  title: '...',
+  company: '',
+  location: '',
+  contract: '',
+  salary: 'Non précisé',
+  publicationDate: undefined,
+  description: 'Capgemini...',
+  telework: 'Non précisé',
+  isFrench: '❌ NON',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🚫 Job ignoré (pas en France): ...
+🔍 Texte complet à analyser: 🎯 Encore à la recherche d’une alternance pour la rentrée 2025 ?...
+📅 Aucune date trouvée, date par défaut: undefined
+💰 Analyse du texte pour le salaire (longueur: 64)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 URL de détail non disponible, extraction depuis le texte complet
+✅ Job extrait: {
+  title: '...',
+  company: '',
+  location: '',
+  contract: '',
+  salary: 'Non précisé',
+  publicationDate: undefined,
+  description: '🎯 Encore à la recherche d’une alternance pour la rentrée 2025.',
+  telework: 'Non précisé',
+  isFrench: '❌ NON',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🚫 Job ignoré (pas en France): ...
+🔍 Texte complet à analyser: ...
+📅 Aucune date trouvée, date par défaut: undefined
+💰 Analyse du texte pour le salaire (longueur: 0)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 URL de détail non disponible, extraction depuis le texte complet
+✅ Job extrait: {
+  title: '...',
+  company: '',
+  location: '',
+  contract: '',
+  salary: 'Non précisé',
+  publicationDate: undefined,
+  description: '...',
+  telework: 'Non précisé',
+  isFrench: '❌ NON',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🚫 Job ignoré (pas en France): ...
+🔍 Texte complet à analyser: GROUPE ALKERA...
+📅 Aucune date trouvée, date par défaut: undefined
+💰 Analyse du texte pour le salaire (longueur: 13)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 URL de détail non disponible, extraction depuis le texte complet
+✅ Job extrait: {
+  title: '...',
+  company: '',
+  location: '',
+  contract: '',
+  salary: 'Non précisé',
+  publicationDate: undefined,
+  description: 'GROUPE ALKERA...',
+  telework: 'Non précisé',
+  isFrench: '❌ NON',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🚫 Job ignoré (pas en France): ...
+🔍 Texte complet à analyser: Alkera recrute ses talents de demain : rejoins-nous en alternance !...
+📅 Aucune date trouvée, date par défaut: undefined
+💰 Analyse du texte pour le salaire (longueur: 67)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 URL de détail non disponible, extraction depuis le texte complet
+✅ Job extrait: {
+  title: '...',
+  company: '',
+  location: '',
+  contract: '',
+  salary: 'Non précisé',
+  publicationDate: undefined,
+  description: 'Alkera recrute ses talents de demain : rejoins-nous en alternance.',
+  telework: 'Non précisé',
+  isFrench: '❌ NON',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🚫 Job ignoré (pas en France): ...
+🔍 Texte complet à analyser: Orange CyberdefenseOrange CyberdefenseAlternance - Business Developer IA SECAlternance 12 à 24 moisLa Défense, FranceCandidature simplifiéeil y a 3 heures...
+📍 Localisation extraite: "La Défense, France" → "La Défense"
+🔍 Élément date trouvé avec le sélecteur: time
+📅 Texte date brut: "il y a 3 heures"
+📅 Date de parution: "il y a 3 heures" → 30/07/2025
+💰 Analyse du texte pour le salaire (longueur: 154)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 Navigation vers: https://www.jobteaser.com/fr/job-offers?lat=48.681003000000004&lng=2.5301432269469717&localized_location=%C3%8Ele-de-France&localized_location=+France&location=France%3A%3A%C3%8Ele-de-France%3A%3A_niokF2GYrIdJqyG1iWWgB3QVN48%3D&sort=recency/fr/job-offers/01024c9b-ca89-4394-9100-59c35f4d3cce-orange-cyberdefense-alternance-business-developer-ia-sec
+⚠️ Erreur extraction description depuis page détail: Please use browser.newContext()
+✅ Job extrait: {
+  title: 'Alternance - Business Developer IA SEC...',
+  company: 'Orange Cyberdefense',
+  location: 'La Défense',
+  contract: 'Alternance',
+  salary: 'Non précisé',
+  publicationDate: '30/07/2025',
+  description: 'Orange CyberdefenseOrange CyberdefenseAlternance - Business Developer IA SECAlternance 12 à 24 moisLa Défense, FranceCandidature simplifiéeil y a 3 heures...',
+  telework: 'Non précisé',
+  isFrench: '❌ NON',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🚫 Job ignoré (pas en France): Alternance - Business Developer IA SEC...
+🔍 Texte complet à analyser: ...
+📅 Aucune date trouvée, date par défaut: undefined
+💰 Analyse du texte pour le salaire (longueur: 0)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 URL de détail non disponible, extraction depuis le texte complet
+✅ Job extrait: {
+  title: '...',
+  company: '',
+  location: '',
+  contract: '',
+  salary: 'Non précisé',
+  publicationDate: undefined,
+  description: '...',
+  telework: 'Non précisé',
+  isFrench: '❌ NON',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🚫 Job ignoré (pas en France): ...
+🔍 Texte complet à analyser: Orange Cyberdefense...
+📅 Aucune date trouvée, date par défaut: undefined
+💰 Analyse du texte pour le salaire (longueur: 19)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 URL de détail non disponible, extraction depuis le texte complet
+✅ Job extrait: {
+  title: '...',
+  company: '',
+  location: '',
+  contract: '',
+  salary: 'Non précisé',
+  publicationDate: undefined,
+  description: 'Orange Cyberdefense.',
+  telework: 'Non précisé',
+  isFrench: '❌ NON',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🚫 Job ignoré (pas en France): ...
+🔍 Texte complet à analyser: Orange Cyberdefense...
+📅 Aucune date trouvée, date par défaut: undefined
+💰 Analyse du texte pour le salaire (longueur: 19)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 URL de détail non disponible, extraction depuis le texte complet
+✅ Job extrait: {
+  title: '...',
+  company: '',
+  location: '',
+  contract: '',
+  salary: 'Non précisé',
+  publicationDate: undefined,
+  description: 'Orange Cyberdefense.',
+  telework: 'Non précisé',
+  isFrench: '❌ NON',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🚫 Job ignoré (pas en France): ...
+🔍 Texte complet à analyser: Alternance 12 à 24 mois...
+📅 Aucune date trouvée, date par défaut: undefined
+💰 Analyse du texte pour le salaire (longueur: 23)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 URL de détail non disponible, extraction depuis le texte complet
+✅ Job extrait: {
+  title: '...',
+  company: '',
+  location: '',
+  contract: '',
+  salary: 'Non précisé',
+  publicationDate: undefined,
+  description: 'Alternance 12 à 24 mois.',
+  telework: 'Non précisé',
+  isFrench: '❌ NON',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🚫 Job ignoré (pas en France): ...
+🔍 Texte complet à analyser: La Défense, France...
+📅 Aucune date trouvée, date par défaut: undefined
+💰 Analyse du texte pour le salaire (longueur: 18)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 URL de détail non disponible, extraction depuis le texte complet
+✅ Job extrait: {
+  title: '...',
+  company: '',
+  location: '',
+  contract: '',
+  salary: 'Non précisé',
+  publicationDate: undefined,
+  description: 'La Défense, France...',
+  telework: 'Non précisé',
+  isFrench: '❌ NON',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🚫 Job ignoré (pas en France): ...
+🔍 Texte complet à analyser: Candidature simplifiée...
+📅 Aucune date trouvée, date par défaut: undefined
+💰 Analyse du texte pour le salaire (longueur: 22)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 URL de détail non disponible, extraction depuis le texte complet
+✅ Job extrait: {
+  title: '...',
+  company: '',
+  location: '',
+  contract: '',
+  salary: 'Non précisé',
+  publicationDate: undefined,
+  description: 'Candidature simplifiée.',
+  telework: 'Non précisé',
+  isFrench: '❌ NON',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🚫 Job ignoré (pas en France): ...
+🔍 Texte complet à analyser: ARC CAPITALARC CAPITALStage : Sales en fusion-acquisitionStage 4 à 6 moisParis, FranceCandidature simplifiéeil y a 3 heures...
+📍 Localisation extraite: "Paris, France" → "Paris"
+🔍 Élément date trouvé avec le sélecteur: time
+📅 Texte date brut: "il y a 3 heures"
+📅 Date de parution: "il y a 3 heures" → 30/07/2025
+💰 Analyse du texte pour le salaire (longueur: 123)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 Navigation vers: https://www.jobteaser.com/fr/job-offers?lat=48.681003000000004&lng=2.5301432269469717&localized_location=%C3%8Ele-de-France&localized_location=+France&location=France%3A%3A%C3%8Ele-de-France%3A%3A_niokF2GYrIdJqyG1iWWgB3QVN48%3D&sort=recency/fr/job-offers/26e033c4-8a20-4673-a9ef-d849e932f102-arc-capital-stage-sales-en-fusion-acquisition
+⚠️ Erreur extraction description depuis page détail: Please use browser.newContext()
+✅ Job extrait: {
+  title: 'Stage : Sales en fusion-acquisition...',
+  company: 'ARC CAPITAL',
+  location: 'Paris',
+  contract: 'Stage',
+  salary: 'Non précisé',
+  publicationDate: '30/07/2025',
+  description: 'ARC CAPITALARC CAPITALStage : Sales en fusion-acquisitionStage 4 à 6 moisParis, FranceCandidature simplifiéeil y a 3 heures...',
+  telework: 'Non précisé',
+  isFrench: '🇫🇷 OUI',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🔍 Texte complet à analyser: ...
+📅 Aucune date trouvée, date par défaut: undefined
+💰 Analyse du texte pour le salaire (longueur: 0)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 URL de détail non disponible, extraction depuis le texte complet
+✅ Job extrait: {
+  title: '...',
+  company: '',
+  location: '',
+  contract: '',
+  salary: 'Non précisé',
+  publicationDate: undefined,
+  description: '...',
+  telework: 'Non précisé',
+  isFrench: '❌ NON',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🚫 Job ignoré (pas en France): ...
+🔍 Texte complet à analyser: ARC CAPITAL...
+📅 Aucune date trouvée, date par défaut: undefined
+💰 Analyse du texte pour le salaire (longueur: 11)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 URL de détail non disponible, extraction depuis le texte complet
+✅ Job extrait: {
+  title: '...',
+  company: '',
+  location: '',
+  contract: '',
+  salary: 'Non précisé',
+  publicationDate: undefined,
+  description: 'ARC CAPITAL...',
+  telework: 'Non précisé',
+  isFrench: '❌ NON',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🚫 Job ignoré (pas en France): ...
+🔍 Texte complet à analyser: ARC CAPITAL...
+📅 Aucune date trouvée, date par défaut: undefined
+💰 Analyse du texte pour le salaire (longueur: 11)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 URL de détail non disponible, extraction depuis le texte complet
+✅ Job extrait: {
+  title: '...',
+  company: '',
+  location: '',
+  contract: '',
+  salary: 'Non précisé',
+  publicationDate: undefined,
+  description: 'ARC CAPITAL...',
+  telework: 'Non précisé',
+  isFrench: '❌ NON',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🚫 Job ignoré (pas en France): ...
+🔍 Texte complet à analyser: Stage 4 à 6 mois...
+📅 Aucune date trouvée, date par défaut: undefined
+💰 Analyse du texte pour le salaire (longueur: 16)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 URL de détail non disponible, extraction depuis le texte complet
+✅ Job extrait: {
+  title: '...',
+  company: '',
+  location: '',
+  contract: '',
+  salary: 'Non précisé',
+  publicationDate: undefined,
+  description: 'Stage 4 à 6 mois...',
+  telework: 'Non précisé',
+  isFrench: '❌ NON',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🚫 Job ignoré (pas en France): ...
+🔍 Texte complet à analyser: Paris, France...
+📅 Aucune date trouvée, date par défaut: undefined
+💰 Analyse du texte pour le salaire (longueur: 13)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 URL de détail non disponible, extraction depuis le texte complet
+✅ Job extrait: {
+  title: '...',
+  company: '',
+  location: '',
+  contract: '',
+  salary: 'Non précisé',
+  publicationDate: undefined,
+  description: 'Paris, France...',
+  telework: 'Non précisé',
+  isFrench: '❌ NON',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🚫 Job ignoré (pas en France): ...
+🔍 Texte complet à analyser: Candidature simplifiée...
+📅 Aucune date trouvée, date par défaut: undefined
+💰 Analyse du texte pour le salaire (longueur: 22)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 URL de détail non disponible, extraction depuis le texte complet
+✅ Job extrait: {
+  title: '...',
+  company: '',
+  location: '',
+  contract: '',
+  salary: 'Non précisé',
+  publicationDate: undefined,
+  description: 'Candidature simplifiée.',
+  telework: 'Non précisé',
+  isFrench: '❌ NON',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🚫 Job ignoré (pas en France): ...
+🔍 Texte complet à analyser: Groupe BelGroupe BelSTAGE - Assistant(e) Contrôle de Gestion Commercial (F/H/X)Stage 6 moisSuresnes, FranceCandidature simplifiéeil y a 3 heures...
+📍 Localisation extraite: "Suresnes, France" → "Suresnes"
+🔍 Élément date trouvé avec le sélecteur: time
+📅 Texte date brut: "il y a 3 heures"
+📅 Date de parution: "il y a 3 heures" → 30/07/2025
+💰 Analyse du texte pour le salaire (longueur: 144)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 Navigation vers: https://www.jobteaser.com/fr/job-offers?lat=48.681003000000004&lng=2.5301432269469717&localized_location=%C3%8Ele-de-France&localized_location=+France&location=France%3A%3A%C3%8Ele-de-France%3A%3A_niokF2GYrIdJqyG1iWWgB3QVN48%3D&sort=recency/fr/job-offers/a71703ff-ff18-4424-a43e-66daee14335f-groupe-bel-stage-assistant-e-controle-de-gestion-commercial-f-h-x
+⚠️ Erreur extraction description depuis page détail: Please use browser.newContext()
+✅ Job extrait: {
+  title: 'STAGE - Assistant(e) Contrôle de Gestion Commercia...',
+  company: 'Groupe Bel',
+  location: 'Suresnes',
+  contract: 'Stage',
+  salary: 'Non précisé',
+  publicationDate: '30/07/2025',
+  description: 'Groupe BelGroupe BelSTAGE - Assistant(e) Contrôle de Gestion Commercial (F/H/X)Stage 6 moisSuresnes, FranceCandidature simplifiéeil y a 3 heures...',
+  telework: 'Non précisé',
+  isFrench: '❌ NON',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🚫 Job ignoré (pas en France): STAGE - Assistant(e) Contrôle de Gestion Commercia...
+🔍 Texte complet à analyser: ...
+📅 Aucune date trouvée, date par défaut: undefined
+💰 Analyse du texte pour le salaire (longueur: 0)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 URL de détail non disponible, extraction depuis le texte complet
+✅ Job extrait: {
+  title: '...',
+  company: '',
+  location: '',
+  contract: '',
+  salary: 'Non précisé',
+  publicationDate: undefined,
+  description: '...',
+  telework: 'Non précisé',
+  isFrench: '❌ NON',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🚫 Job ignoré (pas en France): ...
+🔍 Texte complet à analyser: Groupe Bel...
+📅 Aucune date trouvée, date par défaut: undefined
+💰 Analyse du texte pour le salaire (longueur: 10)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 URL de détail non disponible, extraction depuis le texte complet
+✅ Job extrait: {
+  title: '...',
+  company: '',
+  location: '',
+  contract: '',
+  salary: 'Non précisé',
+  publicationDate: undefined,
+  description: 'Groupe Bel...',
+  telework: 'Non précisé',
+  isFrench: '❌ NON',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🚫 Job ignoré (pas en France): ...
+🔍 Texte complet à analyser: Groupe Bel...
+📅 Aucune date trouvée, date par défaut: undefined
+💰 Analyse du texte pour le salaire (longueur: 10)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 URL de détail non disponible, extraction depuis le texte complet
+✅ Job extrait: {
+  title: '...',
+  company: '',
+  location: '',
+  contract: '',
+  salary: 'Non précisé',
+  publicationDate: undefined,
+  description: 'Groupe Bel...',
+  telework: 'Non précisé',
+  isFrench: '❌ NON',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🚫 Job ignoré (pas en France): ...
+🔍 Texte complet à analyser: Stage 6 mois...
+📅 Aucune date trouvée, date par défaut: undefined
+💰 Analyse du texte pour le salaire (longueur: 12)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 URL de détail non disponible, extraction depuis le texte complet
+✅ Job extrait: {
+  title: '...',
+  company: '',
+  location: '',
+  contract: '',
+  salary: 'Non précisé',
+  publicationDate: undefined,
+  description: 'Stage 6 mois...',
+  telework: 'Non précisé',
+  isFrench: '❌ NON',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🚫 Job ignoré (pas en France): ...
+🔍 Texte complet à analyser: Suresnes, France...
+📅 Aucune date trouvée, date par défaut: undefined
+💰 Analyse du texte pour le salaire (longueur: 16)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 URL de détail non disponible, extraction depuis le texte complet
+✅ Job extrait: {
+  title: '...',
+  company: '',
+  location: '',
+  contract: '',
+  salary: 'Non précisé',
+  publicationDate: undefined,
+  description: 'Suresnes, France...',
+  telework: 'Non précisé',
+  isFrench: '❌ NON',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🚫 Job ignoré (pas en France): ...
+🔍 Texte complet à analyser: Candidature simplifiée...
+📅 Aucune date trouvée, date par défaut: undefined
+💰 Analyse du texte pour le salaire (longueur: 22)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 URL de détail non disponible, extraction depuis le texte complet
+✅ Job extrait: {
+  title: '...',
+  company: '',
+  location: '',
+  contract: '',
+  salary: 'Non précisé',
+  publicationDate: undefined,
+  description: 'Candidature simplifiée.',
+  telework: 'Non précisé',
+  isFrench: '❌ NON',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🚫 Job ignoré (pas en France): ...
+🔍 Texte complet à analyser: Vivendi SEVivendi SEAlternance AchatsAlternance 12 moisParis, FranceCandidature simplifiéeil y a 4 heures...
+📍 Localisation extraite: "Paris, France" → "Paris"
+🔍 Élément date trouvé avec le sélecteur: time
+📅 Texte date brut: "il y a 4 heures"
+📅 Date de parution: "il y a 4 heures" → 30/07/2025
+💰 Analyse du texte pour le salaire (longueur: 105)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 Navigation vers: https://www.jobteaser.com/fr/job-offers?lat=48.681003000000004&lng=2.5301432269469717&localized_location=%C3%8Ele-de-France&localized_location=+France&location=France%3A%3A%C3%8Ele-de-France%3A%3A_niokF2GYrIdJqyG1iWWgB3QVN48%3D&sort=recency/fr/job-offers/8f0f1af7-0cf5-4d01-961e-97aafa07ce21-vivendi-se-alternance-achats
+⚠️ Erreur extraction description depuis page détail: Please use browser.newContext()
+✅ Job extrait: {
+  title: 'Alternance Achats...',
+  company: 'Vivendi SE',
+  location: 'Paris',
+  contract: 'Alternance',
+  salary: 'Non précisé',
+  publicationDate: '30/07/2025',
+  description: 'Vivendi SEVivendi SEAlternance AchatsAlternance 12 moisParis, FranceCandidature simplifiéeil y a 4 heures...',
+  telework: 'Non précisé',
+  isFrench: '🇫🇷 OUI',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🔍 Texte complet à analyser: ...
+📅 Aucune date trouvée, date par défaut: undefined
+💰 Analyse du texte pour le salaire (longueur: 0)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 URL de détail non disponible, extraction depuis le texte complet
+✅ Job extrait: {
+  title: '...',
+  company: '',
+  location: '',
+  contract: '',
+  salary: 'Non précisé',
+  publicationDate: undefined,
+  description: '...',
+  telework: 'Non précisé',
+  isFrench: '❌ NON',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🚫 Job ignoré (pas en France): ...
+🔍 Texte complet à analyser: Vivendi SE...
+📅 Aucune date trouvée, date par défaut: undefined
+💰 Analyse du texte pour le salaire (longueur: 10)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 URL de détail non disponible, extraction depuis le texte complet
+✅ Job extrait: {
+  title: '...',
+  company: '',
+  location: '',
+  contract: '',
+  salary: 'Non précisé',
+  publicationDate: undefined,
+  description: 'Vivendi SE...',
+  telework: 'Non précisé',
+  isFrench: '❌ NON',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🚫 Job ignoré (pas en France): ...
+🔍 Texte complet à analyser: Vivendi SE...
+📅 Aucune date trouvée, date par défaut: undefined
+💰 Analyse du texte pour le salaire (longueur: 10)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 URL de détail non disponible, extraction depuis le texte complet
+✅ Job extrait: {
+  title: '...',
+  company: '',
+  location: '',
+  contract: '',
+  salary: 'Non précisé',
+  publicationDate: undefined,
+  description: 'Vivendi SE...',
+  telework: 'Non précisé',
+  isFrench: '❌ NON',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🚫 Job ignoré (pas en France): ...
+🔍 Texte complet à analyser: Alternance 12 mois...
+📅 Aucune date trouvée, date par défaut: undefined
+💰 Analyse du texte pour le salaire (longueur: 18)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 URL de détail non disponible, extraction depuis le texte complet
+✅ Job extrait: {
+  title: '...',
+  company: '',
+  location: '',
+  contract: '',
+  salary: 'Non précisé',
+  publicationDate: undefined,
+  description: 'Alternance 12 mois...',
+  telework: 'Non précisé',
+  isFrench: '❌ NON',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🚫 Job ignoré (pas en France): ...
+🔍 Texte complet à analyser: Paris, France...
+📅 Aucune date trouvée, date par défaut: undefined
+💰 Analyse du texte pour le salaire (longueur: 13)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 URL de détail non disponible, extraction depuis le texte complet
+✅ Job extrait: {
+  title: '...',
+  company: '',
+  location: '',
+  contract: '',
+  salary: 'Non précisé',
+  publicationDate: undefined,
+  description: 'Paris, France...',
+  telework: 'Non précisé',
+  isFrench: '❌ NON',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🚫 Job ignoré (pas en France): ...
+🔍 Texte complet à analyser: Candidature simplifiée...
+📅 Aucune date trouvée, date par défaut: undefined
+💰 Analyse du texte pour le salaire (longueur: 22)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 URL de détail non disponible, extraction depuis le texte complet
+✅ Job extrait: {
+  title: '...',
+  company: '',
+  location: '',
+  contract: '',
+  salary: 'Non précisé',
+  publicationDate: undefined,
+  description: 'Candidature simplifiée.',
+  telework: 'Non précisé',
+  isFrench: '❌ NON',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🚫 Job ignoré (pas en France): ...
+🔍 Texte complet à analyser: I-KapitalI-KapitalAssistant Sales/Structuration Produits Structurés (stage)Stage 4 à 9 moisParis, FranceCandidature simplifiéeil y a 4 heures...
+📍 Localisation extraite: "Paris, France" → "Paris"
+🔍 Élément date trouvé avec le sélecteur: time
+📅 Texte date brut: "il y a 4 heures"
+📅 Date de parution: "il y a 4 heures" → 30/07/2025
+💰 Analyse du texte pour le salaire (longueur: 141)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 Navigation vers: https://www.jobteaser.com/fr/job-offers?lat=48.681003000000004&lng=2.5301432269469717&localized_location=%C3%8Ele-de-France&localized_location=+France&location=France%3A%3A%C3%8Ele-de-France%3A%3A_niokF2GYrIdJqyG1iWWgB3QVN48%3D&sort=recency/fr/job-offers/83e84546-43eb-417c-b333-d7e08de7eb83-i-kapital-assistant-sales-structuration-produits-structures-stage
+⚠️ Erreur extraction description depuis page détail: Please use browser.newContext()
+✅ Job extrait: {
+  title: 'Assistant Sales/Structuration Produits Structurés ...',
+  company: 'I-Kapital',
+  location: 'Paris',
+  contract: 'Stage',
+  salary: 'Non précisé',
+  publicationDate: '30/07/2025',
+  description: 'I-KapitalI-KapitalAssistant Sales/Structuration Produits Structurés (stage)Stage 4 à 9 moisParis, FranceCandidature simplifiéeil y a 4 heures...',
+  telework: 'Non précisé',
+  isFrench: '🇫🇷 OUI',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🔍 Texte complet à analyser: ...
+📅 Aucune date trouvée, date par défaut: undefined
+💰 Analyse du texte pour le salaire (longueur: 0)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 URL de détail non disponible, extraction depuis le texte complet
+✅ Job extrait: {
+  title: '...',
+  company: '',
+  location: '',
+  contract: '',
+  salary: 'Non précisé',
+  publicationDate: undefined,
+  description: '...',
+  telework: 'Non précisé',
+  isFrench: '❌ NON',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🚫 Job ignoré (pas en France): ...
+🔍 Texte complet à analyser: I-Kapital...
+📅 Aucune date trouvée, date par défaut: undefined
+💰 Analyse du texte pour le salaire (longueur: 9)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 URL de détail non disponible, extraction depuis le texte complet
+✅ Job extrait: {
+  title: '...',
+  company: '',
+  location: '',
+  contract: '',
+  salary: 'Non précisé',
+  publicationDate: undefined,
+  description: 'I-Kapital...',
+  telework: 'Non précisé',
+  isFrench: '❌ NON',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🚫 Job ignoré (pas en France): ...
+🔍 Texte complet à analyser: I-Kapital...
+📅 Aucune date trouvée, date par défaut: undefined
+💰 Analyse du texte pour le salaire (longueur: 9)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 URL de détail non disponible, extraction depuis le texte complet
+✅ Job extrait: {
+  title: '...',
+  company: '',
+  location: '',
+  contract: '',
+  salary: 'Non précisé',
+  publicationDate: undefined,
+  description: 'I-Kapital...',
+  telework: 'Non précisé',
+  isFrench: '❌ NON',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🚫 Job ignoré (pas en France): ...
+🔍 Texte complet à analyser: Stage 4 à 9 mois...
+📅 Aucune date trouvée, date par défaut: undefined
+💰 Analyse du texte pour le salaire (longueur: 16)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 URL de détail non disponible, extraction depuis le texte complet
+✅ Job extrait: {
+  title: '...',
+  company: '',
+  location: '',
+  contract: '',
+  salary: 'Non précisé',
+  publicationDate: undefined,
+  description: 'Stage 4 à 9 mois...',
+  telework: 'Non précisé',
+  isFrench: '❌ NON',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🚫 Job ignoré (pas en France): ...
+🔍 Texte complet à analyser: Paris, France...
+📅 Aucune date trouvée, date par défaut: undefined
+💰 Analyse du texte pour le salaire (longueur: 13)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 URL de détail non disponible, extraction depuis le texte complet
+✅ Job extrait: {
+  title: '...',
+  company: '',
+  location: '',
+  contract: '',
+  salary: 'Non précisé',
+  publicationDate: undefined,
+  description: 'Paris, France...',
+  telework: 'Non précisé',
+  isFrench: '❌ NON',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🚫 Job ignoré (pas en France): ...
+🔍 Texte complet à analyser: Candidature simplifiée...
+📅 Aucune date trouvée, date par défaut: undefined
+💰 Analyse du texte pour le salaire (longueur: 22)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 URL de détail non disponible, extraction depuis le texte complet
+✅ Job extrait: {
+  title: '...',
+  company: '',
+  location: '',
+  contract: '',
+  salary: 'Non précisé',
+  publicationDate: undefined,
+  description: 'Candidature simplifiée.',
+  telework: 'Non précisé',
+  isFrench: '❌ NON',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🚫 Job ignoré (pas en France): ...
+🔍 Texte complet à analyser: SnapdeskSnapdeskStage - Bras Droit Chief Customer OfficerStage 6 moisParis, FranceCandidature simplifiéeil y a 4 heures...
+📍 Localisation extraite: "Paris, France" → "Paris"
+🔍 Élément date trouvé avec le sélecteur: time
+📅 Texte date brut: "il y a 4 heures"
+📅 Date de parution: "il y a 4 heures" → 30/07/2025
+💰 Analyse du texte pour le salaire (longueur: 119)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 Navigation vers: https://www.jobteaser.com/fr/job-offers?lat=48.681003000000004&lng=2.5301432269469717&localized_location=%C3%8Ele-de-France&localized_location=+France&location=France%3A%3A%C3%8Ele-de-France%3A%3A_niokF2GYrIdJqyG1iWWgB3QVN48%3D&sort=recency/fr/job-offers/caec5389-3382-4078-8193-d21146088183-snapdesk-stage-bras-droit-chief-customer-officer
+⚠️ Erreur extraction description depuis page détail: Please use browser.newContext()
+✅ Job extrait: {
+  title: 'Stage - Bras Droit Chief Customer Officer...',
+  company: 'Snapdesk',
+  location: 'Paris',
+  contract: 'Stage',
+  salary: 'Non précisé',
+  publicationDate: '30/07/2025',
+  description: 'SnapdeskSnapdeskStage - Bras Droit Chief Customer OfficerStage 6 moisParis, FranceCandidature simplifiéeil y a 4 heures...',
+  telework: 'Non précisé',
+  isFrench: '🇫🇷 OUI',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🔍 Texte complet à analyser: ...
+📅 Aucune date trouvée, date par défaut: undefined
+💰 Analyse du texte pour le salaire (longueur: 0)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 URL de détail non disponible, extraction depuis le texte complet
+✅ Job extrait: {
+  title: '...',
+  company: '',
+  location: '',
+  contract: '',
+  salary: 'Non précisé',
+  publicationDate: undefined,
+  description: '...',
+  telework: 'Non précisé',
+  isFrench: '❌ NON',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🚫 Job ignoré (pas en France): ...
+🔍 Texte complet à analyser: Snapdesk...
+📅 Aucune date trouvée, date par défaut: undefined
+💰 Analyse du texte pour le salaire (longueur: 8)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 URL de détail non disponible, extraction depuis le texte complet
+✅ Job extrait: {
+  title: '...',
+  company: '',
+  location: '',
+  contract: '',
+  salary: 'Non précisé',
+  publicationDate: undefined,
+  description: 'Snapdesk...',
+  telework: 'Non précisé',
+  isFrench: '❌ NON',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🚫 Job ignoré (pas en France): ...
+🔍 Texte complet à analyser: Snapdesk...
+📅 Aucune date trouvée, date par défaut: undefined
+💰 Analyse du texte pour le salaire (longueur: 8)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 URL de détail non disponible, extraction depuis le texte complet
+✅ Job extrait: {
+  title: '...',
+  company: '',
+  location: '',
+  contract: '',
+  salary: 'Non précisé',
+  publicationDate: undefined,
+  description: 'Snapdesk...',
+  telework: 'Non précisé',
+  isFrench: '❌ NON',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🚫 Job ignoré (pas en France): ...
+🔍 Texte complet à analyser: Stage 6 mois...
+📅 Aucune date trouvée, date par défaut: undefined
+💰 Analyse du texte pour le salaire (longueur: 12)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 URL de détail non disponible, extraction depuis le texte complet
+✅ Job extrait: {
+  title: '...',
+  company: '',
+  location: '',
+  contract: '',
+  salary: 'Non précisé',
+  publicationDate: undefined,
+  description: 'Stage 6 mois...',
+  telework: 'Non précisé',
+  isFrench: '❌ NON',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🚫 Job ignoré (pas en France): ...
+🔍 Texte complet à analyser: Paris, France...
+📅 Aucune date trouvée, date par défaut: undefined
+💰 Analyse du texte pour le salaire (longueur: 13)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 URL de détail non disponible, extraction depuis le texte complet
+✅ Job extrait: {
+  title: '...',
+  company: '',
+  location: '',
+  contract: '',
+  salary: 'Non précisé',
+  publicationDate: undefined,
+  description: 'Paris, France...',
+  telework: 'Non précisé',
+  isFrench: '❌ NON',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🚫 Job ignoré (pas en France): ...
+🔍 Texte complet à analyser: Candidature simplifiée...
+📅 Aucune date trouvée, date par défaut: undefined
+💰 Analyse du texte pour le salaire (longueur: 22)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 URL de détail non disponible, extraction depuis le texte complet
+✅ Job extrait: {
+  title: '...',
+  company: '',
+  location: '',
+  contract: '',
+  salary: 'Non précisé',
+  publicationDate: undefined,
+  description: 'Candidature simplifiée.',
+  telework: 'Non précisé',
+  isFrench: '❌ NON',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🚫 Job ignoré (pas en France): ...
+🔍 Texte complet à analyser: PwC FrancePwC FranceAuditeur des systèmes d'information | Alternance | H/FAlternance 10 à 12 moisNeuilly-sur-Seine, Franceil y a 5 heures...
+📍 Localisation extraite: "Neuilly-sur-Seine, France" → "Neuilly-sur-Seine"
+🔍 Élément date trouvé avec le sélecteur: time
+📅 Texte date brut: "il y a 5 heures"
+📅 Date de parution: "il y a 5 heures" → 30/07/2025
+💰 Analyse du texte pour le salaire (longueur: 137)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 Navigation vers: https://www.jobteaser.com/fr/job-offers?lat=48.681003000000004&lng=2.5301432269469717&localized_location=%C3%8Ele-de-France&localized_location=+France&location=France%3A%3A%C3%8Ele-de-France%3A%3A_niokF2GYrIdJqyG1iWWgB3QVN48%3D&sort=recency/fr/job-offers/5d77a453-f4b1-4aa3-9b71-2ec2fc73027e-pwc-france-auditeur-des-systemes-d-information-alternance-h-f
+⚠️ Erreur extraction description depuis page détail: Please use browser.newContext()
+✅ Job extrait: {
+  title: "Auditeur des systèmes d'information | Alternance |...",
+  company: 'PwC France',
+  location: 'Neuilly-sur-Seine',
+  contract: 'Alternance',
+  salary: 'Non précisé',
+  publicationDate: '30/07/2025',
+  description: "PwC FrancePwC FranceAuditeur des systèmes d'information | Alternance | H/FAlternance 10 à 12 moisNeuilly-sur-Seine, Franceil y a 5 heures...",
+  telework: 'Non précisé',
+  isFrench: '❌ NON',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🚫 Job ignoré (pas en France): Auditeur des systèmes d'information | Alternance |...
+🔍 Texte complet à analyser: ...
+📅 Aucune date trouvée, date par défaut: undefined
+💰 Analyse du texte pour le salaire (longueur: 0)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 URL de détail non disponible, extraction depuis le texte complet
+✅ Job extrait: {
+  title: '...',
+  company: '',
+  location: '',
+  contract: '',
+  salary: 'Non précisé',
+  publicationDate: undefined,
+  description: '...',
+  telework: 'Non précisé',
+  isFrench: '❌ NON',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🚫 Job ignoré (pas en France): ...
+🔍 Texte complet à analyser: PwC France...
+📅 Aucune date trouvée, date par défaut: undefined
+💰 Analyse du texte pour le salaire (longueur: 10)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 URL de détail non disponible, extraction depuis le texte complet
+✅ Job extrait: {
+  title: '...',
+  company: '',
+  location: '',
+  contract: '',
+  salary: 'Non précisé',
+  publicationDate: undefined,
+  description: 'PwC France...',
+  telework: 'Non précisé',
+  isFrench: '❌ NON',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🚫 Job ignoré (pas en France): ...
+🔍 Texte complet à analyser: PwC France...
+📅 Aucune date trouvée, date par défaut: undefined
+💰 Analyse du texte pour le salaire (longueur: 10)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 URL de détail non disponible, extraction depuis le texte complet
+✅ Job extrait: {
+  title: '...',
+  company: '',
+  location: '',
+  contract: '',
+  salary: 'Non précisé',
+  publicationDate: undefined,
+  description: 'PwC France...',
+  telework: 'Non précisé',
+  isFrench: '❌ NON',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🚫 Job ignoré (pas en France): ...
+🔍 Texte complet à analyser: Alternance 10 à 12 mois...
+📅 Aucune date trouvée, date par défaut: undefined
+💰 Analyse du texte pour le salaire (longueur: 23)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 URL de détail non disponible, extraction depuis le texte complet
+✅ Job extrait: {
+  title: '...',
+  company: '',
+  location: '',
+  contract: '',
+  salary: 'Non précisé',
+  publicationDate: undefined,
+  description: 'Alternance 10 à 12 mois.',
+  telework: 'Non précisé',
+  isFrench: '❌ NON',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🚫 Job ignoré (pas en France): ...
+🔍 Texte complet à analyser: Neuilly-sur-Seine, France...
+📅 Aucune date trouvée, date par défaut: undefined
+💰 Analyse du texte pour le salaire (longueur: 25)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 URL de détail non disponible, extraction depuis le texte complet
+✅ Job extrait: {
+  title: '...',
+  company: '',
+  location: '',
+  contract: '',
+  salary: 'Non précisé',
+  publicationDate: undefined,
+  description: 'Neuilly-sur-Seine, France.',
+  telework: 'Non précisé',
+  isFrench: '❌ NON',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🚫 Job ignoré (pas en France): ...
+🔍 Texte complet à analyser: SarawakSarawakCoordinateur commercial & marketing H/FCDIBoulogne-Billancourt, Franceil y a 5 heures...
+📍 Localisation extraite: "Boulogne-Billancourt, France" → "Boulogne-Billancourt"
+🔍 Élément date trouvé avec le sélecteur: time
+📅 Texte date brut: "il y a 5 heures"
+📅 Date de parution: "il y a 5 heures" → 30/07/2025
+💰 Analyse du texte pour le salaire (longueur: 99)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 Navigation vers: https://www.jobteaser.com/fr/job-offers?lat=48.681003000000004&lng=2.5301432269469717&localized_location=%C3%8Ele-de-France&localized_location=+France&location=France%3A%3A%C3%8Ele-de-France%3A%3A_niokF2GYrIdJqyG1iWWgB3QVN48%3D&sort=recency/fr/job-offers/ece050bb-721e-4cf3-8f04-446c77b77acf-sarawak-coordinateur-commercial-marketing-h-f
+⚠️ Erreur extraction description depuis page détail: Please use browser.newContext()
+✅ Job extrait: {
+  title: 'Coordinateur commercial & marketing H/F...',
+  company: 'Sarawak',
+  location: 'Boulogne-Billancourt',
+  contract: 'CDI',
+  salary: 'Non précisé',
+  publicationDate: '30/07/2025',
+  description: 'SarawakSarawakCoordinateur commercial & marketing H/FCDIBoulogne-Billancourt, Franceil y a 5 heures...',
+  telework: 'Non précisé',
+  isFrench: '❌ NON',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🚫 Job ignoré (pas en France): Coordinateur commercial & marketing H/F...
+🔍 Texte complet à analyser: ...
+📅 Aucune date trouvée, date par défaut: undefined
+💰 Analyse du texte pour le salaire (longueur: 0)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 URL de détail non disponible, extraction depuis le texte complet
+✅ Job extrait: {
+  title: '...',
+  company: '',
+  location: '',
+  contract: '',
+  salary: 'Non précisé',
+  publicationDate: undefined,
+  description: '...',
+  telework: 'Non précisé',
+  isFrench: '❌ NON',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🚫 Job ignoré (pas en France): ...
+🔍 Texte complet à analyser: Sarawak...
+📅 Aucune date trouvée, date par défaut: undefined
+💰 Analyse du texte pour le salaire (longueur: 7)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 URL de détail non disponible, extraction depuis le texte complet
+✅ Job extrait: {
+  title: '...',
+  company: '',
+  location: '',
+  contract: '',
+  salary: 'Non précisé',
+  publicationDate: undefined,
+  description: 'Sarawak...',
+  telework: 'Non précisé',
+  isFrench: '❌ NON',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🚫 Job ignoré (pas en France): ...
+🔍 Texte complet à analyser: Sarawak...
+📅 Aucune date trouvée, date par défaut: undefined
+💰 Analyse du texte pour le salaire (longueur: 7)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 URL de détail non disponible, extraction depuis le texte complet
+✅ Job extrait: {
+  title: '...',
+  company: '',
+  location: '',
+  contract: '',
+  salary: 'Non précisé',
+  publicationDate: undefined,
+  description: 'Sarawak...',
+  telework: 'Non précisé',
+  isFrench: '❌ NON',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🚫 Job ignoré (pas en France): ...
+🔍 Texte complet à analyser: CDI...
+📅 Aucune date trouvée, date par défaut: undefined
+💰 Analyse du texte pour le salaire (longueur: 3)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 URL de détail non disponible, extraction depuis le texte complet
+✅ Job extrait: {
+  title: '...',
+  company: '',
+  location: '',
+  contract: '',
+  salary: 'Non précisé',
+  publicationDate: undefined,
+  description: 'CDI...',
+  telework: 'Non précisé',
+  isFrench: '❌ NON',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🚫 Job ignoré (pas en France): ...
+🔍 Texte complet à analyser: Boulogne-Billancourt, France...
+📅 Aucune date trouvée, date par défaut: undefined
+💰 Analyse du texte pour le salaire (longueur: 28)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 URL de détail non disponible, extraction depuis le texte complet
+✅ Job extrait: {
+  title: '...',
+  company: '',
+  location: '',
+  contract: '',
+  salary: 'Non précisé',
+  publicationDate: undefined,
+  description: 'Boulogne-Billancourt, France.',
+  telework: 'Non précisé',
+  isFrench: '❌ NON',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🚫 Job ignoré (pas en France): ...
+🔍 Texte complet à analyser: GreenTomatoMediaGreenTomatoMediaYouTube Channel Manager - Crypto & Blockchain & Web 3CDIPlusieurs localisationsil y a 7 heures...
+📍 Localisation extraite: "Plusieurs localisations" → "Plusieurs localisations"
+🔍 Élément date trouvé avec le sélecteur: time
+📅 Texte date brut: "il y a 7 heures"
+📅 Date de parution: "il y a 7 heures" → 30/07/2025
+💰 Analyse du texte pour le salaire (longueur: 126)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 Navigation vers: https://www.jobteaser.com/fr/job-offers?lat=48.681003000000004&lng=2.5301432269469717&localized_location=%C3%8Ele-de-France&localized_location=+France&location=France%3A%3A%C3%8Ele-de-France%3A%3A_niokF2GYrIdJqyG1iWWgB3QVN48%3D&sort=recency/fr/job-offers/11898536-4f8f-4c56-8084-d255fa40955d-greentomatomedia-youtube-channel-manager-crypto-blockchain-web-3
+⚠️ Erreur extraction description depuis page détail: Please use browser.newContext()
+✅ Job extrait: {
+  title: 'YouTube Channel Manager - Crypto & Blockchain & We...',
+  company: 'GreenTomatoMedia',
+  location: 'Plusieurs localisations',
+  contract: 'CDI',
+  salary: 'Non précisé',
+  publicationDate: '30/07/2025',
+  description: 'GreenTomatoMediaGreenTomatoMediaYouTube Channel Manager - Crypto & Blockchain & Web 3CDIPlusieurs localisationsil y a 7 heures...',
+  telework: 'Non précisé',
+  isFrench: '❌ NON',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🚫 Job ignoré (pas en France): YouTube Channel Manager - Crypto & Blockchain & We...
+🔍 Texte complet à analyser: ...
+📅 Aucune date trouvée, date par défaut: undefined
+💰 Analyse du texte pour le salaire (longueur: 0)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 URL de détail non disponible, extraction depuis le texte complet
+✅ Job extrait: {
+  title: '...',
+  company: '',
+  location: '',
+  contract: '',
+  salary: 'Non précisé',
+  publicationDate: undefined,
+  description: '...',
+  telework: 'Non précisé',
+  isFrench: '❌ NON',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🚫 Job ignoré (pas en France): ...
+🔍 Texte complet à analyser: GreenTomatoMedia...
+📅 Aucune date trouvée, date par défaut: undefined
+💰 Analyse du texte pour le salaire (longueur: 16)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 URL de détail non disponible, extraction depuis le texte complet
+✅ Job extrait: {
+  title: '...',
+  company: '',
+  location: '',
+  contract: '',
+  salary: 'Non précisé',
+  publicationDate: undefined,
+  description: 'GreenTomatoMedia...',
+  telework: 'Non précisé',
+  isFrench: '❌ NON',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🚫 Job ignoré (pas en France): ...
+🔍 Texte complet à analyser: GreenTomatoMedia...
+📅 Aucune date trouvée, date par défaut: undefined
+💰 Analyse du texte pour le salaire (longueur: 16)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 URL de détail non disponible, extraction depuis le texte complet
+✅ Job extrait: {
+  title: '...',
+  company: '',
+  location: '',
+  contract: '',
+  salary: 'Non précisé',
+  publicationDate: undefined,
+  description: 'GreenTomatoMedia...',
+  telework: 'Non précisé',
+  isFrench: '❌ NON',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🚫 Job ignoré (pas en France): ...
+🔍 Texte complet à analyser: CDI...
+📅 Aucune date trouvée, date par défaut: undefined
+💰 Analyse du texte pour le salaire (longueur: 3)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 URL de détail non disponible, extraction depuis le texte complet
+✅ Job extrait: {
+  title: '...',
+  company: '',
+  location: '',
+  contract: '',
+  salary: 'Non précisé',
+  publicationDate: undefined,
+  description: 'CDI...',
+  telework: 'Non précisé',
+  isFrench: '❌ NON',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🚫 Job ignoré (pas en France): ...
+🔍 Texte complet à analyser: Plusieurs localisations...
+📅 Aucune date trouvée, date par défaut: undefined
+💰 Analyse du texte pour le salaire (longueur: 23)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 URL de détail non disponible, extraction depuis le texte complet
+✅ Job extrait: {
+  title: '...',
+  company: '',
+  location: '',
+  contract: '',
+  salary: 'Non précisé',
+  publicationDate: undefined,
+  description: 'Plusieurs localisations.',
+  telework: 'Non précisé',
+  isFrench: '❌ NON',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🚫 Job ignoré (pas en France): ...
+🔍 Texte complet à analyser: AnimalisAnimalisStage -Chargé.e de recrutement H/FStage 4 à 6 moisParis, Franceil y a 18 heures...
+📍 Localisation extraite: "Paris, France" → "Paris"
+🔍 Élément date trouvé avec le sélecteur: time
+📅 Texte date brut: "il y a 18 heures"
+📅 Date de parution: "il y a 18 heures" → 29/07/2025
+💰 Analyse du texte pour le salaire (longueur: 95)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 Navigation vers: https://www.jobteaser.com/fr/job-offers?lat=48.681003000000004&lng=2.5301432269469717&localized_location=%C3%8Ele-de-France&localized_location=+France&location=France%3A%3A%C3%8Ele-de-France%3A%3A_niokF2GYrIdJqyG1iWWgB3QVN48%3D&sort=recency/fr/job-offers/5591eda7-512b-4b21-ab09-a767e9ea91a1-animalis-stage-charge-e-de-recrutement-h-f
+⚠️ Erreur extraction description depuis page détail: Please use browser.newContext()
+✅ Job extrait: {
+  title: 'Stage -Chargé.e de recrutement H/F...',
+  company: 'Animalis',
+  location: 'Paris',
+  contract: 'Stage',
+  salary: 'Non précisé',
+  publicationDate: '29/07/2025',
+  description: 'AnimalisAnimalisStage -Chargé.e de recrutement H/FStage 4 à 6 moisParis, Franceil y a 18 heures...',
+  telework: 'Non précisé',
+  isFrench: '🇫🇷 OUI',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🔍 Texte complet à analyser: ...
+📅 Aucune date trouvée, date par défaut: undefined
+💰 Analyse du texte pour le salaire (longueur: 0)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 URL de détail non disponible, extraction depuis le texte complet
+✅ Job extrait: {
+  title: '...',
+  company: '',
+  location: '',
+  contract: '',
+  salary: 'Non précisé',
+  publicationDate: undefined,
+  description: '...',
+  telework: 'Non précisé',
+  isFrench: '❌ NON',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🚫 Job ignoré (pas en France): ...
+🔍 Texte complet à analyser: Animalis...
+📅 Aucune date trouvée, date par défaut: undefined
+💰 Analyse du texte pour le salaire (longueur: 8)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 URL de détail non disponible, extraction depuis le texte complet
+✅ Job extrait: {
+  title: '...',
+  company: '',
+  location: '',
+  contract: '',
+  salary: 'Non précisé',
+  publicationDate: undefined,
+  description: 'Animalis...',
+  telework: 'Non précisé',
+  isFrench: '❌ NON',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🚫 Job ignoré (pas en France): ...
+🔍 Texte complet à analyser: Animalis...
+📅 Aucune date trouvée, date par défaut: undefined
+💰 Analyse du texte pour le salaire (longueur: 8)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 URL de détail non disponible, extraction depuis le texte complet
+✅ Job extrait: {
+  title: '...',
+  company: '',
+  location: '',
+  contract: '',
+  salary: 'Non précisé',
+  publicationDate: undefined,
+  description: 'Animalis...',
+  telework: 'Non précisé',
+  isFrench: '❌ NON',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🚫 Job ignoré (pas en France): ...
+🔍 Texte complet à analyser: Stage 4 à 6 mois...
+📅 Aucune date trouvée, date par défaut: undefined
+💰 Analyse du texte pour le salaire (longueur: 16)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 URL de détail non disponible, extraction depuis le texte complet
+✅ Job extrait: {
+  title: '...',
+  company: '',
+  location: '',
+  contract: '',
+  salary: 'Non précisé',
+  publicationDate: undefined,
+  description: 'Stage 4 à 6 mois...',
+  telework: 'Non précisé',
+  isFrench: '❌ NON',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🚫 Job ignoré (pas en France): ...
+🔍 Texte complet à analyser: Paris, France...
+📅 Aucune date trouvée, date par défaut: undefined
+💰 Analyse du texte pour le salaire (longueur: 13)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 URL de détail non disponible, extraction depuis le texte complet
+✅ Job extrait: {
+  title: '...',
+  company: '',
+  location: '',
+  contract: '',
+  salary: 'Non précisé',
+  publicationDate: undefined,
+  description: 'Paris, France...',
+  telework: 'Non précisé',
+  isFrench: '❌ NON',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🚫 Job ignoré (pas en France): ...
+🔍 Texte complet à analyser: ODDO BHFODDO BHFAlternance Junior Digital MarketerAlternance 12 à 24 moisParis, Franceil y a 20 heures...
+📍 Localisation extraite: "Paris, France" → "Paris"
+🔍 Élément date trouvé avec le sélecteur: time
+📅 Texte date brut: "il y a 20 heures"
+📅 Date de parution: "il y a 20 heures" → 29/07/2025
+💰 Analyse du texte pour le salaire (longueur: 102)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 Navigation vers: https://www.jobteaser.com/fr/job-offers?lat=48.681003000000004&lng=2.5301432269469717&localized_location=%C3%8Ele-de-France&localized_location=+France&location=France%3A%3A%C3%8Ele-de-France%3A%3A_niokF2GYrIdJqyG1iWWgB3QVN48%3D&sort=recency/fr/job-offers/876cc549-7ba2-4bc5-86d6-b55cc9a64eee-oddo-bhf-alternance-junior-digital-marketer
+⚠️ Erreur extraction description depuis page détail: Please use browser.newContext()
+✅ Job extrait: {
+  title: 'Alternance Junior Digital Marketer...',
+  company: 'ODDO BHF',
+  location: 'Paris',
+  contract: 'Alternance',
+  salary: 'Non précisé',
+  publicationDate: '29/07/2025',
+  description: 'ODDO BHFODDO BHFAlternance Junior Digital MarketerAlternance 12 à 24 moisParis, Franceil y a 20 heures...',
+  telework: 'Non précisé',
+  isFrench: '🇫🇷 OUI',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🔍 Texte complet à analyser: ...
+📅 Aucune date trouvée, date par défaut: undefined
+💰 Analyse du texte pour le salaire (longueur: 0)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 URL de détail non disponible, extraction depuis le texte complet
+✅ Job extrait: {
+  title: '...',
+  company: '',
+  location: '',
+  contract: '',
+  salary: 'Non précisé',
+  publicationDate: undefined,
+  description: '...',
+  telework: 'Non précisé',
+  isFrench: '❌ NON',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🚫 Job ignoré (pas en France): ...
+🔍 Texte complet à analyser: ODDO BHF...
+📅 Aucune date trouvée, date par défaut: undefined
+💰 Analyse du texte pour le salaire (longueur: 8)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 URL de détail non disponible, extraction depuis le texte complet
+✅ Job extrait: {
+  title: '...',
+  company: '',
+  location: '',
+  contract: '',
+  salary: 'Non précisé',
+  publicationDate: undefined,
+  description: 'ODDO BHF...',
+  telework: 'Non précisé',
+  isFrench: '❌ NON',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🚫 Job ignoré (pas en France): ...
+🔍 Texte complet à analyser: ODDO BHF...
+📅 Aucune date trouvée, date par défaut: undefined
+💰 Analyse du texte pour le salaire (longueur: 8)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 URL de détail non disponible, extraction depuis le texte complet
+✅ Job extrait: {
+  title: '...',
+  company: '',
+  location: '',
+  contract: '',
+  salary: 'Non précisé',
+  publicationDate: undefined,
+  description: 'ODDO BHF...',
+  telework: 'Non précisé',
+  isFrench: '❌ NON',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🚫 Job ignoré (pas en France): ...
+🔍 Texte complet à analyser: Alternance 12 à 24 mois...
+📅 Aucune date trouvée, date par défaut: undefined
+💰 Analyse du texte pour le salaire (longueur: 23)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 URL de détail non disponible, extraction depuis le texte complet
+✅ Job extrait: {
+  title: '...',
+  company: '',
+  location: '',
+  contract: '',
+  salary: 'Non précisé',
+  publicationDate: undefined,
+  description: 'Alternance 12 à 24 mois.',
+  telework: 'Non précisé',
+  isFrench: '❌ NON',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🚫 Job ignoré (pas en France): ...
+🔍 Texte complet à analyser: Paris, France...
+📅 Aucune date trouvée, date par défaut: undefined
+💰 Analyse du texte pour le salaire (longueur: 13)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 URL de détail non disponible, extraction depuis le texte complet
+✅ Job extrait: {
+  title: '...',
+  company: '',
+  location: '',
+  contract: '',
+  salary: 'Non précisé',
+  publicationDate: undefined,
+  description: 'Paris, France...',
+  telework: 'Non précisé',
+  isFrench: '❌ NON',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🚫 Job ignoré (pas en France): ...
+🔍 Texte complet à analyser: SFRSFRAlternant(e) - Juriste (h/f) - Réglementation du réseau des télécommunications Alternance 12 moisParis, FranceCandidature simplifiéeil y a 20 heures...
+📍 Localisation extraite: "Paris, France" → "Paris"
+🔍 Élément date trouvé avec le sélecteur: time
+📅 Texte date brut: "il y a 20 heures"
+📅 Date de parution: "il y a 20 heures" → 29/07/2025
+💰 Analyse du texte pour le salaire (longueur: 154)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 Navigation vers: https://www.jobteaser.com/fr/job-offers?lat=48.681003000000004&lng=2.5301432269469717&localized_location=%C3%8Ele-de-France&localized_location=+France&location=France%3A%3A%C3%8Ele-de-France%3A%3A_niokF2GYrIdJqyG1iWWgB3QVN48%3D&sort=recency/fr/job-offers/173ddfc1-f0e0-4dba-a5fd-0d7de9760bd6-sfr-alternant-e-juriste-h-f-reglementation-du-reseau-des-telecommunications
+⚠️ Erreur extraction description depuis page détail: Please use browser.newContext()
+✅ Job extrait: {
+  title: 'Alternant(e) - Juriste (h/f) - Réglementation du r...',
+  company: 'SFR',
+  location: 'Paris',
+  contract: 'Alternance',
+  salary: 'Non précisé',
+  publicationDate: '29/07/2025',
+  description: 'SFRSFRAlternant(e) - Juriste (h/f) - Réglementation du réseau des télécommunications Alternance 12 moisParis, FranceCandidature simplifiéeil y a 20 heures...',
+  telework: 'Non précisé',
+  isFrench: '🇫🇷 OUI',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🔍 Texte complet à analyser: ...
+📅 Aucune date trouvée, date par défaut: undefined
+💰 Analyse du texte pour le salaire (longueur: 0)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 URL de détail non disponible, extraction depuis le texte complet
+✅ Job extrait: {
+  title: '...',
+  company: '',
+  location: '',
+  contract: '',
+  salary: 'Non précisé',
+  publicationDate: undefined,
+  description: '...',
+  telework: 'Non précisé',
+  isFrench: '❌ NON',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🚫 Job ignoré (pas en France): ...
+🔍 Texte complet à analyser: SFR...
+📅 Aucune date trouvée, date par défaut: undefined
+💰 Analyse du texte pour le salaire (longueur: 3)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 URL de détail non disponible, extraction depuis le texte complet
+✅ Job extrait: {
+  title: '...',
+  company: '',
+  location: '',
+  contract: '',
+  salary: 'Non précisé',
+  publicationDate: undefined,
+  description: 'SFR...',
+  telework: 'Non précisé',
+  isFrench: '❌ NON',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🚫 Job ignoré (pas en France): ...
+🔍 Texte complet à analyser: SFR...
+📅 Aucune date trouvée, date par défaut: undefined
+💰 Analyse du texte pour le salaire (longueur: 3)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 URL de détail non disponible, extraction depuis le texte complet
+✅ Job extrait: {
+  title: '...',
+  company: '',
+  location: '',
+  contract: '',
+  salary: 'Non précisé',
+  publicationDate: undefined,
+  description: 'SFR...',
+  telework: 'Non précisé',
+  isFrench: '❌ NON',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🚫 Job ignoré (pas en France): ...
+🔍 Texte complet à analyser: Alternance 12 mois...
+📅 Aucune date trouvée, date par défaut: undefined
+💰 Analyse du texte pour le salaire (longueur: 18)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 URL de détail non disponible, extraction depuis le texte complet
+✅ Job extrait: {
+  title: '...',
+  company: '',
+  location: '',
+  contract: '',
+  salary: 'Non précisé',
+  publicationDate: undefined,
+  description: 'Alternance 12 mois...',
+  telework: 'Non précisé',
+  isFrench: '❌ NON',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🚫 Job ignoré (pas en France): ...
+🔍 Texte complet à analyser: Paris, France...
+📅 Aucune date trouvée, date par défaut: undefined
+💰 Analyse du texte pour le salaire (longueur: 13)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 URL de détail non disponible, extraction depuis le texte complet
+✅ Job extrait: {
+  title: '...',
+  company: '',
+  location: '',
+  contract: '',
+  salary: 'Non précisé',
+  publicationDate: undefined,
+  description: 'Paris, France...',
+  telework: 'Non précisé',
+  isFrench: '❌ NON',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🚫 Job ignoré (pas en France): ...
+🔍 Texte complet à analyser: Candidature simplifiée...
+📅 Aucune date trouvée, date par défaut: undefined
+💰 Analyse du texte pour le salaire (longueur: 22)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 URL de détail non disponible, extraction depuis le texte complet
+✅ Job extrait: {
+  title: '...',
+  company: '',
+  location: '',
+  contract: '',
+  salary: 'Non précisé',
+  publicationDate: undefined,
+  description: 'Candidature simplifiée.',
+  telework: 'Non précisé',
+  isFrench: '❌ NON',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🚫 Job ignoré (pas en France): ...
+🔍 Texte complet à analyser: ActedActedFrance : Stagiaire Contrôle de Gestion dans une ONG - ParisStage 6 moisParis, FranceCandidature simplifiéeil y a 20 heures...
+📍 Localisation extraite: "Paris, France" → "Paris"
+🔍 Élément date trouvé avec le sélecteur: time
+📅 Texte date brut: "il y a 20 heures"
+📅 Date de parution: "il y a 20 heures" → 29/07/2025
+💰 Analyse du texte pour le salaire (longueur: 132)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 Navigation vers: https://www.jobteaser.com/fr/job-offers?lat=48.681003000000004&lng=2.5301432269469717&localized_location=%C3%8Ele-de-France&localized_location=+France&location=France%3A%3A%C3%8Ele-de-France%3A%3A_niokF2GYrIdJqyG1iWWgB3QVN48%3D&sort=recency/fr/job-offers/6d1c7661-a358-494d-980d-a17708aac869-acted-france-stagiaire-controle-de-gestion-dans-une-ong-paris
+⚠️ Erreur extraction description depuis page détail: Please use browser.newContext()
+✅ Job extrait: {
+  title: 'France : Stagiaire Contrôle de Gestion dans une ON...',
+  company: 'Acted',
+  location: 'Paris',
+  contract: 'Stage',
+  salary: 'Non précisé',
+  publicationDate: '29/07/2025',
+  description: 'ActedActedFrance : Stagiaire Contrôle de Gestion dans une ONG - ParisStage 6 moisParis, FranceCandidature simplifiéeil y a 20 heures...',
+  telework: 'Non précisé',
+  isFrench: '🇫🇷 OUI',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🔍 Texte complet à analyser: ...
+📅 Aucune date trouvée, date par défaut: undefined
+💰 Analyse du texte pour le salaire (longueur: 0)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 URL de détail non disponible, extraction depuis le texte complet
+✅ Job extrait: {
+  title: '...',
+  company: '',
+  location: '',
+  contract: '',
+  salary: 'Non précisé',
+  publicationDate: undefined,
+  description: '...',
+  telework: 'Non précisé',
+  isFrench: '❌ NON',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🚫 Job ignoré (pas en France): ...
+🔍 Texte complet à analyser: Acted...
+📅 Aucune date trouvée, date par défaut: undefined
+💰 Analyse du texte pour le salaire (longueur: 5)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 URL de détail non disponible, extraction depuis le texte complet
+✅ Job extrait: {
+  title: '...',
+  company: '',
+  location: '',
+  contract: '',
+  salary: 'Non précisé',
+  publicationDate: undefined,
+  description: 'Acted...',
+  telework: 'Non précisé',
+  isFrench: '❌ NON',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🚫 Job ignoré (pas en France): ...
+🔍 Texte complet à analyser: Acted...
+📅 Aucune date trouvée, date par défaut: undefined
+💰 Analyse du texte pour le salaire (longueur: 5)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 URL de détail non disponible, extraction depuis le texte complet
+✅ Job extrait: {
+  title: '...',
+  company: '',
+  location: '',
+  contract: '',
+  salary: 'Non précisé',
+  publicationDate: undefined,
+  description: 'Acted...',
+  telework: 'Non précisé',
+  isFrench: '❌ NON',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🚫 Job ignoré (pas en France): ...
+🔍 Texte complet à analyser: Stage 6 mois...
+📅 Aucune date trouvée, date par défaut: undefined
+💰 Analyse du texte pour le salaire (longueur: 12)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 URL de détail non disponible, extraction depuis le texte complet
+✅ Job extrait: {
+  title: '...',
+  company: '',
+  location: '',
+  contract: '',
+  salary: 'Non précisé',
+  publicationDate: undefined,
+  description: 'Stage 6 mois...',
+  telework: 'Non précisé',
+  isFrench: '❌ NON',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🚫 Job ignoré (pas en France): ...
+🔍 Texte complet à analyser: Paris, France...
+📅 Aucune date trouvée, date par défaut: undefined
+💰 Analyse du texte pour le salaire (longueur: 13)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 URL de détail non disponible, extraction depuis le texte complet
+✅ Job extrait: {
+  title: '...',
+  company: '',
+  location: '',
+  contract: '',
+  salary: 'Non précisé',
+  publicationDate: undefined,
+  description: 'Paris, France...',
+  telework: 'Non précisé',
+  isFrench: '❌ NON',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🚫 Job ignoré (pas en France): ...
+🔍 Texte complet à analyser: Candidature simplifiée...
+📅 Aucune date trouvée, date par défaut: undefined
+💰 Analyse du texte pour le salaire (longueur: 22)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 URL de détail non disponible, extraction depuis le texte complet
+✅ Job extrait: {
+  title: '...',
+  company: '',
+  location: '',
+  contract: '',
+  salary: 'Non précisé',
+  publicationDate: undefined,
+  description: 'Candidature simplifiée.',
+  telework: 'Non précisé',
+  isFrench: '❌ NON',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🚫 Job ignoré (pas en France): ...
+🔍 Texte complet à analyser: NatixisNatixisAlternance - 2 ans - Gestionnaire CRM Client Support Group F/HAlternance 19 à 24 moisÎle-de-France, Franceil y a 20 heures...
+📍 Localisation extraite: "Île-de-France, France" → "Île-de-France"
+🔍 Élément date trouvé avec le sélecteur: time
+📅 Texte date brut: "il y a 20 heures"
+📅 Date de parution: "il y a 20 heures" → 29/07/2025
+💰 Analyse du texte pour le salaire (longueur: 136)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 Navigation vers: https://www.jobteaser.com/fr/job-offers?lat=48.681003000000004&lng=2.5301432269469717&localized_location=%C3%8Ele-de-France&localized_location=+France&location=France%3A%3A%C3%8Ele-de-France%3A%3A_niokF2GYrIdJqyG1iWWgB3QVN48%3D&sort=recency/fr/job-offers/376457bf-8b64-42c2-990c-731c4767deea-natixis-alternance-2-ans-gestionnaire-crm-client-support-group-f-h
+⚠️ Erreur extraction description depuis page détail: Please use browser.newContext()
+✅ Job extrait: {
+  title: 'Alternance - 2 ans - Gestionnaire CRM Client Suppo...',
+  company: 'Natixis',
+  location: 'Île-de-France',
+  contract: 'Alternance',
+  salary: 'Non précisé',
+  publicationDate: '29/07/2025',
+  description: 'NatixisNatixisAlternance - 2 ans - Gestionnaire CRM Client Support Group F/HAlternance 19 à 24 moisÎle-de-France, Franceil y a 20 heures...',
+  telework: 'Non précisé',
+  isFrench: '🇫🇷 OUI',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🔍 Texte complet à analyser: ...
+📅 Aucune date trouvée, date par défaut: undefined
+💰 Analyse du texte pour le salaire (longueur: 0)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 URL de détail non disponible, extraction depuis le texte complet
+✅ Job extrait: {
+  title: '...',
+  company: '',
+  location: '',
+  contract: '',
+  salary: 'Non précisé',
+  publicationDate: undefined,
+  description: '...',
+  telework: 'Non précisé',
+  isFrench: '❌ NON',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🚫 Job ignoré (pas en France): ...
+🔍 Texte complet à analyser: Natixis...
+📅 Aucune date trouvée, date par défaut: undefined
+💰 Analyse du texte pour le salaire (longueur: 7)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 URL de détail non disponible, extraction depuis le texte complet
+✅ Job extrait: {
+  title: '...',
+  company: '',
+  location: '',
+  contract: '',
+  salary: 'Non précisé',
+  publicationDate: undefined,
+  description: 'Natixis...',
+  telework: 'Non précisé',
+  isFrench: '❌ NON',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🚫 Job ignoré (pas en France): ...
+🔍 Texte complet à analyser: Natixis...
+📅 Aucune date trouvée, date par défaut: undefined
+💰 Analyse du texte pour le salaire (longueur: 7)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 URL de détail non disponible, extraction depuis le texte complet
+✅ Job extrait: {
+  title: '...',
+  company: '',
+  location: '',
+  contract: '',
+  salary: 'Non précisé',
+  publicationDate: undefined,
+  description: 'Natixis...',
+  telework: 'Non précisé',
+  isFrench: '❌ NON',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🚫 Job ignoré (pas en France): ...
+🔍 Texte complet à analyser: Alternance 19 à 24 mois...
+📅 Aucune date trouvée, date par défaut: undefined
+💰 Analyse du texte pour le salaire (longueur: 23)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 URL de détail non disponible, extraction depuis le texte complet
+✅ Job extrait: {
+  title: '...',
+  company: '',
+  location: '',
+  contract: '',
+  salary: 'Non précisé',
+  publicationDate: undefined,
+  description: 'Alternance 19 à 24 mois.',
+  telework: 'Non précisé',
+  isFrench: '❌ NON',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🚫 Job ignoré (pas en France): ...
+🔍 Texte complet à analyser: Île-de-France, France...
+📅 Aucune date trouvée, date par défaut: undefined
+💰 Analyse du texte pour le salaire (longueur: 21)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 URL de détail non disponible, extraction depuis le texte complet
+✅ Job extrait: {
+  title: '...',
+  company: '',
+  location: '',
+  contract: '',
+  salary: 'Non précisé',
+  publicationDate: undefined,
+  description: 'Île-de-France, France.',
+  telework: 'Non précisé',
+  isFrench: '❌ NON',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🚫 Job ignoré (pas en France): ...
+🔍 Texte complet à analyser: mc2imc2iStage - Consultant(e) en Transformation Numérique H/FStage 4 à 6 moisÎle-de-France, Franceil y a 20 heures...
+📍 Localisation extraite: "Île-de-France, France" → "Île-de-France"
+🔍 Élément date trouvé avec le sélecteur: time
+📅 Texte date brut: "il y a 20 heures"
+📅 Date de parution: "il y a 20 heures" → 29/07/2025
+💰 Analyse du texte pour le salaire (longueur: 114)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 Navigation vers: https://www.jobteaser.com/fr/job-offers?lat=48.681003000000004&lng=2.5301432269469717&localized_location=%C3%8Ele-de-France&localized_location=+France&location=France%3A%3A%C3%8Ele-de-France%3A%3A_niokF2GYrIdJqyG1iWWgB3QVN48%3D&sort=recency/fr/job-offers/5ab1a2e0-3be1-499c-81d1-63deae95c30b-mc2i-stage-consultant-e-en-transformation-numerique-h-f
+⚠️ Erreur extraction description depuis page détail: Please use browser.newContext()
+✅ Job extrait: {
+  title: 'Stage - Consultant(e) en Transformation Numérique ...',
+  company: 'mc2i',
+  location: 'Île-de-France',
+  contract: 'Stage',
+  salary: 'Non précisé',
+  publicationDate: '29/07/2025',
+  description: 'mc2imc2iStage - Consultant(e) en Transformation Numérique H/FStage 4 à 6 moisÎle-de-France, Franceil y a 20 heures...',
+  telework: 'Non précisé',
+  isFrench: '🇫🇷 OUI',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🔍 Texte complet à analyser: ...
+📅 Aucune date trouvée, date par défaut: undefined
+💰 Analyse du texte pour le salaire (longueur: 0)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 URL de détail non disponible, extraction depuis le texte complet
+✅ Job extrait: {
+  title: '...',
+  company: '',
+  location: '',
+  contract: '',
+  salary: 'Non précisé',
+  publicationDate: undefined,
+  description: '...',
+  telework: 'Non précisé',
+  isFrench: '❌ NON',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🚫 Job ignoré (pas en France): ...
+🔍 Texte complet à analyser: mc2i...
+📅 Aucune date trouvée, date par défaut: undefined
+💰 Analyse du texte pour le salaire (longueur: 4)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 URL de détail non disponible, extraction depuis le texte complet
+✅ Job extrait: {
+  title: '...',
+  company: '',
+  location: '',
+  contract: '',
+  salary: 'Non précisé',
+  publicationDate: undefined,
+  description: 'mc2i...',
+  telework: 'Non précisé',
+  isFrench: '❌ NON',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🚫 Job ignoré (pas en France): ...
+🔍 Texte complet à analyser: mc2i...
+📅 Aucune date trouvée, date par défaut: undefined
+💰 Analyse du texte pour le salaire (longueur: 4)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 URL de détail non disponible, extraction depuis le texte complet
+✅ Job extrait: {
+  title: '...',
+  company: '',
+  location: '',
+  contract: '',
+  salary: 'Non précisé',
+  publicationDate: undefined,
+  description: 'mc2i...',
+  telework: 'Non précisé',
+  isFrench: '❌ NON',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🚫 Job ignoré (pas en France): ...
+🔍 Texte complet à analyser: Stage 4 à 6 mois...
+📅 Aucune date trouvée, date par défaut: undefined
+💰 Analyse du texte pour le salaire (longueur: 16)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 URL de détail non disponible, extraction depuis le texte complet
+✅ Job extrait: {
+  title: '...',
+  company: '',
+  location: '',
+  contract: '',
+  salary: 'Non précisé',
+  publicationDate: undefined,
+  description: 'Stage 4 à 6 mois...',
+  telework: 'Non précisé',
+  isFrench: '❌ NON',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🚫 Job ignoré (pas en France): ...
+🔍 Texte complet à analyser: Île-de-France, France...
+📅 Aucune date trouvée, date par défaut: undefined
+💰 Analyse du texte pour le salaire (longueur: 21)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 URL de détail non disponible, extraction depuis le texte complet
+✅ Job extrait: {
+  title: '...',
+  company: '',
+  location: '',
+  contract: '',
+  salary: 'Non précisé',
+  publicationDate: undefined,
+  description: 'Île-de-France, France.',
+  telework: 'Non précisé',
+  isFrench: '❌ NON',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🚫 Job ignoré (pas en France): ...
+🔍 Texte complet à analyser: Tikehau CapitalTikehau CapitalInternship - Fund Management Real Assets (H/F) - January 2026Stage 4 à 6 moisParis, Franceil y a 21 heures...
+📍 Localisation extraite: "Paris, France" → "Paris"
+🔍 Élément date trouvé avec le sélecteur: time
+📅 Texte date brut: "il y a 21 heures"
+📅 Date de parution: "il y a 21 heures" → 29/07/2025
+💰 Analyse du texte pour le salaire (longueur: 136)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 Navigation vers: https://www.jobteaser.com/fr/job-offers?lat=48.681003000000004&lng=2.5301432269469717&localized_location=%C3%8Ele-de-France&localized_location=+France&location=France%3A%3A%C3%8Ele-de-France%3A%3A_niokF2GYrIdJqyG1iWWgB3QVN48%3D&sort=recency/fr/job-offers/42f4276b-9457-48c6-88b8-221fc6d9282b-tikehau-capital-internship-fund-management-real-assets-h-f-january-2026
+⚠️ Erreur extraction description depuis page détail: Please use browser.newContext()
+✅ Job extrait: {
+  title: 'Internship - Fund Management Real Assets (H/F) - J...',
+  company: 'Tikehau Capital',
+  location: 'Paris',
+  contract: 'Stage',
+  salary: 'Non précisé',
+  publicationDate: '29/07/2025',
+  description: 'Tikehau CapitalTikehau CapitalInternship - Fund Management Real Assets (H/F) - January 2026Stage 4 à 6 moisParis, Franceil y a 21 heures...',
+  telework: 'Non précisé',
+  isFrench: '🇫🇷 OUI',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🔍 Texte complet à analyser: ...
+📅 Aucune date trouvée, date par défaut: undefined
+💰 Analyse du texte pour le salaire (longueur: 0)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 URL de détail non disponible, extraction depuis le texte complet
+✅ Job extrait: {
+  title: '...',
+  company: '',
+  location: '',
+  contract: '',
+  salary: 'Non précisé',
+  publicationDate: undefined,
+  description: '...',
+  telework: 'Non précisé',
+  isFrench: '❌ NON',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🚫 Job ignoré (pas en France): ...
+🔍 Texte complet à analyser: Tikehau Capital...
+📅 Aucune date trouvée, date par défaut: undefined
+💰 Analyse du texte pour le salaire (longueur: 15)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 URL de détail non disponible, extraction depuis le texte complet
+✅ Job extrait: {
+  title: '...',
+  company: '',
+  location: '',
+  contract: '',
+  salary: 'Non précisé',
+  publicationDate: undefined,
+  description: 'Tikehau Capital...',
+  telework: 'Non précisé',
+  isFrench: '❌ NON',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🚫 Job ignoré (pas en France): ...
+🔍 Texte complet à analyser: Tikehau Capital...
+📅 Aucune date trouvée, date par défaut: undefined
+💰 Analyse du texte pour le salaire (longueur: 15)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 URL de détail non disponible, extraction depuis le texte complet
+✅ Job extrait: {
+  title: '...',
+  company: '',
+  location: '',
+  contract: '',
+  salary: 'Non précisé',
+  publicationDate: undefined,
+  description: 'Tikehau Capital...',
+  telework: 'Non précisé',
+  isFrench: '❌ NON',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🚫 Job ignoré (pas en France): ...
+🔍 Texte complet à analyser: Stage 4 à 6 mois...
+📅 Aucune date trouvée, date par défaut: undefined
+💰 Analyse du texte pour le salaire (longueur: 16)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 URL de détail non disponible, extraction depuis le texte complet
+✅ Job extrait: {
+  title: '...',
+  company: '',
+  location: '',
+  contract: '',
+  salary: 'Non précisé',
+  publicationDate: undefined,
+  description: 'Stage 4 à 6 mois...',
+  telework: 'Non précisé',
+  isFrench: '❌ NON',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🚫 Job ignoré (pas en France): ...
+🔍 Texte complet à analyser: Paris, France...
+📅 Aucune date trouvée, date par défaut: undefined
+💰 Analyse du texte pour le salaire (longueur: 13)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 URL de détail non disponible, extraction depuis le texte complet
+✅ Job extrait: {
+  title: '...',
+  company: '',
+  location: '',
+  contract: '',
+  salary: 'Non précisé',
+  publicationDate: undefined,
+  description: 'Paris, France...',
+  telework: 'Non précisé',
+  isFrench: '❌ NON',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🚫 Job ignoré (pas en France): ...
+🔍 Texte complet à analyser: ElisElisAlternance- Assistant(e) Chef de Produit Marketing H/FAlternance 10 à 12 moisSaint-Cloud, FranceCandidature simplifiéeil y a 21 heures...
+📍 Localisation extraite: "Saint-Cloud, France" → "Saint-Cloud"
+🔍 Élément date trouvé avec le sélecteur: time
+📅 Texte date brut: "il y a 21 heures"
+📅 Date de parution: "il y a 21 heures" → 29/07/2025
+💰 Analyse du texte pour le salaire (longueur: 142)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 Navigation vers: https://www.jobteaser.com/fr/job-offers?lat=48.681003000000004&lng=2.5301432269469717&localized_location=%C3%8Ele-de-France&localized_location=+France&location=France%3A%3A%C3%8Ele-de-France%3A%3A_niokF2GYrIdJqyG1iWWgB3QVN48%3D&sort=recency/fr/job-offers/7aca61b1-df0f-47bc-9293-6f9b1592b3fc-elis-alternance-assistant-e-chef-de-produit-marketing-h-f
+⚠️ Erreur extraction description depuis page détail: Please use browser.newContext()
+✅ Job extrait: {
+  title: 'Alternance- Assistant(e) Chef de Produit Marketing...',
+  company: 'Elis',
+  location: 'Saint-Cloud',
+  contract: 'Alternance',
+  salary: 'Non précisé',
+  publicationDate: '29/07/2025',
+  description: 'ElisElisAlternance- Assistant(e) Chef de Produit Marketing H/FAlternance 10 à 12 moisSaint-Cloud, FranceCandidature simplifiéeil y a 21 heures...',
+  telework: 'Non précisé',
+  isFrench: '❌ NON',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🚫 Job ignoré (pas en France): Alternance- Assistant(e) Chef de Produit Marketing...
+🔍 Texte complet à analyser: ...
+📅 Aucune date trouvée, date par défaut: undefined
+💰 Analyse du texte pour le salaire (longueur: 0)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 URL de détail non disponible, extraction depuis le texte complet
+✅ Job extrait: {
+  title: '...',
+  company: '',
+  location: '',
+  contract: '',
+  salary: 'Non précisé',
+  publicationDate: undefined,
+  description: '...',
+  telework: 'Non précisé',
+  isFrench: '❌ NON',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🚫 Job ignoré (pas en France): ...
+🔍 Texte complet à analyser: Elis...
+📅 Aucune date trouvée, date par défaut: undefined
+💰 Analyse du texte pour le salaire (longueur: 4)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 URL de détail non disponible, extraction depuis le texte complet
+✅ Job extrait: {
+  title: '...',
+  company: '',
+  location: '',
+  contract: '',
+  salary: 'Non précisé',
+  publicationDate: undefined,
+  description: 'Elis...',
+  telework: 'Non précisé',
+  isFrench: '❌ NON',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🚫 Job ignoré (pas en France): ...
+🔍 Texte complet à analyser: Elis...
+📅 Aucune date trouvée, date par défaut: undefined
+💰 Analyse du texte pour le salaire (longueur: 4)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 URL de détail non disponible, extraction depuis le texte complet
+✅ Job extrait: {
+  title: '...',
+  company: '',
+  location: '',
+  contract: '',
+  salary: 'Non précisé',
+  publicationDate: undefined,
+  description: 'Elis...',
+  telework: 'Non précisé',
+  isFrench: '❌ NON',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🚫 Job ignoré (pas en France): ...
+🔍 Texte complet à analyser: Alternance 10 à 12 mois...
+📅 Aucune date trouvée, date par défaut: undefined
+💰 Analyse du texte pour le salaire (longueur: 23)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 URL de détail non disponible, extraction depuis le texte complet
+✅ Job extrait: {
+  title: '...',
+  company: '',
+  location: '',
+  contract: '',
+  salary: 'Non précisé',
+  publicationDate: undefined,
+  description: 'Alternance 10 à 12 mois.',
+  telework: 'Non précisé',
+  isFrench: '❌ NON',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🚫 Job ignoré (pas en France): ...
+🔍 Texte complet à analyser: Saint-Cloud, France...
+📅 Aucune date trouvée, date par défaut: undefined
+💰 Analyse du texte pour le salaire (longueur: 19)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 URL de détail non disponible, extraction depuis le texte complet
+✅ Job extrait: {
+  title: '...',
+  company: '',
+  location: '',
+  contract: '',
+  salary: 'Non précisé',
+  publicationDate: undefined,
+  description: 'Saint-Cloud, France.',
+  telework: 'Non précisé',
+  isFrench: '❌ NON',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🚫 Job ignoré (pas en France): ...
+🔍 Texte complet à analyser: Candidature simplifiée...
+📅 Aucune date trouvée, date par défaut: undefined
+💰 Analyse du texte pour le salaire (longueur: 22)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 URL de détail non disponible, extraction depuis le texte complet
+✅ Job extrait: {
+  title: '...',
+  company: '',
+  location: '',
+  contract: '',
+  salary: 'Non précisé',
+  publicationDate: undefined,
+  description: 'Candidature simplifiée.',
+  telework: 'Non précisé',
+  isFrench: '❌ NON',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🚫 Job ignoré (pas en France): ...
+🔍 Texte complet à analyser: 12345…50...
+📅 Aucune date trouvée, date par défaut: undefined
+💰 Analyse du texte pour le salaire (longueur: 8)
+💰 Aucun salaire trouvé dans le texte, valeur par défaut: "Non précisé"
+📝 Début extraction description depuis la page de détail
+📝 URL de détail non disponible, extraction depuis le texte complet
+✅ Job extrait: {
+  title: '...',
+  company: '',
+  location: '',
+  contract: '',
+  salary: 'Non précisé',
+  publicationDate: undefined,
+  description: '12345…50...',
+  telework: 'Non précisé',
+  isFrench: '❌ NON',
+  url: 'https://www.jobteaser.com/fr/job-offers?lat=48.681...'
+}
+🚫 Job ignoré (pas en France): ...
+✅ Page 1: 14 jobs extraits (total: 14)
+
+🎉 SCRAPING TERMINÉ! 14 offres trouvées
+[JOBTEASER CRON] Tentative d'insertion de 14 jobs
+
+💾 JOB INSÉRÉ EN BASE #1:
+   📋 Titre: Alternance Chef de projet H/F
+   🏢 Entreprise: La Poste Groupe
+   📍 Localisation: Paris
+   📅 Date de parution: 30/07/2025
+   💰 Salaire: Non précisé
+   📝 Contrat: Alternance
+   🏠 Télétravail: Non précisé
+   📄 Description: La Poste GroupeLa Poste GroupeAlternance Chef de projet H/FAlternance 12 moisParis, FranceCandidature simplifiéeOffre de la semaineValeoValeoAlternanc...
+   🔗 URL: https://www.jobteaser.com/fr/job-offers?lat=48.681003000000004&lng=2.5301432269469717&localized_location=%C3%8Ele-de-France&localized_location=+France&location=France%3A%3A%C3%8Ele-de-France%3A%3A_niokF2GYrIdJqyG1iWWgB3QVN48%3D&sort=recency/fr/job-offers/e2e9f514-5ae0-4e64-801a-5b545916eb1c-la-poste-groupe-alternance-chef-de-projet-h-f
+   📊 Source: jobteaser
+   ──────────────────────────────────────────────
+
+💾 JOB INSÉRÉ EN BASE #2:
+   📋 Titre: Business Development & Marketing Assistant (intern)
+   🏢 Entreprise: Oxford Economics
+   📍 Localisation: Paris
+   📅 Date de parution: 30/07/2025
+   💰 Salaire: Non précisé
+   📝 Contrat: Stage
+   🏠 Télétravail: Non précisé
+   📄 Description: Oxford EconomicsOxford EconomicsBusiness Development & Marketing Assistant (intern)Stage 5 à 6 moisParis, FranceCandidature simplifiéeil y a 2 heures....
+   🔗 URL: https://www.jobteaser.com/fr/job-offers?lat=48.681003000000004&lng=2.5301432269469717&localized_location=%C3%8Ele-de-France&localized_location=+France&location=France%3A%3A%C3%8Ele-de-France%3A%3A_niokF2GYrIdJqyG1iWWgB3QVN48%3D&sort=recency/fr/job-offers/f3d368af-f42a-4861-87af-48842824cbb1-oxford-economics-business-development-marketing-assistant-intern
+   📊 Source: jobteaser
+   ──────────────────────────────────────────────
+
+💾 JOB INSÉRÉ EN BASE #3:
+   📋 Titre: Stage : Sales en fusion-acquisition
+   🏢 Entreprise: ARC CAPITAL
+   📍 Localisation: Paris
+   📅 Date de parution: 30/07/2025
+   💰 Salaire: Non précisé
+   📝 Contrat: Stage
+   🏠 Télétravail: Non précisé
+   📄 Description: ARC CAPITALARC CAPITALStage : Sales en fusion-acquisitionStage 4 à 6 moisParis, FranceCandidature simplifiéeil y a 3 heures......
+   🔗 URL: https://www.jobteaser.com/fr/job-offers?lat=48.681003000000004&lng=2.5301432269469717&localized_location=%C3%8Ele-de-France&localized_location=+France&location=France%3A%3A%C3%8Ele-de-France%3A%3A_niokF2GYrIdJqyG1iWWgB3QVN48%3D&sort=recency/fr/job-offers/26e033c4-8a20-4673-a9ef-d849e932f102-arc-capital-stage-sales-en-fusion-acquisition
+   📊 Source: jobteaser
+   ──────────────────────────────────────────────
+
+💾 JOB INSÉRÉ EN BASE #4:
+   📋 Titre: Alternance Achats
+   🏢 Entreprise: Vivendi SE
+   📍 Localisation: Paris
+   📅 Date de parution: 30/07/2025
+   💰 Salaire: Non précisé
+   📝 Contrat: Alternance
+   🏠 Télétravail: Non précisé
+   📄 Description: Vivendi SEVivendi SEAlternance AchatsAlternance 12 moisParis, FranceCandidature simplifiéeil y a 4 heures......
+   🔗 URL: https://www.jobteaser.com/fr/job-offers?lat=48.681003000000004&lng=2.5301432269469717&localized_location=%C3%8Ele-de-France&localized_location=+France&location=France%3A%3A%C3%8Ele-de-France%3A%3A_niokF2GYrIdJqyG1iWWgB3QVN48%3D&sort=recency/fr/job-offers/8f0f1af7-0cf5-4d01-961e-97aafa07ce21-vivendi-se-alternance-achats
+   📊 Source: jobteaser
+   ──────────────────────────────────────────────
+
+💾 JOB INSÉRÉ EN BASE #5:
+   📋 Titre: Assistant Sales/Structuration Produits Structurés (stage)
+   🏢 Entreprise: I-Kapital
+   📍 Localisation: Paris
+   📅 Date de parution: 30/07/2025
+   💰 Salaire: Non précisé
+   📝 Contrat: Stage
+   🏠 Télétravail: Non précisé
+   📄 Description: I-KapitalI-KapitalAssistant Sales/Structuration Produits Structurés (stage)Stage 4 à 9 moisParis, FranceCandidature simplifiéeil y a 4 heures......
+   🔗 URL: https://www.jobteaser.com/fr/job-offers?lat=48.681003000000004&lng=2.5301432269469717&localized_location=%C3%8Ele-de-France&localized_location=+France&location=France%3A%3A%C3%8Ele-de-France%3A%3A_niokF2GYrIdJqyG1iWWgB3QVN48%3D&sort=recency/fr/job-offers/83e84546-43eb-417c-b333-d7e08de7eb83-i-kapital-assistant-sales-structuration-produits-structures-stage
+   📊 Source: jobteaser
+   ──────────────────────────────────────────────
+
+💾 JOB INSÉRÉ EN BASE #6:
+   📋 Titre: Stage - Bras Droit Chief Customer Officer
+   🏢 Entreprise: Snapdesk
+   📍 Localisation: Paris
+   📅 Date de parution: 30/07/2025
+   💰 Salaire: Non précisé
+   📝 Contrat: Stage
+   🏠 Télétravail: Non précisé
+   📄 Description: SnapdeskSnapdeskStage - Bras Droit Chief Customer OfficerStage 6 moisParis, FranceCandidature simplifiéeil y a 4 heures......
+   🔗 URL: https://www.jobteaser.com/fr/job-offers?lat=48.681003000000004&lng=2.5301432269469717&localized_location=%C3%8Ele-de-France&localized_location=+France&location=France%3A%3A%C3%8Ele-de-France%3A%3A_niokF2GYrIdJqyG1iWWgB3QVN48%3D&sort=recency/fr/job-offers/caec5389-3382-4078-8193-d21146088183-snapdesk-stage-bras-droit-chief-customer-officer
+   📊 Source: jobteaser
+   ──────────────────────────────────────────────
+
+💾 JOB INSÉRÉ EN BASE #7:
+   📋 Titre: Stage -Chargé.e de recrutement H/F
+   🏢 Entreprise: Animalis
+   📍 Localisation: Paris
+   📅 Date de parution: 29/07/2025
+   💰 Salaire: Non précisé
+   📝 Contrat: Stage
+   🏠 Télétravail: Non précisé
+   📄 Description: AnimalisAnimalisStage -Chargé.e de recrutement H/FStage 4 à 6 moisParis, Franceil y a 18 heures......
+   🔗 URL: https://www.jobteaser.com/fr/job-offers?lat=48.681003000000004&lng=2.5301432269469717&localized_location=%C3%8Ele-de-France&localized_location=+France&location=France%3A%3A%C3%8Ele-de-France%3A%3A_niokF2GYrIdJqyG1iWWgB3QVN48%3D&sort=recency/fr/job-offers/5591eda7-512b-4b21-ab09-a767e9ea91a1-animalis-stage-charge-e-de-recrutement-h-f
+   📊 Source: jobteaser
+   ──────────────────────────────────────────────
+
+💾 JOB INSÉRÉ EN BASE #8:
+   📋 Titre: Alternance Junior Digital Marketer
+   🏢 Entreprise: ODDO BHF
+   📍 Localisation: Paris
+   📅 Date de parution: 29/07/2025
+   💰 Salaire: Non précisé
+   📝 Contrat: Alternance
+   🏠 Télétravail: Non précisé
+   📄 Description: ODDO BHFODDO BHFAlternance Junior Digital MarketerAlternance 12 à 24 moisParis, Franceil y a 20 heures......
+   🔗 URL: https://www.jobteaser.com/fr/job-offers?lat=48.681003000000004&lng=2.5301432269469717&localized_location=%C3%8Ele-de-France&localized_location=+France&location=France%3A%3A%C3%8Ele-de-France%3A%3A_niokF2GYrIdJqyG1iWWgB3QVN48%3D&sort=recency/fr/job-offers/876cc549-7ba2-4bc5-86d6-b55cc9a64eee-oddo-bhf-alternance-junior-digital-marketer
+   📊 Source: jobteaser
+   ──────────────────────────────────────────────
+
+💾 JOB INSÉRÉ EN BASE #9:
+   📋 Titre: Alternant(e) - Juriste (h/f) - Réglementation du réseau des télécommunications
+   🏢 Entreprise: SFR
+   📍 Localisation: Paris
+   📅 Date de parution: 29/07/2025
+   💰 Salaire: Non précisé
+   📝 Contrat: Alternance
+   🏠 Télétravail: Non précisé
+   📄 Description: SFRSFRAlternant(e) - Juriste (h/f) - Réglementation du réseau des télécommunications Alternance 12 moisParis, FranceCandidature simplifiéeil y a 20 he...
+   🔗 URL: https://www.jobteaser.com/fr/job-offers?lat=48.681003000000004&lng=2.5301432269469717&localized_location=%C3%8Ele-de-France&localized_location=+France&location=France%3A%3A%C3%8Ele-de-France%3A%3A_niokF2GYrIdJqyG1iWWgB3QVN48%3D&sort=recency/fr/job-offers/173ddfc1-f0e0-4dba-a5fd-0d7de9760bd6-sfr-alternant-e-juriste-h-f-reglementation-du-reseau-des-telecommunications
+   📊 Source: jobteaser
+   ──────────────────────────────────────────────
+
+💾 JOB INSÉRÉ EN BASE #10:
+   📋 Titre: France : Stagiaire Contrôle de Gestion dans une ONG - Paris
+   🏢 Entreprise: Acted
+   📍 Localisation: Paris
+   📅 Date de parution: 29/07/2025
+   💰 Salaire: Non précisé
+   📝 Contrat: Stage
+   🏠 Télétravail: Non précisé
+   📄 Description: ActedActedFrance : Stagiaire Contrôle de Gestion dans une ONG - ParisStage 6 moisParis, FranceCandidature simplifiéeil y a 20 heures......
+   🔗 URL: https://www.jobteaser.com/fr/job-offers?lat=48.681003000000004&lng=2.5301432269469717&localized_location=%C3%8Ele-de-France&localized_location=+France&location=France%3A%3A%C3%8Ele-de-France%3A%3A_niokF2GYrIdJqyG1iWWgB3QVN48%3D&sort=recency/fr/job-offers/6d1c7661-a358-494d-980d-a17708aac869-acted-france-stagiaire-controle-de-gestion-dans-une-ong-paris
+   📊 Source: jobteaser
+   ──────────────────────────────────────────────
+
+💾 JOB INSÉRÉ EN BASE #11:
+   📋 Titre: Alternance - 2 ans - Gestionnaire CRM Client Support Group F/H
+   🏢 Entreprise: Natixis
+   📍 Localisation: Île-de-France
+   📅 Date de parution: 29/07/2025
+   💰 Salaire: Non précisé
+   📝 Contrat: Alternance
+   🏠 Télétravail: Non précisé
+   📄 Description: NatixisNatixisAlternance - 2 ans - Gestionnaire CRM Client Support Group F/HAlternance 19 à 24 moisÎle-de-France, Franceil y a 20 heures......
+   🔗 URL: https://www.jobteaser.com/fr/job-offers?lat=48.681003000000004&lng=2.5301432269469717&localized_location=%C3%8Ele-de-France&localized_location=+France&location=France%3A%3A%C3%8Ele-de-France%3A%3A_niokF2GYrIdJqyG1iWWgB3QVN48%3D&sort=recency/fr/job-offers/376457bf-8b64-42c2-990c-731c4767deea-natixis-alternance-2-ans-gestionnaire-crm-client-support-group-f-h
+   📊 Source: jobteaser
+   ──────────────────────────────────────────────
+
+💾 JOB INSÉRÉ EN BASE #12:
+   📋 Titre: Stage - Consultant(e) en Transformation Numérique H/F
+   🏢 Entreprise: mc2i
+   📍 Localisation: Île-de-France
+   📅 Date de parution: 29/07/2025
+   💰 Salaire: Non précisé
+   📝 Contrat: Stage
+   🏠 Télétravail: Non précisé
+   📄 Description: mc2imc2iStage - Consultant(e) en Transformation Numérique H/FStage 4 à 6 moisÎle-de-France, Franceil y a 20 heures......
+   🔗 URL: https://www.jobteaser.com/fr/job-offers?lat=48.681003000000004&lng=2.5301432269469717&localized_location=%C3%8Ele-de-France&localized_location=+France&location=France%3A%3A%C3%8Ele-de-France%3A%3A_niokF2GYrIdJqyG1iWWgB3QVN48%3D&sort=recency/fr/job-offers/5ab1a2e0-3be1-499c-81d1-63deae95c30b-mc2i-stage-consultant-e-en-transformation-numerique-h-f
+   📊 Source: jobteaser
+   ──────────────────────────────────────────────
+
+💾 JOB INSÉRÉ EN BASE #13:
+   📋 Titre: Internship - Fund Management Real Assets (H/F) - January 2026
+   🏢 Entreprise: Tikehau Capital
+   📍 Localisation: Paris
+   📅 Date de parution: 29/07/2025
+   💰 Salaire: Non précisé
+   📝 Contrat: Stage
+   🏠 Télétravail: Non précisé
+   📄 Description: Tikehau CapitalTikehau CapitalInternship - Fund Management Real Assets (H/F) - January 2026Stage 4 à 6 moisParis, Franceil y a 21 heures......
+   🔗 URL: https://www.jobteaser.com/fr/job-offers?lat=48.681003000000004&lng=2.5301432269469717&localized_location=%C3%8Ele-de-France&localized_location=+France&location=France%3A%3A%C3%8Ele-de-France%3A%3A_niokF2GYrIdJqyG1iWWgB3QVN48%3D&sort=recency/fr/job-offers/42f4276b-9457-48c6-88b8-221fc6d9282b-tikehau-capital-internship-fund-management-real-assets-h-f-january-2026
+   📊 Source: jobteaser
+   ──────────────────────────────────────────────
+[JOBTEASER CRON] Insertion terminée: 13 insérés, 1 ignorés
+📊 Statistiques de scraping JobTeaser mises à jour
+
+🎉 SCRAPING JOBTEASER CRON TERMINÉ
+📊 Total jobs trouvés: 14

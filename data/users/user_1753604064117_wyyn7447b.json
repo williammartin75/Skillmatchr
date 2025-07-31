@@ -1,0 +1,123 @@
+{
+  "id": "user_1753604064117_wyyn7447b",
+  "firstName": "Antoine",
+  "lastName": "Lorence",
+  "email": "alorence@flokod.com",
+  "password": "mmmmmm",
+  "createdAt": "2025-07-27T08:14:24.117Z",
+  "profile": {
+    "firstName": "Antoine",
+    "lastName": "Lorence",
+    "email": "alorence@flokod.com",
+    "phone": "0670055137",
+    "address": "",
+    "skills": [],
+    "experience": [],
+    "education": []
+  },
+  "documents": [
+    {
+      "id": "doc_1753604064118",
+      "name": "cv-lorence-antoine.pdf",
+      "type": "cv",
+      "path": "/uploads/users/user_1753604064117_wyyn7447b/cv-1753604064117-cv-lorence-antoine.pdf",
+      "uploadedAt": "2025-07-27T08:14:24.118Z",
+      "extractedInfo": {
+        "firstName": "Antoine",
+        "lastName": "Lorence",
+        "email": "alorence@flokod.com",
+        "phone": "0670055137"
+      }
+    }
+  ],
+  "matchingResults": {
+    "success": true,
+    "message": "Matching terminé avec succès",
+    "data": {
+      "userId": "user_1753604064117_wyyn7447b",
+      "timestamp": "2025-07-27T08:14:24.247Z",
+      "cvAnalysis": {
+        "skills": [
+          "Python",
+          "Django",
+          "Flask",
+          "FastAPI",
+          "Vue.js",
+          "Vanilla JS",
+          "HTML",
+          "CSS",
+          "PostgreSQL",
+          "C++",
+          "Qt",
+          "CMake",
+          "Ansible",
+          "Docker",
+          "Swarm",
+          "GitHub Actions",
+          "Gitlab CI",
+          "Drone CI",
+          "Grafana",
+          "Graylog",
+          "Traefik"
+        ],
+        "experiences": [
+          {
+            "title": "Développeur Django",
+            "company": "LA POSTE",
+            "yearsAgo": 1,
+            "temporalWeight": 1,
+            "description": "Maintenance applicative de la plateforme Xaas"
+          },
+          {
+            "title": "Développeur Django",
+            "company": "LENGOW",
+            "yearsAgo": 3,
+            "temporalWeight": 0.8,
+            "description": "Maintenance du module de gestion des marketplaces"
+          },
+          {
+            "title": "Développeur Python",
+            "company": "OVHCLOUD",
+            "yearsAgo": 5,
+            "temporalWeight": 0.6,
+            "description": "Renouvellement des outils interne de collaboration"
+          },
+          {
+            "title": "Développeur Django",
+            "company": "IMBRIKATION",
+            "yearsAgo": 5,
+            "temporalWeight": 0.6,
+            "description": "Développement du portail web Vigicube.fr"
+          },
+          {
+            "title": "Formateur Python/Django",
+            "company": "IMIE",
+            "yearsAgo": 6,
+            "temporalWeight": 0.4,
+            "description": "Préparation et animation de formations"
+          }
+        ],
+        "education": {
+          "degree": "Master Informatique",
+          "institution": "INSA Rennes",
+          "year": 2012,
+          "specialization": "Développement logiciel"
+        },
+        "location": "Paris",
+        "contractPreferences": [
+          "CDI",
+          "Freelance"
+        ],
+        "salaryRange": "45k-70k€",
+        "remotePreference": true
+      },
+      "matchedJobs": [],
+      "topMatches": [],
+      "summary": {
+        "totalJobsAnalyzed": 0,
+        "averageMatchScore": 0,
+        "bestMatch": null
+      }
+    }
+  }
+}

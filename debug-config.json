@@ -1,0 +1,62 @@
+{
+  "apiUrl": "https://recherche-entreprises.api.gouv.fr/search",
+  "validParameters": {
+    "activityCodes": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E",
+      "F",
+      "G",
+      "H",
+      "I",
+      "J",
+      "K",
+      "L",
+      "M",
+      "N",
+      "O",
+      "P",
+      "Q",
+      "R",
+      "S",
+      "T",
+      "U"
+    ],
+    "employeeCodes": [
+      "NN",
+      "00",
+      "01",
+      "02",
+      "03",
+      "11",
+      "12",
+      "21",
+      "22",
+      "31",
+      "32",
+      "41",
+      "42",
+      "51",
+      "52",
+      "53"
+    ],
+    "revenueCodes": [
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7"
+    ]
+  },
+  "errorMessages": {
+    "400": "Paramètres de recherche invalides",
+    "429": "Trop de requêtes. Veuillez attendre quelques secondes",
+    "500": "Erreur serveur de l'API. Veuillez réessayer plus tard"
+  },
+  "debugMode": true,
+  "logLevel": "verbose"
+}

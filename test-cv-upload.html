@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Upload CV</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .upload-area {
+            border: 2px dashed #ccc;
+            padding: 40px;
+            text-align: center;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+        .upload-area.dragover {
+            border-color: #3b82f6;
+            background-color: #eff6ff;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 20px;
+            border-radius: 8px;
+            white-space: pre-wrap;
+        }
+        .success {
+            background-color: #d1fae5;
+            border: 1px solid #10b981;
+        }
+        .error {
+            background-color: #fee2e2;
+            border: 1px solid #ef4444;
+        }
+        button {
+            background-color: #3b82f6;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #2563eb;
+        }
+        button:disabled {
+            background-color: #9ca3af;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+    <h1>Test Upload CV</h1>
+    
+    <div class="upload-area" id="uploadArea">
+        <p>Glissez-déposez votre CV ici ou cliquez pour sélectionner un fichier</p>
+        <input type="file" id="fileInput" accept=".pdf,.doc,.docx" style="display: none;">
+        <button onclick="document.getElementById('fileInput').click()">Sélectionner un fichier</button>
+    </div>
+
+    <div id="result"></div>
+
+    <script>
+        const uploadArea = document.getElementById('uploadArea');
+        const fileInput = document.getElementById('fileInput');
+        const resultDiv = document.getElementById('result');
+
+        // Gestion du drag & drop
+        uploadArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadArea.classList.add('dragover');
+        });
+
+        uploadArea.addEventListener('dragleave', () => {
+            uploadArea.classList.remove('dragover');
+        });
+
+        uploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadArea.classList.remove('dragover');
+            const files = e.dataTransfer.files;
+            if (files.length > 0) {
+                handleFile(files[0]);
+            }
+        });
+
+        // Gestion de la sélection de fichier
+        fileInput.addEventListener('change', (e) => {
+            if (e.target.files.length > 0) {
+                handleFile(e.target.files[0]);
+            }
+        });
+
+        async function handleFile(file) {
+            resultDiv.innerHTML = '<p>Analyse en cours...</p>';
+            
+            const formData = new FormData();
+            formData.append('cv', file);
+
+            try {
+                const response = await fetch('/api/cv-upload', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    resultDiv.className = 'result success';
+                    resultDiv.innerHTML = `
+                        <h3>✅ Analyse réussie !</h3>
+                        <p><strong>Fichier :</strong> ${data.fileName}</p>
+                        <p><strong>Score global :</strong> ${data.analysis.score}/100</p>
+                        <p><strong>Score ATS :</strong> ${data.analysis.atsScore}/100</p>
+                        <p><strong>Lisibilité :</strong> ${data.analysis.readabilityScore}/100</p>
+                        
+                        <h4>Points forts :</h4>
+                        <ul>
+                            ${data.analysis.strengths.map(s => `<li>${s}</li>`).join('')}
+                        </ul>
+                        
+                        <h4>Axes d'amélioration :</h4>
+                        <ul>
+                            ${data.analysis.weaknesses.map(w => `<li>${w}</li>`).join('')}
+                        </ul>
+                        
+                        <h4>Recommandations :</h4>
+                        <ul>
+                            ${data.analysis.suggestions.map(s => `<li>${s}</li>`).join('')}
+                        </ul>
+                        
+                        <h4>Informations extraites :</h4>
+                        <p><strong>Mots-clés :</strong> ${data.analysis.extractedInfo?.keywords?.join(', ') || 'Aucun'}</p>
+                        <p><strong>Compétences :</strong> ${data.analysis.extractedInfo?.skills?.join(', ') || 'Aucune'}</p>
+                        <p><strong>Contact :</strong> ${data.analysis.extractedInfo?.hasContact ? '✅ Présent' : '❌ Manquant'}</p>
+                        <p><strong>Chiffres :</strong> ${data.analysis.extractedInfo?.hasNumbers ? '✅ Présents' : '❌ Manquants'}</p>
+                        
+                        <h4>Statistiques :</h4>
+                        <p><strong>Taille :</strong> ${(data.analysis.fileInfo.size / 1024 / 1024).toFixed(2)} MB</p>
+                        <p><strong>Caractères :</strong> ${data.analysis.fileInfo.textLength?.toLocaleString() || 'N/A'}</p>
+                        <p><strong>Mots :</strong> ${data.analysis.fileInfo.wordCount?.toLocaleString() || 'N/A'}</p>
+                    `;
+                } else {
+                    resultDiv.className = 'result error';
+                    resultDiv.innerHTML = `<h3>❌ Erreur</h3><p>${data.error}</p>`;
+                }
+            } catch (error) {
+                resultDiv.className = 'result error';
+                resultDiv.innerHTML = `<h3>❌ Erreur</h3><p>Erreur lors de l'upload : ${error.message}</p>`;
+            }
+        }
+    </script>
+</body>
+</html> 

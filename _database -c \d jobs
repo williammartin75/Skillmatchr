@@ -1,0 +1,31 @@
+                                          Table "public.jobs"
+    Column     |            Type             | Collation | Nullable |             Default              
+---------------+-----------------------------+-----------+----------+----------------------------------
+ id            | integer                     |           | not null | nextval('jobs_id_seq'::regclass)
+ original_id   | character varying(100)      |           |          | 
+ title         | character varying(1000)     |           | not null | 
+ company       | character varying(500)      |           |          | 
+ location      | character varying(500)      |           |          | 
+ description   | text                        |           |          | 
+ salary        | character varying(200)      |           |          | 
+ contract_type | character varying(200)      |           |          | 
+ source        | character varying(50)       |           | not null | 
+ url           | text                        |           |          | 
+ source_url    | text                        |           |          | 
+ posted_date   | timestamp without time zone |           |          | 
+ published_at  | character varying(50)       |           |          | 
+ remote        | character varying(200)      |           |          | 
+ skills        | text[]                      |           |          | 
+ tags          | text[]                      |           |          | 
+ created_at    | timestamp without time zone |           |          | CURRENT_TIMESTAMP
+ updated_at    | timestamp without time zone |           |          | CURRENT_TIMESTAMP
+ start_date    | character varying(100)      |           |          | 
+Indexes:
+    "jobs_pkey" PRIMARY KEY, btree (id)
+    "idx_jobs_location" btree (location)
+    "idx_jobs_original_id_source" btree (original_id, source)
+    "idx_jobs_posted_date" btree (posted_date)
+    "idx_jobs_published_at" btree (published_at)
+    "idx_jobs_source" btree (source)
+    "jobs_original_id_source_key" UNIQUE CONSTRAINT, btree (original_id, source)
+

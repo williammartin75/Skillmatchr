@@ -1,0 +1,474 @@
+{
+  "id": "user_1753623636098_oxul2r9c7",
+  "firstName": "Antoine",
+  "lastName": "Lorence",
+  "email": "alorence@flokod.com",
+  "password": "111111",
+  "createdAt": "2025-07-27T13:40:36.098Z",
+  "profile": {
+    "firstName": "Antoine",
+    "lastName": "Lorence",
+    "email": "alorence@flokod.com",
+    "phone": "0670055137",
+    "address": "",
+    "skills": [],
+    "experience": [],
+    "education": []
+  },
+  "documents": [
+    {
+      "id": "doc_1753623636099",
+      "name": "cv-lorence-antoine.pdf",
+      "type": "cv",
+      "path": "/uploads/users/user_1753623636098_oxul2r9c7/cv-1753623636098-cv-lorence-antoine.pdf",
+      "uploadedAt": "2025-07-27T13:40:36.099Z",
+      "extractedInfo": {
+        "firstName": "Antoine",
+        "lastName": "Lorence",
+        "email": "alorence@flokod.com",
+        "phone": "0670055137"
+      }
+    }
+  ],
+  "matchingResults": {
+    "success": true,
+    "message": "Matching terminé avec succès",
+    "data": {
+      "userId": "user_1753623636098_oxul2r9c7",
+      "timestamp": "2025-07-27T13:40:36.479Z",
+      "cvAnalysis": {
+        "skills": [
+          "Python",
+          "Django",
+          "Flask",
+          "FastAPI",
+          "Vue.js",
+          "Vanilla JS",
+          "HTML",
+          "CSS",
+          "PostgreSQL",
+          "C++",
+          "Qt",
+          "CMake",
+          "Ansible",
+          "Docker",
+          "Swarm",
+          "GitHub Actions",
+          "Gitlab CI",
+          "Drone CI",
+          "Grafana",
+          "Graylog",
+          "Traefik"
+        ],
+        "experiences": [
+          {
+            "title": "Développeur Django",
+            "company": "LA POSTE",
+            "yearsAgo": 1,
+            "temporalWeight": 1,
+            "description": "Maintenance applicative de la plateforme Xaas"
+          },
+          {
+            "title": "Développeur Django",
+            "company": "LENGOW",
+            "yearsAgo": 3,
+            "temporalWeight": 0.8,
+            "description": "Maintenance du module de gestion des marketplaces"
+          },
+          {
+            "title": "Développeur Python",
+            "company": "OVHCLOUD",
+            "yearsAgo": 5,
+            "temporalWeight": 0.6,
+            "description": "Renouvellement des outils interne de collaboration"
+          },
+          {
+            "title": "Développeur Django",
+            "company": "IMBRIKATION",
+            "yearsAgo": 5,
+            "temporalWeight": 0.6,
+            "description": "Développement du portail web Vigicube.fr"
+          },
+          {
+            "title": "Formateur Python/Django",
+            "company": "IMIE",
+            "yearsAgo": 6,
+            "temporalWeight": 0.4,
+            "description": "Préparation et animation de formations"
+          }
+        ],
+        "education": {
+          "degree": "Master Informatique",
+          "institution": "INSA Rennes",
+          "year": 2012,
+          "specialization": "Développement logiciel"
+        },
+        "location": "Paris",
+        "contractPreferences": [
+          "CDI",
+          "Freelance"
+        ],
+        "salaryRange": "45k-70k€",
+        "remotePreference": true
+      },
+      "matchedJobs": [
+        {
+          "id": 37,
+          "title": "Développeur Game",
+          "company": "WebSolutions",
+          "location": "Paris",
+          "type": "CDI",
+          "salary": "56k-99k€",
+          "description": "Nous recherchons un développeur game expérimenté pour rejoindre notre équipe WebSolutions.",
+          "skills": [
+            "React",
+            "Node.js",
+            "PostgreSQL"
+          ],
+          "postedDate": "2024-01-15",
+          "remote": false,
+          "source": "Welcome to the Jungle",
+          "matchPercentage": 80,
+          "matchingSkills": [
+            "PostgreSQL"
+          ]
+        },
+        {
+          "id": 149,
+          "title": "Développeur Blockchain",
+          "company": "DesignStudio",
+          "location": "Paris",
+          "type": "Freelance",
+          "salary": "43k-90k€",
+          "description": "Nous recherchons un développeur blockchain expérimenté pour rejoindre notre équipe DesignStudio.",
+          "skills": [
+            "React",
+            "Node.js",
+            "PostgreSQL"
+          ],
+          "postedDate": "2024-01-15",
+          "remote": false,
+          "source": "Glassdoor",
+          "matchPercentage": 77,
+          "matchingSkills": [
+            "PostgreSQL"
+          ]
+        },
+        {
+          "id": 35,
+          "title": "Développeur Frontend",
+          "company": "GameStudio",
+          "location": "Lille",
+          "type": "CDI",
+          "salary": "49k-74k€",
+          "description": "Nous recherchons un développeur frontend expérimenté pour rejoindre notre équipe GameStudio.",
+          "skills": [
+            "PostgreSQL",
+            "React",
+            "Node.js"
+          ],
+          "postedDate": "2024-01-15",
+          "remote": false,
+          "source": "Indeed",
+          "matchPercentage": 74,
+          "matchingSkills": [
+            "PostgreSQL"
+          ]
+        },
+        {
+          "id": 25,
+          "title": "Développeur Game",
+          "company": "AI Solutions",
+          "location": "Rennes",
+          "type": "Freelance",
+          "salary": "53k-73k€",
+          "description": "Nous recherchons un développeur game expérimenté pour rejoindre notre équipe AI Solutions.",
+          "skills": [
+            "React",
+            "Node.js",
+            "AWS",
+            "Docker",
+            "PostgreSQL"
+          ],
+          "postedDate": "2024-01-15",
+          "remote": false,
+          "source": "LinkedIn",
+          "matchPercentage": 73,
+          "matchingSkills": [
+            "Docker",
+            "PostgreSQL"
+          ]
+        },
+        {
+          "id": 46,
+          "title": "Développeur Game",
+          "company": "CloudTech",
+          "location": "Tours",
+          "type": "CDI",
+          "salary": "68k-80k€",
+          "description": "Nous recherchons un développeur game expérimenté pour rejoindre notre équipe CloudTech.",
+          "skills": [
+            "React",
+            "Node.js",
+            "PostgreSQL"
+          ],
+          "postedDate": "2024-01-15",
+          "remote": false,
+          "source": "Welcome to the Jungle",
+          "matchPercentage": 73,
+          "matchingSkills": [
+            "PostgreSQL"
+          ]
+        },
+        {
+          "id": 66,
+          "title": "Développeur Game",
+          "company": "MobileApp",
+          "location": "Strasbourg",
+          "type": "Freelance",
+          "salary": "53k-73k€",
+          "description": "Nous recherchons un développeur game expérimenté pour rejoindre notre équipe MobileApp.",
+          "skills": [
+            "React",
+            "Node.js",
+            "PostgreSQL",
+            "AWS",
+            "Docker"
+          ],
+          "postedDate": "2024-01-15",
+          "remote": true,
+          "source": "Apec",
+          "matchPercentage": 73,
+          "matchingSkills": [
+            "PostgreSQL",
+            "Docker"
+          ]
+        },
+        {
+          "id": 99,
+          "title": "Développeur Full Stack",
+          "company": "CloudTech",
+          "location": "Lille",
+          "type": "CDI",
+          "salary": "43k-87k€",
+          "description": "Nous recherchons un développeur full stack expérimenté pour rejoindre notre équipe CloudTech.",
+          "skills": [
+            "Node.js",
+            "PostgreSQL",
+            "React"
+          ],
+          "postedDate": "2024-01-15",
+          "remote": true,
+          "source": "Indeed",
+          "matchPercentage": 72,
+          "matchingSkills": [
+            "PostgreSQL"
+          ]
+        },
+        {
+          "id": 165,
+          "title": "Développeur Full Stack",
+          "company": "StartupXYZ",
+          "location": "Tours",
+          "type": "Freelance",
+          "salary": "53k-79k€",
+          "description": "Nous recherchons un développeur full stack expérimenté pour rejoindre notre équipe StartupXYZ.",
+          "skills": [
+            "PostgreSQL",
+            "Docker",
+            "React",
+            "AWS",
+            "Node.js"
+          ],
+          "postedDate": "2024-01-15",
+          "remote": false,
+          "source": "Welcome to the Jungle",
+          "matchPercentage": 72,
+          "matchingSkills": [
+            "PostgreSQL",
+            "Docker"
+          ]
+        },
+        {
+          "id": 1,
+          "title": "Développeur Full Stack",
+          "company": "TechCorp",
+          "location": "Paris",
+          "type": "CDI",
+          "salary": "45k-65k€",
+          "description": "Nous recherchons un développeur Full Stack expérimenté pour rejoindre notre équipe...",
+          "skills": [
+            "React",
+            "Node.js",
+            "PostgreSQL",
+            "AWS"
+          ],
+          "postedDate": "2024-01-15",
+          "remote": true,
+          "source": "LinkedIn",
+          "matchPercentage": 71,
+          "matchingSkills": [
+            "PostgreSQL"
+          ]
+        },
+        {
+          "id": 53,
+          "title": "Développeur Blockchain",
+          "company": "TechCorp",
+          "location": "Paris",
+          "type": "CDI",
+          "salary": "48k-91k€",
+          "description": "Nous recherchons un développeur blockchain expérimenté pour rejoindre notre équipe TechCorp.",
+          "skills": [
+            "React",
+            "AWS",
+            "Node.js",
+            "PostgreSQL"
+          ],
+          "postedDate": "2024-01-15",
+          "remote": false,
+          "source": "Glassdoor",
+          "matchPercentage": 71,
+          "matchingSkills": [
+            "PostgreSQL"
+          ]
+        }
+      ],
+      "topMatches": [
+        {
+          "id": 37,
+          "title": "Développeur Game",
+          "company": "WebSolutions",
+          "location": "Paris",
+          "type": "CDI",
+          "salary": "56k-99k€",
+          "description": "Nous recherchons un développeur game expérimenté pour rejoindre notre équipe WebSolutions.",
+          "skills": [
+            "React",
+            "Node.js",
+            "PostgreSQL"
+          ],
+          "postedDate": "2024-01-15",
+          "remote": false,
+          "source": "Welcome to the Jungle",
+          "matchPercentage": 80,
+          "matchingSkills": [
+            "PostgreSQL"
+          ]
+        },
+        {
+          "id": 149,
+          "title": "Développeur Blockchain",
+          "company": "DesignStudio",
+          "location": "Paris",
+          "type": "Freelance",
+          "salary": "43k-90k€",
+          "description": "Nous recherchons un développeur blockchain expérimenté pour rejoindre notre équipe DesignStudio.",
+          "skills": [
+            "React",
+            "Node.js",
+            "PostgreSQL"
+          ],
+          "postedDate": "2024-01-15",
+          "remote": false,
+          "source": "Glassdoor",
+          "matchPercentage": 77,
+          "matchingSkills": [
+            "PostgreSQL"
+          ]
+        },
+        {
+          "id": 35,
+          "title": "Développeur Frontend",
+          "company": "GameStudio",
+          "location": "Lille",
+          "type": "CDI",
+          "salary": "49k-74k€",
+          "description": "Nous recherchons un développeur frontend expérimenté pour rejoindre notre équipe GameStudio.",
+          "skills": [
+            "PostgreSQL",
+            "React",
+            "Node.js"
+          ],
+          "postedDate": "2024-01-15",
+          "remote": false,
+          "source": "Indeed",
+          "matchPercentage": 74,
+          "matchingSkills": [
+            "PostgreSQL"
+          ]
+        },
+        {
+          "id": 25,
+          "title": "Développeur Game",
+          "company": "AI Solutions",
+          "location": "Rennes",
+          "type": "Freelance",
+          "salary": "53k-73k€",
+          "description": "Nous recherchons un développeur game expérimenté pour rejoindre notre équipe AI Solutions.",
+          "skills": [
+            "React",
+            "Node.js",
+            "AWS",
+            "Docker",
+            "PostgreSQL"
+          ],
+          "postedDate": "2024-01-15",
+          "remote": false,
+          "source": "LinkedIn",
+          "matchPercentage": 73,
+          "matchingSkills": [
+            "Docker",
+            "PostgreSQL"
+          ]
+        },
+        {
+          "id": 46,
+          "title": "Développeur Game",
+          "company": "CloudTech",
+          "location": "Tours",
+          "type": "CDI",
+          "salary": "68k-80k€",
+          "description": "Nous recherchons un développeur game expérimenté pour rejoindre notre équipe CloudTech.",
+          "skills": [
+            "React",
+            "Node.js",
+            "PostgreSQL"
+          ],
+          "postedDate": "2024-01-15",
+          "remote": false,
+          "source": "Welcome to the Jungle",
+          "matchPercentage": 73,
+          "matchingSkills": [
+            "PostgreSQL"
+          ]
+        }
+      ],
+      "summary": {
+        "totalJobsAnalyzed": 10,
+        "averageMatchScore": 74,
+        "bestMatch": {
+          "id": 37,
+          "title": "Développeur Game",
+          "company": "WebSolutions",
+          "location": "Paris",
+          "type": "CDI",
+          "salary": "56k-99k€",
+          "description": "Nous recherchons un développeur game expérimenté pour rejoindre notre équipe WebSolutions.",
+          "skills": [
+            "React",
+            "Node.js",
+            "PostgreSQL"
+          ],
+          "postedDate": "2024-01-15",
+          "remote": false,
+          "source": "Welcome to the Jungle",
+          "matchPercentage": 80,
+          "matchingSkills": [
+            "PostgreSQL"
+          ]
+        }
+      }
+    }
+  }
+}
