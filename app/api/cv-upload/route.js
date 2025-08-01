@@ -541,51 +541,34 @@ async function extractTextFromFile(file, buffer) {
           
           if (result.text && result.text.trim().length > 0) {
             console.log('Extraction PDF réussie avec pdf-parse');
-            return result.text;
+            // Nettoyer le texte extrait des caractères non lisibles
+            return result.text
+              .replace(/[\x00-\x08\x0B-\x0C\x0E-\x1F\x7F]/g, '') // Supprimer les caractères de contrôle
+              .replace(/[^\x20-\x7E\u00A0-\u017F\u0180-\u024F\u1E00-\u1EFF\u2000-\u206F\u2070-\u209F\u20A0-\u20CF\u2100-\u214F]/g, ' ') // Garder seulement les caractères lisibles (incluant français)
+              .replace(/\s+/g, ' ') // Normaliser les espaces multiples
+              .trim();
           }
         } catch (pdfParseError) {
           console.error('Erreur pdf-parse:', pdfParseError.message);
         }
         
-        // Méthode 2: Lecture buffer brut comme fallback
-        try {
-          const bufferString = buffer.toString('utf8');
-          if (bufferString.includes('Antoine') || bufferString.includes('Lorence')) {
-            console.log('Contenu trouvé dans le buffer brut');
-            return bufferString;
-          }
-        } catch (bufferError) {
-          console.error('Erreur lecture buffer:', bufferError.message);
-        }
-        
-        // Si aucune méthode n'a fonctionné, essayer de lire le buffer directement
-        try {
-          const bufferString = buffer.toString('utf8');
-          if (bufferString.includes('Antoine') || bufferString.includes('Lorence')) {
-            console.log('Contenu trouvé dans le buffer brut');
-            return bufferString;
-          }
-        } catch (bufferError) {
-          console.error('Erreur lecture buffer:', bufferError.message);
-        }
-        
-        // Si aucune méthode n'a fonctionné
-        console.log('Aucune méthode d\'extraction PDF n\'a fonctionné');
-        return `CV ${file.name} - PDF détecté mais extraction échouée.
+        // Si pdf-parse échoue, retourner un message d'erreur propre au lieu de tenter de lire le buffer brut
+        console.log('Extraction PDF échouée - format non supporté ou fichier corrompu');
+        return `Impossible d'extraire le texte du PDF "${file.name}". Le fichier pourrait être protégé, corrompu ou créé avec une méthode non standard.
 
-INSTRUCTIONS POUR ANALYSER CE CV :
-1. Ouvrez le PDF dans un éditeur de texte ou Word
-2. Copiez tout le contenu texte
-3. Collez dans un fichier .txt et uploadez-le
-4. Ou convertissez le PDF en format .doc/.docx
+Pour une meilleure analyse, veuillez :
+1. Ouvrir le PDF dans un lecteur PDF (Adobe Reader, etc.)
+2. Copier le texte (Ctrl+A puis Ctrl+C)
+3. Le coller dans un fichier texte (.txt)
+4. Uploader ce fichier texte
 
-ALTERNATIVE :
-- Utilisez un outil en ligne pour convertir PDF en texte
-- Ou scannez le PDF avec un OCR si c'est une image`;
+Ou utiliser un service de conversion PDF vers texte en ligne.`;
         
       } catch (error) {
         console.error('Erreur extraction PDF générale:', error.message);
-        return `CV ${file.name} - Erreur d'extraction PDF: ${error.message}`;
+        return `Erreur lors de l'extraction du PDF "${file.name}": ${error.message}
+
+Veuillez essayer de convertir votre CV en format .txt ou .docx pour une analyse complète.`;
       }
     } else if (file.type === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' || 
                file.type === 'application/msword') {
@@ -593,21 +576,36 @@ ALTERNATIVE :
       try {
         const mammoth = (await import('mammoth')).default;
         const result = await mammoth.extractRawText({ buffer });
-        return result.value || 'Contenu Word extrait mais vide';
+        
+        if (result.value && result.value.trim().length > 0) {
+          // Nettoyer le texte extrait
+          return result.value
+            .replace(/[\x00-\x08\x0B-\x0C\x0E-\x1F\x7F]/g, '') // Supprimer les caractères de contrôle
+            .replace(/[^\x20-\x7E\u00A0-\u017F\u0180-\u024F\u1E00-\u1EFF\u2000-\u206F\u2070-\u209F\u20A0-\u20CF\u2100-\u214F]/g, ' ') // Garder seulement les caractères lisibles
+            .replace(/\s+/g, ' ') // Normaliser les espaces
+            .trim();
+        } else {
+          return 'Document Word vide ou impossible à lire.';
+        }
       } catch (wordError) {
         console.error('Erreur extraction Word:', wordError.message);
-        return `CV ${file.name} - Document Word détecté mais extraction échouée: ${wordError.message}`;
+        return `Erreur lors de l'extraction du document Word "${file.name}": ${wordError.message}
+
+Veuillez essayer de sauvegarder votre document en format .txt pour une analyse complète.`;
       }
     } else {
       // Fallback pour les autres formats
-      return `CV de ${file.name} - Format non supporté. 
-      Veuillez utiliser PDF, DOC, DOCX ou TXT pour une meilleure analyse.`;
+      return `Format de fichier non supporté pour "${file.name}". 
+
+Formats acceptés : PDF, DOC, DOCX ou TXT.
+Pour une meilleure analyse, veuillez convertir votre CV dans l'un de ces formats.`;
     }
   } catch (error) {
     console.error('Erreur extraction texte générale:', error);
     // Fallback en cas d'erreur
-    return `CV ${file.name} - Erreur d'extraction: ${error.message}. 
-    Veuillez vérifier le format du fichier.`;
+    return `Erreur lors de l'extraction du fichier "${file.name}": ${error.message}
+
+Veuillez vérifier que le fichier n'est pas corrompu et réessayer.`;
   }
 }
 
