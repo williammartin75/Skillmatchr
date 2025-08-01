@@ -11,7 +11,19 @@ const CONFIG = {
         'welcometothejungle.com',
         'regionsjob.com',
         'cadremploi.fr',
-        'chooseyourboss.com'
+        'chooseyourboss.com',
+        'jobteaser.com'
+    ],
+    USER_AGENTS: [
+        'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+        'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+        'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:121.0) Gecko/20100101 Firefox/121.0',
+        'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.1 Safari/605.1.15',
+        'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
+    ],
+    PROXIES: [
+        // Liste des proxies tournants (à configurer selon disponibilité)
+        // Format: { host: 'proxy.example.com', port: 8080, username: 'user', password: 'pass' }
     ]
 };
 
@@ -109,6 +121,14 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
         case 'clearApplicationHistory':
             clearApplicationHistory().then(() => {
                 sendResponse({ success: true });
+            }).catch(error => {
+                sendResponse({ success: false, error: error.message });
+            });
+            return true;
+            
+        case 'apply-to-job':
+            handleJobApplication(request.data).then(result => {
+                sendResponse({ success: true, result });
             }).catch(error => {
                 sendResponse({ success: false, error: error.message });
             });
@@ -437,4 +457,169 @@ if (typeof module !== 'undefined' && module.exports) {
         addToApplicationHistory,
         clearApplicationHistory
     };
+} 
+
+// Fonction pour gérer les candidatures JobTeaser
+async function handleJobApplication(data) {
+    console.log('[Background] Handling job application:', data);
+    
+    const { url, profile, cvPath } = data;
+    
+    // Vérifier si c'est une URL JobTeaser
+    if (!url.includes('jobteaser.com')) {
+        throw new Error('URL non supportée. Seul JobTeaser est supporté pour le moment.');
+    }
+    
+    try {
+        // Configurer un user-agent aléatoire
+        const userAgent = getRandomUserAgent();
+        console.log('[Background] Using User-Agent:', userAgent);
+        
+        // Configurer le proxy si disponible
+        if (CONFIG.PROXIES.length > 0) {
+            const proxy = getRandomProxy();
+            await configureProxy(proxy);
+            console.log('[Background] Using proxy:', proxy.host);
+        }
+        
+        // Ouvrir l'URL dans un nouvel onglet
+        const tab = await chrome.tabs.create({ url, active: true });
+        console.log('[Background] Tab created:', tab.id);
+        
+        // Attendre que la page soit chargée
+        await waitForTabLoad(tab.id);
+        
+        // Injecter le script pour l'application
+        const result = await chrome.scripting.executeScript({
+            target: { tabId: tab.id, allFrames: true },
+            func: applyToJobOnPage,
+            args: [{
+                profile,
+                cvPath,
+                adapter: 'JobteaserAdapter'
+            }]
+        });
+        
+        console.log('[Background] Application result:', result);
+        
+        // Envoyer le résultat au dashboard
+        sendToDashboard({
+            action: 'application-complete',
+            jobUrl: url,
+            success: result[0].result.success,
+            message: result[0].result.message,
+            timestamp: new Date().toISOString()
+        });
+        
+        return result[0].result;
+        
+    } catch (error) {
+        console.error('[Background] Application error:', error);
+        
+        // Envoyer l'erreur au dashboard
+        sendToDashboard({
+            action: 'application-error',
+            jobUrl: url,
+            error: error.message,
+            timestamp: new Date().toISOString()
+        });
+        
+        throw error;
+    }
+}
+
+// Fonction injectée dans la page pour gérer la candidature
+async function applyToJobOnPage(data) {
+    console.log('[Injected] Starting job application with data:', data);
+    
+    try {
+        // Vérifier que les adaptateurs sont disponibles
+        if (!window.SiteAdapters || !window.SiteAdapters[data.adapter]) {
+            throw new Error(`Adapter ${data.adapter} not found`);
+        }
+        
+        // Créer une instance de l'adaptateur
+        const AdapterClass = window.SiteAdapters[data.adapter];
+        const adapter = new AdapterClass(new window.HumanBehaviorSimulator());
+        
+        // Appliquer au job
+        const result = await adapter.applyToJob({
+            profile: data.profile,
+            cvPath: data.cvPath
+        });
+        
+        return { success: true, result };
+        
+    } catch (error) {
+        console.error('[Injected] Application error:', error);
+        return { success: false, error: error.message };
+    }
+}
+
+// Obtenir un user-agent aléatoire
+function getRandomUserAgent() {
+    const index = Math.floor(Math.random() * CONFIG.USER_AGENTS.length);
+    return CONFIG.USER_AGENTS[index];
+}
+
+// Obtenir un proxy aléatoire
+function getRandomProxy() {
+    if (CONFIG.PROXIES.length === 0) return null;
+    const index = Math.floor(Math.random() * CONFIG.PROXIES.length);
+    return CONFIG.PROXIES[index];
+}
+
+// Configurer le proxy (nécessite une extension proxy séparée ou API)
+async function configureProxy(proxy) {
+    if (!proxy) return;
+    
+    // Note: Chrome ne permet pas de configurer directement les proxies via l'API
+    // Vous devrez utiliser une extension proxy dédiée ou configurer au niveau système
+    console.log('[Background] Proxy configuration requested:', proxy);
+    
+    // Pour une vraie implémentation, vous pourriez :
+    // 1. Utiliser chrome.proxy API (nécessite permission "proxy")
+    // 2. Communiquer avec une extension proxy tierce
+    // 3. Utiliser un serveur proxy local
+}
+
+// Attendre le chargement complet d'un onglet
+function waitForTabLoad(tabId) {
+    return new Promise((resolve) => {
+        const listener = (updatedTabId, changeInfo) => {
+            if (updatedTabId === tabId && changeInfo.status === 'complete') {
+                chrome.tabs.onUpdated.removeListener(listener);
+                resolve();
+            }
+        };
+        chrome.tabs.onUpdated.addListener(listener);
+    });
+}
+
+// Envoyer des données au dashboard
+async function sendToDashboard(data) {
+    try {
+        console.log('[Background] Sending to dashboard:', data);
+        
+        // Envoyer au dashboard via message
+        chrome.runtime.sendMessage({
+            action: 'dashboard-update',
+            data: data
+        });
+        
+        // Aussi envoyer à l'API si configurée
+        const config = await getConfig();
+        if (config.apiUrl && config.apiKey) {
+            await fetch(`${config.apiUrl}/api/applications/log`, {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${config.apiKey}`,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            });
+        }
+    } catch (error) {
+        console.error('[Background] Error sending to dashboard:', error);
+    }
 } 

@@ -39,6 +39,10 @@ class JobDetector {
             console.log('✅ [DEBUG] Site Pôle Emploi détecté');
             return 'poleemploi';
         }
+        if (hostname.includes('jobteaser.com')) {
+            console.log('✅ [DEBUG] Site JobTeaser détecté');
+            return 'jobteaser';
+        }
         
         console.log('⚠️ [DEBUG] Site inconnu détecté:', hostname);
         return 'unknown';
@@ -204,6 +208,9 @@ class JobDetector {
             case 'poleemploi':
                 isOnSite = hostname.includes('pole-emploi.fr') || hostname.includes('francetravail.fr');
                 break;
+            case 'jobteaser':
+                isOnSite = hostname.includes('jobteaser.com');
+                break;
             default:
                 isOnSite = false;
         }
@@ -220,7 +227,8 @@ class JobDetector {
             'linkedin': 'https://www.linkedin.com/jobs/',
             'indeed': 'https://fr.indeed.com/',
             'apec': 'https://www.apec.fr/candidat/recherche-emploi.html',
-            'poleemploi': 'https://candidat.pole-emploi.fr/offres/recherche'
+            'poleemploi': 'https://candidat.pole-emploi.fr/offres/recherche',
+            'jobteaser': 'https://www.jobteaser.com/fr/job-offers'
         };
 
         const url = siteUrls[targetSite];
@@ -299,6 +307,9 @@ class JobDetector {
                 break;
             case 'poleemploi':
                 adapter = new PoleEmploiAdapter(this.humanBehavior);
+                break;
+            case 'jobteaser':
+                adapter = new JobteaserAdapter(this.humanBehavior);
                 break;
             default:
                 adapter = new GenericAdapter(this.humanBehavior);
@@ -721,4 +732,5 @@ class HumanBehaviorSimulator {
 // Initialiser le détecteur d'emploi
 console.log('🚀 [DEBUG] Initialisation de l\'extension SkillMatchr...');
 const jobDetector = new JobDetector();
+window.jobDetector = jobDetector; // Exposer globalement pour les adaptateurs
 console.log('✅ [DEBUG] Extension SkillMatchr initialisée avec succès'); 
