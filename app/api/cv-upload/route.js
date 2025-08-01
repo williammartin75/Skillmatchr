@@ -7,6 +7,19 @@ import os from 'os';
 
 const execAsync = promisify(exec);
 
+// Imports pour l'extraction de texte
+let pdfParse, mammoth;
+try {
+  pdfParse = require('pdf-parse');
+} catch (e) {
+  console.warn('pdf-parse non disponible:', e.message);
+}
+try {
+  mammoth = require('mammoth');
+} catch (e) {
+  console.warn('mammoth non disponible:', e.message);
+}
+
 // Configuration du modèle Llama
 const LLAMA_ENDPOINT = process.env.LLAMA_ENDPOINT || 'http://localhost:11434/api/generate';
 const LLAMA_MODEL = process.env.LLAMA_MODEL || 'llama2';
@@ -29,6 +42,44 @@ const ALLOWED_TYPES = [
 ];
 
 const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10MB
+
+// Fonction de nettoyage du texte extrait
+function cleanExtractedText(text) {
+  if (!text) return '';
+  
+  // Remplacer les caractères non imprimables par des espaces
+  let cleanedText = text.replace(/[\x00-\x08\x0B\x0C\x0E-\x1F\x7F-\x9F]/g, ' ');
+  
+  // Remplacer les multiples espaces par un seul espace
+  cleanedText = cleanedText.replace(/\s+/g, ' ');
+  
+  // Supprimer les espaces en début et fin de ligne
+  cleanedText = cleanedText.split('\n').map(line => line.trim()).join('\n');
+  
+  // Supprimer les lignes vides multiples
+  cleanedText = cleanedText.replace(/\n{3,}/g, '\n\n');
+  
+  // Supprimer les caractères de formatage PDF spécifiques
+  cleanedText = cleanedText.replace(/[∞®™©]/g, '');
+  
+  // Nettoyer les espaces autour de la ponctuation
+  cleanedText = cleanedText.replace(/\s+([.,;:!?])/g, '$1');
+  cleanedText = cleanedText.replace(/([.,;:!?])\s*([.,;:!?])/g, '$1$2');
+  
+  // Supprimer les caractères de contrôle Unicode
+  cleanedText = cleanedText.replace(/[\u0000-\u001F\u007F-\u009F\u200B-\u200D\uFEFF]/g, '');
+  
+  // Nettoyer les guillemets étranges
+  cleanedText = cleanedText.replace(/[""''„"«»]/g, '"');
+  
+  // Nettoyer les tirets étranges
+  cleanedText = cleanedText.replace(/[–—−]/g, '-');
+  
+  // Supprimer les espaces avant et après le texte complet
+  cleanedText = cleanedText.trim();
+  
+  return cleanedText;
+}
 
 // Fonction de détection automatique des informations personnelles
 function extractPersonalInfo(text, fileName = '') {
@@ -179,6 +230,22 @@ function extractPersonalInfo(text, fileName = '') {
         }
       }
       if (email) break;
+    }
+  }
+  
+  // Méthode 4: Recherche spéciale pour emails collés avec mots-clés
+  if (!email) {
+    // Pattern pour détecter "Courrielalorence@flokod.com" ou similaire
+    const keywordEmailPattern = /(mail|courriel|email|e-mail|contact|courrier)([A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,})/gi;
+    const matches = text.match(keywordEmailPattern);
+    if (matches && matches.length > 0) {
+      // Extraire juste la partie email
+      const match = matches[0];
+      const emailPart = match.match(/[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}/);
+      if (emailPart) {
+        email = emailPart[0];
+        console.log(`✅ Email trouvé collé avec mot-clé: "${email}"`);
+      }
     }
   }
   
@@ -532,82 +599,72 @@ async function extractTextFromFile(file, buffer) {
     if (file.type === 'text/plain') {
       return buffer.toString('utf-8');
     } else if (file.type === 'application/pdf') {
-      // Extraction PDF avec méthode simplifiée et compatible
+      // Extraction PDF via script externe pour éviter les problèmes de compatibilité Next.js
       try {
-        // Méthode 1: pdf-parse avec configuration minimale
+        // Sauvegarder temporairement le fichier
+        const tempDir = os.tmpdir();
+        const tempFilePath = path.join(tempDir, `temp_${Date.now()}_${file.name}`);
+        
+        await fs.promises.writeFile(tempFilePath, buffer);
+        
+        // Appeler le script d'extraction
+        const scriptPath = path.join(process.cwd(), 'scripts', 'extract-pdf.js');
+        const { stdout, stderr } = await execAsync(`node "${scriptPath}" "${tempFilePath}"`);
+        
+        // Supprimer le fichier temporaire
+        await fs.promises.unlink(tempFilePath).catch(() => {});
+        
+        if (stderr) {
+          console.error('Erreur script extraction:', stderr);
+        }
+        
+        // Parser le résultat JSON
         try {
-          const pdfParse = (await import('pdf-parse')).default;
-          const result = await pdfParse(buffer);
-          
-          if (result.text && result.text.trim().length > 0) {
-            console.log('Extraction PDF réussie avec pdf-parse');
+          const result = JSON.parse(stdout);
+          if (result.success && result.text) {
+            console.log('Extraction PDF réussie via script');
+            console.log('Pages:', result.pages);
+            console.log('Texte extrait:', result.text.length, 'caractères');
             return result.text;
+          } else {
+            console.error('Échec extraction:', result.error);
+            return `Erreur d'extraction PDF: ${result.error || 'Aucun texte extrait'}`;
           }
-        } catch (pdfParseError) {
-          console.error('Erreur pdf-parse:', pdfParseError.message);
+        } catch (parseError) {
+          console.error('Erreur parsing JSON:', parseError);
+          console.error('Stdout:', stdout);
+          return 'Erreur lors de l\'extraction du texte du PDF';
         }
-        
-        // Méthode 2: Lecture buffer brut comme fallback
-        try {
-          const bufferString = buffer.toString('utf8');
-          if (bufferString.includes('Antoine') || bufferString.includes('Lorence')) {
-            console.log('Contenu trouvé dans le buffer brut');
-            return bufferString;
-          }
-        } catch (bufferError) {
-          console.error('Erreur lecture buffer:', bufferError.message);
-        }
-        
-        // Si aucune méthode n'a fonctionné, essayer de lire le buffer directement
-        try {
-          const bufferString = buffer.toString('utf8');
-          if (bufferString.includes('Antoine') || bufferString.includes('Lorence')) {
-            console.log('Contenu trouvé dans le buffer brut');
-            return bufferString;
-          }
-        } catch (bufferError) {
-          console.error('Erreur lecture buffer:', bufferError.message);
-        }
-        
-        // Si aucune méthode n'a fonctionné
-        console.log('Aucune méthode d\'extraction PDF n\'a fonctionné');
-        return `CV ${file.name} - PDF détecté mais extraction échouée.
-
-INSTRUCTIONS POUR ANALYSER CE CV :
-1. Ouvrez le PDF dans un éditeur de texte ou Word
-2. Copiez tout le contenu texte
-3. Collez dans un fichier .txt et uploadez-le
-4. Ou convertissez le PDF en format .doc/.docx
-
-ALTERNATIVE :
-- Utilisez un outil en ligne pour convertir PDF en texte
-- Ou scannez le PDF avec un OCR si c'est une image`;
-        
       } catch (error) {
-        console.error('Erreur extraction PDF générale:', error.message);
-        return `CV ${file.name} - Erreur d'extraction PDF: ${error.message}`;
+        console.error('Erreur extraction PDF:', error);
+        return `Erreur lors de l'extraction du PDF: ${error.message}`;
       }
     } else if (file.type === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' || 
                file.type === 'application/msword') {
       // Extraction réelle des documents Word
       try {
-        const mammoth = (await import('mammoth')).default;
+        // Vérifier que mammoth est disponible
+        if (!mammoth) {
+          console.error('mammoth non disponible');
+          return 'Erreur: Module mammoth non installé. Impossible d\'extraire le texte du document Word.';
+        }
+        
         const result = await mammoth.extractRawText({ buffer });
         return result.value || 'Contenu Word extrait mais vide';
       } catch (wordError) {
         console.error('Erreur extraction Word:', wordError.message);
-        return `CV ${file.name} - Document Word détecté mais extraction échouée: ${wordError.message}`;
+        return `Document Word détecté mais extraction échouée: ${wordError.message}`;
       }
     } else {
       // Fallback pour les autres formats
-      return `CV de ${file.name} - Format non supporté. 
-      Veuillez utiliser PDF, DOC, DOCX ou TXT pour une meilleure analyse.`;
+      return `Format de fichier non supporté: ${file.type}. 
+Veuillez utiliser PDF, DOC, DOCX ou TXT pour une meilleure analyse.`;
     }
   } catch (error) {
     console.error('Erreur extraction texte générale:', error);
     // Fallback en cas d'erreur
-    return `CV ${file.name} - Erreur d'extraction: ${error.message}. 
-    Veuillez vérifier le format du fichier.`;
+    return `Erreur d'extraction: ${error.message}. 
+Veuillez vérifier le format du fichier.`;
   }
 }
 
