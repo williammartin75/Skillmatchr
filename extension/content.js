@@ -300,6 +300,9 @@ class JobDetector {
             case 'poleemploi':
                 adapter = new PoleEmploiAdapter(this.humanBehavior);
                 break;
+            case 'jobteaser':
+                adapter = new JobteaserAdapter(this.humanBehavior);
+                break;
             default:
                 adapter = new GenericAdapter(this.humanBehavior);
         }

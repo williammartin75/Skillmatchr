@@ -18,7 +18,9 @@
     "https://*.apec.fr/*",
     "https://*.pole-emploi.fr/*",
     "https://*.francetravail.fr/*",
-    "http://localhost:3001/*"
+    "https://*.jobteaser.com/*",
+    "http://localhost:3001/*",
+    "http://localhost:3000/*"
   ],
   
   "background": {
@@ -33,7 +35,8 @@
         "https://*.indeed.com/*",
         "https://*.apec.fr/*",
         "https://*.pole-emploi.fr/*",
-        "https://*.francetravail.fr/*"
+        "https://*.francetravail.fr/*",
+        "https://*.jobteaser.com/*"
       ],
       "js": ["site-adapters.js", "content.js"],
       "css": ["content.css"]

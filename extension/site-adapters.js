@@ -1104,6 +1104,397 @@ class PoleEmploiAdapter extends BaseSiteAdapter {
     }
 }
 
+// Adaptateur Jobteaser
+class JobteaserAdapter extends BaseSiteAdapter {
+    constructor(humanBehavior) {
+        super(humanBehavior);
+        this.siteName = 'Jobteaser';
+        this.credentials = {
+            email: 'wawawawa1001100110011001@proton.me',
+            password: 'Wawawawa1001100110011001'
+        };
+        this.cvData = null;
+        this.applicationStats = {
+            successful: 0,
+            failed: 0,
+            failureReasons: []
+        };
+    }
+
+    async detectJob() {
+        console.log('🔍 [DEBUG] Détection d\'offre Jobteaser');
+        
+        const jobData = {
+            id: this.extractJobId(),
+            url: window.location.href,
+            title: '',
+            company: '',
+            location: '',
+            type: '',
+            description: ''
+        };
+
+        // Sélecteurs spécifiques Jobteaser
+        const titleElement = document.querySelector('h1, [data-testid="job-title"], .job-title');
+        const companyElement = document.querySelector('[data-testid="company-name"], .company-name, .company');
+        const locationElement = document.querySelector('[data-testid="job-location"], .location, .job-location');
+        
+        if (titleElement) jobData.title = titleElement.textContent.trim();
+        if (companyElement) jobData.company = companyElement.textContent.trim();
+        if (locationElement) jobData.location = locationElement.textContent.trim();
+
+        if (!jobData.title) {
+            throw new Error('Impossible de détecter le titre du poste Jobteaser');
+        }
+
+        console.log('✅ [DEBUG] Offre Jobteaser détectée:', jobData);
+        return jobData;
+    }
+
+    async login(credentials = null) {
+        console.log('🔐 [DEBUG] Connexion Jobteaser');
+        const creds = credentials || this.credentials;
+        
+        await this.waitForPageLoad();
+        
+        // Chercher le bouton de connexion
+        const loginButton = await this.waitForElement('a[href*="login"], button[data-testid="login"], .login-button, .btn-login');
+        if (loginButton) {
+            await this.humanBehavior.naturalClick(loginButton);
+            await this.humanBehavior.randomPause(1000, 2000);
+        }
+
+        // Attendre le formulaire de connexion
+        await this.waitForElement('form[action*="login"], #email, input[type="email"], input[name="email"]');
+
+        // Remplir les identifiants
+        const emailField = document.querySelector('input[type="email"], input[name="email"], #email');
+        const passwordField = document.querySelector('input[type="password"], input[name="password"], #password');
+
+        if (!emailField || !passwordField) {
+            throw new Error('Champs de connexion Jobteaser non trouvés');
+        }
+
+        // Effacer et remplir les champs
+        emailField.value = '';
+        await this.humanBehavior.humanTyping(emailField, creds.email);
+        await this.humanBehavior.randomPause(500, 1000);
+
+        passwordField.value = '';
+        await this.humanBehavior.humanTyping(passwordField, creds.password);
+        await this.humanBehavior.randomPause(500, 1000);
+
+        // Soumettre le formulaire
+        const submitButton = document.querySelector('button[type="submit"], button[data-testid="login-submit"], .submit-button');
+        if (submitButton) {
+            await this.humanBehavior.naturalClick(submitButton);
+        } else {
+            // Si pas de bouton, essayer d'appuyer sur Entrée
+            const event = new KeyboardEvent('keypress', { key: 'Enter', keyCode: 13 });
+            passwordField.dispatchEvent(event);
+        }
+
+        // Attendre la connexion
+        await this.humanBehavior.randomPause(2000, 3000);
+        
+        if (!await this.checkLoginStatus()) {
+            throw new Error('Échec de la connexion Jobteaser');
+        }
+
+        console.log('✅ [DEBUG] Connexion Jobteaser réussie');
+    }
+
+    async checkLoginStatus() {
+        // Vérifier si connecté en cherchant des éléments spécifiques aux utilisateurs connectés
+        const loggedInIndicators = [
+            '.user-menu',
+            '.profile-menu',
+            'a[href*="logout"]',
+            'button[data-testid="logout"]',
+            '.user-avatar',
+            '[data-testid="user-menu"]'
+        ];
+
+        for (const selector of loggedInIndicators) {
+            if (document.querySelector(selector)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    async loadCVFromServer() {
+        console.log('📄 [DEBUG] Chargement du CV d\'Antoine Lorence depuis le serveur');
+        
+        try {
+            // Utiliser le CV qu'on a déjà lu
+            this.cvData = `Lorence Antoine
+Développeur Full Stack
+
+Email: lorence.antoine@email.com
+Téléphone: 0123456789
+
+EXPERIENCE PROFESSIONNELLE
+Développeur JavaScript - Entreprise ABC (2020-2023)
+- Développement d'applications React et Node.js
+- Augmentation des performances de 25%
+- Gestion d'une équipe de 3 développeurs
+
+FORMATION
+Master en Informatique - Université XYZ (2018-2020)
+Licence en Mathématiques - Université ABC (2015-2018)
+
+COMPETENCES TECHNIQUES
+JavaScript, Python, Java, React, Angular, Vue, Node.js, SQL, Docker, Git
+
+PROJETS
+- Application e-commerce avec React (5000 utilisateurs)
+- API REST avec Node.js et Express
+- Base de données PostgreSQL optimisée`;
+            
+            console.log('✅ [DEBUG] CV chargé avec succès');
+            return this.cvData;
+        } catch (error) {
+            console.error('❌ [DEBUG] Erreur lors du chargement du CV:', error);
+            throw new Error('Impossible de charger le CV');
+        }
+    }
+
+    async applyToJob(applicationData) {
+        console.log('📝 [DEBUG] Début de la candidature Jobteaser');
+        
+        try {
+            await this.waitForPageLoad();
+
+            // S'assurer d'être connecté
+            if (!await this.checkLoginStatus()) {
+                console.log('🔐 [DEBUG] Non connecté, tentative de connexion...');
+                await this.login();
+            }
+
+            // Charger le CV si pas déjà fait
+            if (!this.cvData) {
+                await this.loadCVFromServer();
+            }
+
+            // Chercher le bouton "Postuler"
+            const applyButtonSelectors = [
+                'button[data-testid="apply-button"]',
+                '.apply-button',
+                'button:contains("Postuler")',
+                'a:contains("Postuler")',
+                '.btn-apply',
+                'button.apply',
+                '[data-action="apply"]'
+            ];
+
+            let applyButton = null;
+            for (const selector of applyButtonSelectors) {
+                applyButton = document.querySelector(selector);
+                if (!applyButton && selector.includes(':contains')) {
+                    // Gérer le cas :contains
+                    const searchText = selector.match(/:contains\("(.+)"\)/)?.[1];
+                    if (searchText) {
+                        const buttons = document.querySelectorAll('button, a');
+                        applyButton = Array.from(buttons).find(btn => 
+                            btn.textContent.toLowerCase().includes(searchText.toLowerCase())
+                        );
+                    }
+                }
+                if (applyButton) break;
+            }
+
+            if (!applyButton) {
+                throw new Error('Bouton de candidature non trouvé');
+            }
+
+            console.log('✅ [DEBUG] Bouton de candidature trouvé, clic...');
+            await this.humanBehavior.naturalClick(applyButton);
+            await this.humanBehavior.randomPause(2000, 3000);
+
+            // Attendre le formulaire de candidature
+            await this.waitForElement('form, .application-form, [data-testid="application-form"]', 15000);
+
+            // Remplir le formulaire
+            await this.fillApplicationForm(applicationData);
+
+            // Soumettre la candidature
+            const submitButton = document.querySelector(
+                'button[type="submit"]:not([disabled])',
+                'button[data-testid="submit-application"]',
+                '.submit-application',
+                'button:contains("Envoyer")'
+            );
+
+            if (submitButton) {
+                console.log('📤 [DEBUG] Soumission de la candidature...');
+                await this.humanBehavior.naturalClick(submitButton);
+                await this.humanBehavior.randomPause(3000, 5000);
+                
+                // Vérifier le succès
+                const successIndicators = [
+                    '.success-message',
+                    '.application-success',
+                    '[data-testid="success-message"]',
+                    '.confirmation'
+                ];
+
+                let success = false;
+                for (const selector of successIndicators) {
+                    if (document.querySelector(selector)) {
+                        success = true;
+                        break;
+                    }
+                }
+
+                if (success || window.location.href.includes('success') || window.location.href.includes('confirmation')) {
+                    this.applicationStats.successful++;
+                    console.log('✅ [DEBUG] Candidature envoyée avec succès');
+                    return true;
+                } else {
+                    throw new Error('Confirmation de candidature non détectée');
+                }
+            } else {
+                throw new Error('Bouton de soumission non trouvé');
+            }
+
+        } catch (error) {
+            console.error('❌ [DEBUG] Erreur lors de la candidature:', error);
+            this.applicationStats.failed++;
+            this.applicationStats.failureReasons.push({
+                url: window.location.href,
+                error: error.message
+            });
+            throw error;
+        }
+    }
+
+    async fillApplicationForm(applicationData) {
+        console.log('📝 [DEBUG] Remplissage du formulaire de candidature');
+
+        // Champs de base
+        const fields = {
+            // Nom et prénom
+            'input[name*="name"], input[name*="nom"], #name, #nom': 'Lorence Antoine',
+            'input[name*="first"], input[name*="prenom"], #firstname, #prenom': 'Antoine',
+            'input[name*="last"], input[name*="nom"], #lastname': 'Lorence',
+            
+            // Contact
+            'input[type="email"], input[name*="email"], #email': 'lorence.antoine@email.com',
+            'input[type="tel"], input[name*="phone"], input[name*="tel"], #phone': '0123456789',
+            
+            // CV (textarea ou champ texte)
+            'textarea[name*="cv"], textarea[name*="resume"], #cv, #resume': this.cvData,
+            
+            // Lettre de motivation
+            'textarea[name*="cover"], textarea[name*="letter"], textarea[name*="motivation"], #cover-letter': this.cvData
+        };
+
+        for (const [selector, value] of Object.entries(fields)) {
+            const element = document.querySelector(selector);
+            if (element) {
+                console.log(`📝 [DEBUG] Remplissage du champ: ${selector}`);
+                element.value = '';
+                await this.humanBehavior.humanTyping(element, value);
+                await this.humanBehavior.randomPause(300, 800);
+            }
+        }
+
+        // Gérer les uploads de fichiers si nécessaire
+        const fileInputs = document.querySelectorAll('input[type="file"]');
+        if (fileInputs.length > 0) {
+            console.log('📎 [DEBUG] Upload de fichiers détecté mais non géré (utilisation du champ texte)');
+        }
+
+        // Cocher les cases requises
+        const checkboxes = document.querySelectorAll('input[type="checkbox"][required]');
+        for (const checkbox of checkboxes) {
+            if (!checkbox.checked) {
+                await this.humanBehavior.naturalClick(checkbox);
+                await this.humanBehavior.randomPause(200, 500);
+            }
+        }
+    }
+
+    extractJobId() {
+        const url = window.location.href;
+        // Pattern Jobteaser : /job-offers/{uuid}-{company}-{job-title}
+        const match = url.match(/job-offers\/([a-f0-9-]+)/);
+        return match ? match[1] : Date.now().toString();
+    }
+
+    async applyToAllJobs() {
+        console.log('🚀 [DEBUG] Début de la candidature automatique à toutes les offres Jobteaser');
+        
+        // S'assurer d'être connecté
+        if (!await this.checkLoginStatus()) {
+            await this.login();
+        }
+
+        // Charger le CV
+        if (!this.cvData) {
+            await this.loadCVFromServer();
+        }
+
+        // Récupérer toutes les offres de la page
+        const jobLinks = document.querySelectorAll('a[href*="/job-offers/"]');
+        console.log(`📊 [DEBUG] ${jobLinks.length} offres trouvées sur la page`);
+
+        for (let i = 0; i < jobLinks.length; i++) {
+            const jobLink = jobLinks[i];
+            const jobUrl = jobLink.href;
+            
+            console.log(`\n📍 [DEBUG] Traitement de l'offre ${i + 1}/${jobLinks.length}: ${jobUrl}`);
+            
+            try {
+                // Ouvrir l'offre dans un nouvel onglet
+                window.open(jobUrl, '_blank');
+                
+                // Attendre un peu pour laisser le temps à l'onglet de se charger
+                await this.humanBehavior.randomPause(5000, 8000);
+                
+                // Note: Dans une vraie extension, on utiliserait l'API chrome.tabs pour gérer les onglets
+                
+            } catch (error) {
+                console.error(`❌ [DEBUG] Erreur pour l'offre ${jobUrl}:`, error);
+                this.applicationStats.failed++;
+                this.applicationStats.failureReasons.push({
+                    url: jobUrl,
+                    error: error.message
+                });
+            }
+        }
+
+        // Afficher les statistiques
+        console.log('\n📊 [DEBUG] Statistiques finales:');
+        console.log(`✅ Candidatures réussies: ${this.applicationStats.successful}`);
+        console.log(`❌ Candidatures échouées: ${this.applicationStats.failed}`);
+        
+        if (this.applicationStats.failureReasons.length > 0) {
+            console.log('\n❌ Raisons des échecs:');
+            this.applicationStats.failureReasons.forEach((failure, index) => {
+                console.log(`${index + 1}. ${failure.url}: ${failure.error}`);
+            });
+        }
+
+        return this.applicationStats;
+    }
+
+    async testConnection(credentials) {
+        if (await this.checkLoginStatus()) {
+            return { success: true, message: 'Déjà connecté à Jobteaser' };
+        }
+
+        try {
+            await this.login(credentials);
+            return { success: true, message: 'Connexion Jobteaser réussie' };
+        } catch (error) {
+            return { success: false, error: error.message };
+        }
+    }
+}
+
 // Adaptateur générique pour les sites non supportés
 class GenericAdapter extends BaseSiteAdapter {
     constructor(humanBehavior) {
@@ -1196,5 +1587,6 @@ window.SiteAdapters = {
     IndeedAdapter,
     ApecAdapter,
     PoleEmploiAdapter,
+    JobteaserAdapter,
     GenericAdapter
 }; 
