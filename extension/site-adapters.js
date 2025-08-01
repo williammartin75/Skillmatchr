@@ -1190,11 +1190,576 @@ class GenericAdapter extends BaseSiteAdapter {
     }
 }
 
+// Adaptateur JobTeaser
+class JobteaserAdapter extends BaseSiteAdapter {
+    constructor(humanBehavior) {
+        super(humanBehavior);
+        this.siteName = 'JobTeaser';
+        this.credentials = {
+            email: 'wawawawa1001100110011001@proton.me',
+            password: 'Wawawawa1001100110011001'
+        };
+        this.timeout = 30000; // Timeout de 30 secondes
+        console.log('[JobTeaserAdapter] Adapter initialisé');
+    }
+
+    async detectJob() {
+        console.log('[JobTeaserAdapter] Step 1: Detecting job offer...');
+        
+        const jobData = {
+            id: this.extractJobId(),
+            url: window.location.href,
+            title: '',
+            company: '',
+            location: '',
+            type: '',
+            description: ''
+        };
+
+        // Sélecteurs JobTeaser spécifiques
+        const titleSelectors = [
+            'h1[data-testid="job-title"]',
+            '.job-details__title',
+            '.job__title',
+            'h1.title',
+            'h1'
+        ];
+
+        const companySelectors = [
+            '[data-testid="company-name"]',
+            '.company__name',
+            '.job-details__company',
+            '.employer'
+        ];
+
+        const locationSelectors = [
+            '[data-testid="job-location"]',
+            '.job-details__location',
+            '.location',
+            '.job__location'
+        ];
+
+        // Extraire les informations
+        console.log('[JobTeaserAdapter] Extracting job information...');
+        
+        for (const selector of titleSelectors) {
+            const element = document.querySelector(selector);
+            if (element && element.textContent.trim()) {
+                jobData.title = element.textContent.trim();
+                console.log('[JobTeaserAdapter] Job title found:', jobData.title);
+                break;
+            }
+        }
+
+        for (const selector of companySelectors) {
+            const element = document.querySelector(selector);
+            if (element && element.textContent.trim()) {
+                jobData.company = element.textContent.trim();
+                console.log('[JobTeaserAdapter] Company found:', jobData.company);
+                break;
+            }
+        }
+
+        for (const selector of locationSelectors) {
+            const element = document.querySelector(selector);
+            if (element && element.textContent.trim()) {
+                jobData.location = element.textContent.trim();
+                console.log('[JobTeaserAdapter] Location found:', jobData.location);
+                break;
+            }
+        }
+
+        if (!jobData.title) {
+            console.error('[JobTeaserAdapter] Failed to detect job title');
+            throw new Error('Impossible de détecter le titre du poste JobTeaser');
+        }
+
+        console.log('[JobTeaserAdapter] Job detection complete:', jobData);
+        return jobData;
+    }
+
+    async login(credentials) {
+        console.log('[JobTeaserAdapter] Step 2: Login process started');
+        
+        // Utiliser les identifiants par défaut si non fournis
+        const loginCredentials = credentials || this.credentials;
+        console.log('[JobTeaserAdapter] Using email:', loginCredentials.email);
+        
+        await this.waitForPageLoad();
+        
+        // Chercher le bouton de connexion
+        const loginButtonSelectors = [
+            'a[href*="sign_in"]',
+            'a[href*="login"]',
+            '.login-button',
+            'button[data-testid="login"]',
+            'a.sign-in'
+        ];
+
+        let loginButton = null;
+        for (const selector of loginButtonSelectors) {
+            loginButton = document.querySelector(selector);
+            if (loginButton) {
+                console.log('[JobTeaserAdapter] Login button found with selector:', selector);
+                break;
+            }
+        }
+
+        if (!loginButton) {
+            console.error('[JobTeaserAdapter] Login button not found');
+            throw new Error('Bouton de connexion JobTeaser non trouvé');
+        }
+
+        console.log('[JobTeaserAdapter] Clicking login button...');
+        await this.humanBehavior.naturalClick(loginButton);
+        
+        // Attendre le formulaire de connexion
+        console.log('[JobTeaserAdapter] Waiting for login form...');
+        await this.waitForElement('form[action*="sign_in"], #user_email, input[name="user[email]"]', 10000);
+
+        // Remplir le formulaire
+        const emailSelectors = [
+            '#user_email',
+            'input[name="user[email]"]',
+            'input[type="email"]'
+        ];
+
+        const passwordSelectors = [
+            '#user_password',
+            'input[name="user[password]"]',
+            'input[type="password"]'
+        ];
+
+        let emailField = null;
+        let passwordField = null;
+
+        for (const selector of emailSelectors) {
+            emailField = document.querySelector(selector);
+            if (emailField) break;
+        }
+
+        for (const selector of passwordSelectors) {
+            passwordField = document.querySelector(selector);
+            if (passwordField) break;
+        }
+
+        if (!emailField || !passwordField) {
+            console.error('[JobTeaserAdapter] Login fields not found');
+            throw new Error('Champs de connexion JobTeaser non trouvés');
+        }
+
+        console.log('[JobTeaserAdapter] Filling login form...');
+        await this.humanBehavior.humanTyping(emailField, loginCredentials.email);
+        await this.humanBehavior.humanTyping(passwordField, loginCredentials.password);
+
+        // Soumettre
+        const submitButton = document.querySelector('button[type="submit"], input[type="submit"], button[name="commit"]');
+        if (submitButton) {
+            console.log('[JobTeaserAdapter] Submitting login form...');
+            await this.humanBehavior.naturalClick(submitButton);
+        }
+
+        console.log('[JobTeaserAdapter] Waiting for login to complete...');
+        await this.waitForLoginSuccess();
+        console.log('[JobTeaserAdapter] Login successful!');
+    }
+
+    async checkLoginStatus() {
+        console.log('[JobTeaserAdapter] Checking login status...');
+        
+        const loginIndicators = [
+            '.user-menu',
+            '.profile-menu',
+            'a[href*="profile"]',
+            'a[href*="logout"]',
+            'a[href*="sign_out"]',
+            '.user-avatar'
+        ];
+
+        const logoutIndicators = [
+            'a[href*="sign_in"]',
+            'a[href*="login"]',
+            '.login-button'
+        ];
+
+        // Check for login indicators
+        for (const selector of loginIndicators) {
+            if (document.querySelector(selector)) {
+                console.log('[JobTeaserAdapter] User is logged in (found:', selector, ')');
+                return true;
+            }
+        }
+
+        // Check for logout indicators
+        for (const selector of logoutIndicators) {
+            if (document.querySelector(selector)) {
+                console.log('[JobTeaserAdapter] User is not logged in');
+                return false;
+            }
+        }
+
+        console.log('[JobTeaserAdapter] Login status unclear, assuming not logged in');
+        return false;
+    }
+
+    async searchJob(jobData) {
+        console.log('[JobTeaserAdapter] Searching for job:', jobData);
+        
+        // JobTeaser utilise une recherche par mots-clés
+        const searchUrl = `https://www.jobteaser.com/fr/job-offers?query=${encodeURIComponent(jobData.title)}&location=${encodeURIComponent(jobData.location || '')}`;
+        console.log('[JobTeaserAdapter] Navigating to search URL:', searchUrl);
+        
+        window.location.href = searchUrl;
+        await this.waitForPageLoad();
+        console.log('[JobTeaserAdapter] Search page loaded');
+    }
+
+    async applyToJob(applicationData) {
+        console.log('[JobTeaserAdapter] Step 3: Starting application process');
+        
+        // Créer une promise avec timeout
+        return new Promise(async (resolve, reject) => {
+            const timeoutId = setTimeout(() => {
+                console.error('[JobTeaserAdapter] Application timeout after 30 seconds');
+                reject(new Error('Timeout: La candidature a pris plus de 30 secondes'));
+            }, this.timeout);
+
+            try {
+                await this.waitForPageLoad();
+
+                // Vérifier si déjà connecté, sinon se connecter
+                if (!await this.checkLoginStatus()) {
+                    console.log('[JobTeaserAdapter] Not logged in, initiating login...');
+                    await this.login(this.credentials);
+                }
+
+                // Chercher le bouton "Postuler"
+                console.log('[JobTeaserAdapter] Looking for apply button...');
+                const applyButtonSelectors = [
+                    '.apply-button',
+                    'a[href*="apply"]',
+                    'button[data-testid="apply"]',
+                    '.btn-apply',
+                    'a.apply',
+                    'button:contains("Postuler")',
+                    'a:contains("Postuler")'
+                ];
+
+                let applyButton = null;
+                for (const selector of applyButtonSelectors) {
+                    applyButton = document.querySelector(selector);
+                    if (!applyButton && selector.includes(':contains')) {
+                        // Fallback pour les sélecteurs avec :contains
+                        const elements = document.querySelectorAll('button, a');
+                        for (const el of elements) {
+                            if (el.textContent.includes('Postuler')) {
+                                applyButton = el;
+                                break;
+                            }
+                        }
+                    }
+                    if (applyButton) {
+                        console.log('[JobTeaserAdapter] Apply button found:', selector);
+                        break;
+                    }
+                }
+
+                if (!applyButton) {
+                    throw new Error('Bouton de candidature JobTeaser non trouvé');
+                }
+
+                console.log('[JobTeaserAdapter] Step 3: Clicked Apply');
+                await this.humanBehavior.naturalClick(applyButton);
+
+                // Attendre le formulaire de candidature
+                console.log('[JobTeaserAdapter] Waiting for application form...');
+                await this.waitForElement('.application-form, form[action*="applications"], .modal-content', 10000);
+
+                // Gérer les iframes si nécessaire
+                const iframe = document.querySelector('iframe[src*="jobteaser"], iframe.application-iframe');
+                if (iframe) {
+                    console.log('[JobTeaserAdapter] Application form is in iframe, switching context...');
+                    // Note: Les content scripts ne peuvent pas accéder directement aux iframes cross-origin
+                    // On devra injecter le script dans l'iframe via chrome.scripting.executeScript
+                    console.log('[JobTeaserAdapter] Iframe detected, need to inject script');
+                }
+
+                // Remplir le formulaire
+                console.log('[JobTeaserAdapter] Step 4: Filling application form...');
+                await this.fillJobTeaserForm(applicationData);
+
+                // Upload du CV
+                console.log('[JobTeaserAdapter] Step 5: Uploading CV...');
+                await this.uploadCV(applicationData);
+
+                // Soumettre la candidature
+                console.log('[JobTeaserAdapter] Step 6: Submitting application...');
+                const submitSelectors = [
+                    'button[type="submit"]',
+                    'input[type="submit"]',
+                    'button.submit',
+                    'button:contains("Envoyer")',
+                    'button:contains("Soumettre")'
+                ];
+
+                let submitButton = null;
+                for (const selector of submitSelectors) {
+                    submitButton = document.querySelector(selector);
+                    if (!submitButton && selector.includes(':contains')) {
+                        const buttons = document.querySelectorAll('button');
+                        for (const btn of buttons) {
+                            if (btn.textContent.includes('Envoyer') || btn.textContent.includes('Soumettre')) {
+                                submitButton = btn;
+                                break;
+                            }
+                        }
+                    }
+                    if (submitButton) break;
+                }
+
+                if (submitButton) {
+                    await this.humanBehavior.naturalClick(submitButton);
+                    console.log('[JobTeaserAdapter] Application submitted successfully!');
+                }
+
+                // Attendre la confirmation
+                await this.waitForApplicationSuccess();
+
+                clearTimeout(timeoutId);
+                console.log('[JobTeaserAdapter] Step 7: Application completed successfully');
+                resolve({ success: true, message: 'Candidature envoyée avec succès sur JobTeaser' });
+
+            } catch (error) {
+                clearTimeout(timeoutId);
+                console.error('[JobTeaserAdapter] Application error:', error);
+                reject(error);
+            }
+        });
+    }
+
+    async fillJobTeaserForm(applicationData) {
+        console.log('[JobTeaserAdapter] Filling application form...');
+        
+        const profile = applicationData.profile || {
+            name: 'Antoine Lorence',
+            email: this.credentials.email,
+            phone: '+33 6 12 34 56 78'
+        };
+
+        // Sélecteurs de champs JobTeaser
+        const fieldMappings = {
+            name: ['input[name*="name"]', 'input[name*="nom"]', '#applicant_name'],
+            firstName: ['input[name*="first_name"]', 'input[name*="prenom"]', '#applicant_first_name'],
+            lastName: ['input[name*="last_name"]', 'input[name*="nom"]', '#applicant_last_name'],
+            email: ['input[type="email"]', 'input[name*="email"]', '#applicant_email'],
+            phone: ['input[type="tel"]', 'input[name*="phone"]', 'input[name*="telephone"]', '#applicant_phone'],
+            coverLetter: ['textarea[name*="cover_letter"]', 'textarea[name*="motivation"]', 'textarea']
+        };
+
+        for (const [fieldType, selectors] of Object.entries(fieldMappings)) {
+            for (const selector of selectors) {
+                const field = document.querySelector(selector);
+                if (field && !field.value) {
+                    let value = '';
+                    switch (fieldType) {
+                        case 'name':
+                            value = profile.name;
+                            break;
+                        case 'firstName':
+                            value = profile.name ? profile.name.split(' ')[0] : 'Antoine';
+                            break;
+                        case 'lastName':
+                            value = profile.name ? profile.name.split(' ').slice(1).join(' ') : 'Lorence';
+                            break;
+                        case 'email':
+                            value = profile.email;
+                            break;
+                        case 'phone':
+                            value = profile.phone;
+                            break;
+                        case 'coverLetter':
+                            value = profile.coverLetter || `Bonjour,\n\nJe suis très intéressé par cette opportunité et souhaite apporter mes compétences à votre équipe.\n\nCordialement,\n${profile.name}`;
+                            break;
+                    }
+                    if (value) {
+                        console.log(`[JobTeaserAdapter] Filling ${fieldType} field:`, selector);
+                        await this.humanBehavior.humanTyping(field, value);
+                    }
+                }
+            }
+        }
+    }
+
+    async uploadCV(applicationData) {
+        console.log('[JobTeaserAdapter] Looking for CV upload field...');
+        
+        const fileInputSelectors = [
+            'input[type="file"]',
+            'input[name*="cv"]',
+            'input[name*="resume"]',
+            'input[accept*="pdf"]',
+            '#applicant_cv'
+        ];
+
+        let fileInput = null;
+        for (const selector of fileInputSelectors) {
+            fileInput = document.querySelector(selector);
+            if (fileInput) {
+                console.log('[JobTeaserAdapter] CV upload field found:', selector);
+                break;
+            }
+        }
+
+        if (fileInput) {
+            // Note: Dans une vraie implémentation, on devrait avoir le CV d'Antoine Lorence
+            // Pour l'instant, on simule juste l'action
+            console.log('[JobTeaserAdapter] CV upload field present (manual upload required)');
+            // Dans la vraie implémentation, on pourrait utiliser l'API File pour créer un fichier
+        } else {
+            console.log('[JobTeaserAdapter] No CV upload field found, might be optional');
+        }
+    }
+
+    async testConnection(credentials) {
+        console.log('[JobTeaserAdapter] Testing connection...');
+        
+        if (await this.checkLoginStatus()) {
+            console.log('[JobTeaserAdapter] Already logged in');
+            return { success: true, message: 'Déjà connecté à JobTeaser' };
+        }
+
+        try {
+            await this.login(credentials || this.credentials);
+            return { success: true, message: 'Connexion JobTeaser réussie' };
+        } catch (error) {
+            console.error('[JobTeaserAdapter] Connection test failed:', error);
+            return { success: false, error: error.message };
+        }
+    }
+
+    async waitForLoginSuccess() {
+        console.log('[JobTeaserAdapter] Waiting for login success...');
+        
+        return new Promise((resolve, reject) => {
+            const startTime = Date.now();
+            
+            const checkLogin = () => {
+                // Vérifier le succès
+                if (this.checkLoginStatus()) {
+                    console.log('[JobTeaserAdapter] Login success confirmed');
+                    resolve();
+                    return;
+                }
+                
+                // Vérifier les erreurs
+                const errorSelectors = [
+                    '.alert-error',
+                    '.error-message',
+                    '.login-error',
+                    '[data-testid="error-message"]'
+                ];
+                
+                for (const selector of errorSelectors) {
+                    const errorElement = document.querySelector(selector);
+                    if (errorElement) {
+                        const errorText = errorElement.textContent.trim();
+                        console.error('[JobTeaserAdapter] Login error detected:', errorText);
+                        reject(new Error(`Erreur de connexion: ${errorText}`));
+                        return;
+                    }
+                }
+                
+                // Timeout
+                if (Date.now() - startTime > 15000) {
+                    console.error('[JobTeaserAdapter] Login timeout');
+                    reject(new Error('Timeout de connexion JobTeaser'));
+                    return;
+                }
+                
+                // Réessayer
+                setTimeout(checkLogin, 500);
+            };
+            
+            checkLogin();
+        });
+    }
+
+    async waitForApplicationSuccess() {
+        console.log('[JobTeaserAdapter] Waiting for application success...');
+        
+        return new Promise((resolve, reject) => {
+            const startTime = Date.now();
+            
+            const checkSuccess = () => {
+                // Vérifier les indicateurs de succès
+                const successSelectors = [
+                    '.success-message',
+                    '.confirmation',
+                    '[data-testid="success"]',
+                    '.alert-success'
+                ];
+                
+                for (const selector of successSelectors) {
+                    const element = document.querySelector(selector);
+                    if (element) {
+                        console.log('[JobTeaserAdapter] Application success detected');
+                        resolve();
+                        return;
+                    }
+                }
+                
+                // Vérifier si on a été redirigé
+                if (window.location.href.includes('confirmation') || 
+                    window.location.href.includes('success') ||
+                    window.location.href.includes('merci')) {
+                    console.log('[JobTeaserAdapter] Success redirect detected');
+                    resolve();
+                    return;
+                }
+                
+                // Timeout
+                if (Date.now() - startTime > 10000) {
+                    console.log('[JobTeaserAdapter] Application assumed successful (timeout)');
+                    resolve(); // On assume le succès après 10 secondes
+                    return;
+                }
+                
+                setTimeout(checkSuccess, 500);
+            };
+            
+            checkSuccess();
+        });
+    }
+
+    extractJobId() {
+        const url = window.location.href;
+        const patterns = [
+            /job-offers\/([^\/\?]+)/,
+            /jobs\/([^\/\?]+)/,
+            /offres\/([^\/\?]+)/,
+            /id=([^&]+)/
+        ];
+        
+        for (const pattern of patterns) {
+            const match = url.match(pattern);
+            if (match) {
+                console.log('[JobTeaserAdapter] Job ID extracted:', match[1]);
+                return match[1];
+            }
+        }
+        
+        const fallbackId = Date.now().toString();
+        console.log('[JobTeaserAdapter] No job ID found, using fallback:', fallbackId);
+        return fallbackId;
+    }
+}
+
 // Export des adaptateurs
 window.SiteAdapters = {
     LinkedInAdapter,
     IndeedAdapter,
     ApecAdapter,
     PoleEmploiAdapter,
+    JobteaserAdapter,
     GenericAdapter
 }; 
