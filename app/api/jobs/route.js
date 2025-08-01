@@ -28,9 +28,10 @@ export async function GET(request) {
   const publicationDate = searchParams.get('publicationDate') || '';
   const hasCV = searchParams.get('hasCV') === 'true';
   const userId = searchParams.get('userId');
+  const sortBy = searchParams.get('sortBy') || 'date';
 
   console.log('🔍 API Debug - Connexion PostgreSQL pour récupérer les offres unifiées');
-  console.log('🔍 API Debug - Paramètres:', { page, limit, location, radius, searchQuery, contractType, minSalary, skills, remoteOnly, newJobsOnly, source, hasCV, userId });
+  console.log('🔍 API Debug - Paramètres:', { page, limit, location, radius, searchQuery, contractType, minSalary, skills, remoteOnly, newJobsOnly, source, hasCV, userId, sortBy });
 
   try {
     // Construction de la requête SQL pour la base unifiée
@@ -170,8 +171,62 @@ export async function GET(request) {
       }
     }
 
-    // Tri par date de publication (plus récent en premier)
-    query += ` ORDER BY published_at DESC`;
+    // Logique de tri
+    switch (sortBy) {
+      case 'date':
+        query += ` ORDER BY published_at DESC NULLS LAST`;
+        break;
+      case 'date_asc':
+        query += ` ORDER BY published_at ASC NULLS LAST`;
+        break;
+      case 'salary_desc':
+        query += ` ORDER BY CASE 
+          WHEN salary IS NULL OR salary = '' OR LOWER(salary) LIKE '%negociable%' THEN 0
+          ELSE CAST(
+            REGEXP_REPLACE(
+              REGEXP_REPLACE(
+                REGEXP_REPLACE(
+                  SPLIT_PART(salary, '-', 2),
+                  '[^0-9]', '', 'g'
+                ),
+                'k$', '000', 'i'
+              ),
+              'K$', '000', 'i'
+            ) AS INTEGER
+          )
+        END DESC NULLS LAST, published_at DESC`;
+        break;
+      case 'salary_asc':
+        query += ` ORDER BY CASE 
+          WHEN salary IS NULL OR salary = '' OR LOWER(salary) LIKE '%negociable%' THEN 999999999
+          ELSE CAST(
+            REGEXP_REPLACE(
+              REGEXP_REPLACE(
+                REGEXP_REPLACE(
+                  SPLIT_PART(salary, '-', 1),
+                  '[^0-9]', '', 'g'
+                ),
+                'k$', '000', 'i'
+              ),
+              'K$', '000', 'i'
+            ) AS INTEGER
+          )
+        END ASC NULLS LAST, published_at DESC`;
+        break;
+      case 'company':
+        query += ` ORDER BY LOWER(company) ASC NULLS LAST, published_at DESC`;
+        break;
+      case 'location':
+        query += ` ORDER BY LOWER(location) ASC NULLS LAST, published_at DESC`;
+        break;
+      case 'match':
+        // Pour le tri par compatibilité, on garde l'ordre actuel si hasCV est true
+        // car les résultats sont déjà triés par matchPercentage dans le code plus bas
+        query += ` ORDER BY published_at DESC NULLS LAST`;
+        break;
+      default:
+        query += ` ORDER BY published_at DESC NULLS LAST`;
+    }
 
     // Pagination
     const offset = (page - 1) * limit;

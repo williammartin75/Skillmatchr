@@ -25,7 +25,8 @@ export default function Jobs() {
     skills: "",
     remoteOnly: false,
     newJobsOnly: false,
-    publicationDate: "" // Nouveau filtre de date de publication
+    publicationDate: "", // Nouveau filtre de date de publication
+    sortBy: "date" // Nouveau filtre de tri
   });
   const [isInitialLoad, setIsInitialLoad] = useState(true);
   const [locationSuggestions, setLocationSuggestions] = useState([]);
@@ -249,7 +250,8 @@ export default function Jobs() {
       skills: "",
       remoteOnly: false,
       newJobsOnly: false,
-      publicationDate: ""
+      publicationDate: "",
+      sortBy: "date"
     });
     setLocationSuggestions([]);
     setShowLocationSuggestions(false);
@@ -445,26 +447,47 @@ export default function Jobs() {
                 )}
               </div>
 
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Type de contrat</label>
-                <select 
+              {/* Type de contrat */}
+              <div className="bg-white rounded-lg shadow-sm p-4">
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Type de contrat
+                </label>
+                <select
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
                   value={filters.contractType}
                   onChange={(e) => setFilters(prev => ({ ...prev, contractType: e.target.value }))}
                 >
-                  <option value="">Tous les contrats</option>
-                  <option value="cdi">CDI</option>
-                  <option value="cdd / temporaire">CDD / Temporaire</option>
-                  <option value="alternance">Alternance</option>
-                  <option value="stage">Stage</option>
-                  <option value="freelance">Freelance</option>
-                  <option value="autres">Autres</option>
-                  <option value="temps partiel">Temps partiel</option>
-                  <option value="vie">VIE</option>
-                  <option value="bénévolat / service civique">Bénévolat / Service civique</option>
-                  <option value="graduate program">Graduate program</option>
+                  <option value="">Tous les types</option>
+                  <option value="CDI">CDI</option>
+                  <option value="CDD">CDD</option>
+                  <option value="Intérim">Intérim</option>
+                  <option value="Stage">Stage</option>
+                  <option value="Alternance">Alternance</option>
+                  <option value="Freelance">Freelance</option>
                 </select>
               </div>
+
+              {/* Tri des résultats */}
+              <div className="bg-white rounded-lg shadow-sm p-4">
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Trier par
+                </label>
+                <select
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                  value={filters.sortBy}
+                  onChange={(e) => setFilters(prev => ({ ...prev, sortBy: e.target.value }))}
+                >
+                  <option value="date">Date (plus récent)</option>
+                  <option value="date_asc">Date (plus ancien)</option>
+                  <option value="salary_desc">Salaire (décroissant)</option>
+                  <option value="salary_asc">Salaire (croissant)</option>
+                  <option value="company">Entreprise (A-Z)</option>
+                  <option value="location">Localisation (A-Z)</option>
+                  {hasCV && <option value="match">Compatibilité CV</option>}
+                </select>
+              </div>
+
+              {/* Source */}
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">Source</label>
                 <select 
