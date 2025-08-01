@@ -8,6 +8,7 @@ export default function LettreMotivationChecker() {
   const [uploadedFile, setUploadedFile] = useState(null);
   const [lettreAnalysis, setLettreAnalysis] = useState(null);
   const [error, setError] = useState(null);
+  const [extractedText, setExtractedText] = useState(null);
   const fileInputRef = useRef(null);
 
   // Données par défaut pour l'analyse
@@ -83,6 +84,7 @@ export default function LettreMotivationChecker() {
         type: file.type
       });
       setLettreAnalysis(data.analysis);
+      setExtractedText(data.extractedText); // Récupérer le texte extrait
 
     } catch (error) {
       console.error('Erreur upload:', error);
@@ -116,6 +118,10 @@ export default function LettreMotivationChecker() {
     setUploadedFile(null);
     setLettreAnalysis(null);
     setError(null);
+    setExtractedText(null);
+    if (fileInputRef.current) {
+      fileInputRef.current.value = '';
+    }
   };
 
   return (
@@ -349,6 +355,24 @@ export default function LettreMotivationChecker() {
                 ))}
               </div>
             </div>
+
+            {/* Extracted Text Section */}
+            {extractedText && (
+              <div className="bg-white rounded-lg shadow p-6">
+                <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center">
+                  <svg className="w-5 h-5 text-gray-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                  </svg>
+                  Texte extrait de votre lettre
+                </h3>
+                <div className="bg-gray-50 rounded-lg p-4 max-h-96 overflow-y-auto">
+                  <pre className="whitespace-pre-wrap text-sm text-gray-700 font-mono">{extractedText}</pre>
+                </div>
+                <p className="text-xs text-gray-500 mt-2">
+                  Le texte ci-dessus a été extrait automatiquement de votre lettre de motivation.
+                </p>
+              </div>
+            )}
           </div>
 
           {/* Sidebar */}

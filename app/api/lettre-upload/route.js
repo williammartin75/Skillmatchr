@@ -235,23 +235,46 @@ function analyzeLettreContent(text, file, buffer) {
 
 // Fonction d'extraction de texte depuis un fichier
 async function extractTextFromFile(file, buffer) {
-  if (file.type === 'text/plain') {
-    return new TextDecoder().decode(buffer);
+  try {
+    if (file.type === 'text/plain') {
+      return buffer.toString('utf-8');
+    } else if (file.type === 'application/pdf') {
+      // Extraction PDF
+      try {
+        const pdfParse = (await import('pdf-parse')).default;
+        const result = await pdfParse(buffer);
+        
+        if (result.text && result.text.trim().length > 0) {
+          console.log('Extraction PDF réussie avec pdf-parse');
+          return result.text;
+        }
+      } catch (pdfParseError) {
+        console.error('Erreur pdf-parse:', pdfParseError.message);
+        // Fallback - retourner un texte par défaut
+        return `Lettre de motivation ${file.name} - PDF détecté mais extraction échouée. Veuillez utiliser un fichier TXT ou DOCX pour une meilleure analyse.`;
+      }
+    } else if (file.type === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' || 
+               file.type === 'application/msword') {
+      // Extraction Word
+      try {
+        const mammoth = (await import('mammoth')).default;
+        const result = await mammoth.extractRawText({ buffer });
+        return result.value || 'Contenu Word extrait mais vide';
+      } catch (wordError) {
+        console.error('Erreur extraction Word:', wordError.message);
+        return `Lettre de motivation ${file.name} - Document Word détecté mais extraction échouée: ${wordError.message}`;
+      }
+    } else {
+      // Fallback pour les autres formats
+      return `Lettre de motivation de ${file.name} - Format non supporté. 
+      Veuillez utiliser PDF, DOC, DOCX ou TXT pour une meilleure analyse.`;
+    }
+  } catch (error) {
+    console.error('Erreur extraction texte générale:', error);
+    // Fallback en cas d'erreur
+    return `Lettre de motivation ${file.name} - Erreur d'extraction: ${error.message}. 
+    Veuillez vérifier le format du fichier.`;
   }
-  
-  if (file.type === 'application/pdf') {
-    // Pour les PDF, on simule l'extraction de texte
-    // En production, vous utiliseriez une bibliothèque comme pdf-parse
-    return "Texte extrait du PDF - simulation pour la démo";
-  }
-  
-  if (file.type === 'application/msword' || file.type === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document') {
-    // Pour les documents Word, on simule l'extraction de texte
-    // En production, vous utiliseriez une bibliothèque comme mammoth
-    return "Texte extrait du document Word - simulation pour la démo";
-  }
-  
-  throw new Error('Format de fichier non supporté');
 }
 
 export async function POST(request) {
@@ -302,6 +325,7 @@ export async function POST(request) {
     return NextResponse.json({
       success: true,
       analysis: analysis,
+      extractedText: text,
       fileInfo: {
         name: file.name,
         size: file.size,
