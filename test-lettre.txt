@@ -1,0 +1,12 @@
+Madame, Monsieur,
+
+Actuellement à la recherche d'un emploi de développeur web fullstack, je me permets de vous adresser ma candidature pour le poste que vous proposez au sein de votre entreprise.
+
+Passionné par le développement web depuis plusieurs années, j'ai acquis une solide expérience dans les technologies modernes telles que React, Node.js et MongoDB. Au cours de mes précédentes missions, j'ai eu l'opportunité de travailler sur des projets variés qui m'ont permis de développer mes compétences techniques tout en cultivant mon sens du travail en équipe.
+
+Votre entreprise représente pour moi une réelle opportunité de mettre mes compétences au service de projets innovants. Je suis particulièrement intéressé par vos initiatives en matière de transformation digitale et je suis convaincu que mon profil technique et ma motivation pourraient apporter une réelle valeur ajoutée à votre équipe.
+
+Je me tiens à votre disposition pour un entretien au cours duquel je pourrai vous exposer plus en détail mes motivations et mes compétences. Dans l'attente de votre retour, je vous prie d'agréer, Madame, Monsieur, l'expression de mes salutations distinguées.
+
+Cordialement,
+Jean Dupont
