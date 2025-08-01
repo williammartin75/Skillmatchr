@@ -447,7 +447,37 @@ export default function CVChecker() {
                     </h3>
                     <div className="bg-white border border-gray-200 rounded-lg p-4 max-h-96 overflow-y-auto">
                       <pre className="text-sm text-gray-800 whitespace-pre-wrap font-mono">
-                        {extractedText}
+                        {(() => {
+                          // Nettoyer et valider le texte avant affichage
+                          let cleanText = extractedText;
+                          
+                          // Détecter si le texte contient des données binaires
+                          const hasBinaryData = cleanText.includes('endstream') || 
+                                              cleanText.includes('endobj') ||
+                                              cleanText.match(/[\x00-\x08\x0B-\x0C\x0E-\x1F]/) ||
+                                              (cleanText.includes('PDF') && cleanText.match(/[^\x20-\x7E\n\r\t]/g)?.length > cleanText.length * 0.1);
+                          
+                          if (hasBinaryData) {
+                            return "❌ Le contenu extrait semble être corrompu ou binaire.\n\nLe PDF n'a pas pu être correctement analysé. Veuillez essayer avec un autre format.";
+                          }
+                          
+                          // Si le texte commence par [Extraction PDF échouée], l'afficher tel quel
+                          if (cleanText.startsWith('[Extraction PDF échouée]') || cleanText.startsWith('[Erreur d\'extraction]')) {
+                            return cleanText;
+                          }
+                          
+                          // Nettoyer les caractères Unicode problématiques
+                          cleanText = cleanText
+                            .replace(/[﴾﴿]/g, (match) => match === '﴾' ? '(' : ')')
+                            .replace(/[–—‐]/g, '-')
+                            .replace(/[\u2018\u2019]/g, "'")
+                            .replace(/[\u201C\u201D]/g, '"')
+                            .replace(/\u00A0/g, ' ')
+                            .replace(/[\u200B\u200C\u200D\uFEFF]/g, '')
+                            .trim();
+                          
+                          return cleanText || "Aucun texte n'a pu être extrait de ce document.";
+                        })()}
                       </pre>
                     </div>
                     <p className="text-xs text-gray-500 mt-2">
