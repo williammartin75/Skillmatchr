@@ -29,7 +29,18 @@ export default function Home() {
   const [termsAccepted, setTermsAccepted] = useState(false);
   const fileInputRef = useRef(null);
 
-  // Fonction pour extraire les informations du CV
+  // Import dynamique de notre fonction d'extraction améliorée
+  const [extractCvTextSimpleFunc, setExtractCvTextSimpleFunc] = useState(null);
+  
+  useEffect(() => {
+    // Charger la fonction d'extraction au montage du composant
+    import('./lib/extractCvText.js').then(module => {
+      setExtractCvTextSimpleFunc(() => module.extractCvTextSimple);
+    }).catch(err => {
+      console.error("Erreur lors du chargement de extractCvText:", err);
+    });
+  }, []);
+
   // Fonction pour extraire le PDF côté client
   const extractPDFText = async (file) => {
     if (file.type !== 'application/pdf') {
@@ -38,6 +49,18 @@ export default function Home() {
 
     try {
       console.log("📄 Extraction PDF côté client...");
+      
+      // Utiliser notre fonction d'extraction améliorée si disponible
+      if (extractCvTextSimpleFunc) {
+        console.log("🚀 Utilisation de la fonction d'extraction améliorée");
+        const fullText = await extractCvTextSimpleFunc(file);
+        console.log("✅ Extraction PDF réussie avec fonction améliorée");
+        console.log("📝 Texte extrait (premiers 500 caractères):", fullText.substring(0, 500));
+        return fullText;
+      }
+      
+      // Fallback sur l'ancienne méthode si la nouvelle n'est pas chargée
+      console.log("⚠️ Fallback sur l'ancienne méthode d'extraction");
       
       // Importer pdfjs-dist dynamiquement
       const pdfjsLib = await import('pdfjs-dist');
