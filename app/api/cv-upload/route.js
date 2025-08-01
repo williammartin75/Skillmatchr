@@ -526,88 +526,378 @@ function analyzeCVContent(text, file, buffer) {
   };
 }
 
+// Fonction de nettoyage et structuration du texte - Version finale
+function cleanAndStructureText(rawText) {
+  // Nettoyer les caractères spéciaux invisibles
+  let cleanedText = rawText
+    // Remplacer les espaces insécables et autres caractères invisibles
+    .replace(/\xa0/g, ' ')
+    .replace(/\u00A0/g, ' ')
+    .replace(/\u200B/g, '') // zero-width space
+    .replace(/\u2028/g, '\n') // line separator
+    .replace(/\u2029/g, '\n\n') // paragraph separator
+    // Nettoyer les tirets spéciaux
+    .replace(/[\u2010\u2011\u2012\u2013\u2014\u2015]/g, '-') // tous les tirets Unicode
+    .replace(/‐/g, '-') // tiret spécifique trouvé dans le CV
+    // Remplacer les parenthèses spéciales
+    .replace(/﴾/g, '(')
+    .replace(/﴿/g, ')')
+    // Nettoyer les puces
+    .replace(/\u2022/g, '▪') // bullet point
+    .replace(/\u2019/g, "'") // apostrophe
+    .replace(/[\u201C\u201D]/g, '"') // guillemets
+    // Nettoyer les espaces avant ponctuation
+    .replace(/\s+([,;:!?])/g, '$1')
+    // Ajouter espace après deux-points
+    .replace(/([:])\s*/g, '$1 ')
+    // Réduire les espaces multiples
+    .replace(/[ \t]+/g, ' ')
+    // Préserver les retours à la ligne pour les listes
+    .replace(/\n\s*▪/g, '\n▪')
+    .trim();
+
+  // Séparer en lignes tout en préservant la structure
+  let lines = cleanedText.split('\n');
+  
+  // Joindre les lignes coupées (qui ne commencent pas par une majuscule, puce ou chiffre)
+  let joinedLines = [];
+  for (let i = 0; i < lines.length; i++) {
+    const currentLine = lines[i].trim();
+    const nextLine = i + 1 < lines.length ? lines[i + 1].trim() : '';
+    
+    // Si la ligne suivante ne commence pas par une majuscule, puce, chiffre ou n'est pas vide
+    // et que la ligne actuelle ne se termine pas par un point, on joint
+    if (currentLine && 
+        nextLine && 
+        !nextLine.match(/^[A-Z▪\-\d]/) && 
+        !currentLine.endsWith('.') &&
+        !currentLine.endsWith(':') &&
+        currentLine.length > 10) {
+      joinedLines.push(currentLine + ' ' + nextLine);
+      i++; // Skip next line since we joined it
+    } else {
+      joinedLines.push(currentLine);
+    }
+  }
+  lines = joinedLines;
+  
+  // Structure pour organiser le CV
+  let cvData = {
+    header: [],
+    experiences: [],
+    competences: [],
+    formation: [],
+    langues: []
+  };
+  
+  let i = 0;
+  
+  // Phase 1: Extraire le header (nom et infos de contact)
+  while (i < lines.length && i < 15) {
+    const line = lines[i].trim();
+    
+    if (!line) {
+      i++;
+      continue;
+    }
+    
+    // Détecter le nom (pattern: Prénom NOM)
+    if (line.match(/^[A-Z][a-z]+\s+[A-Z]+$/)) {
+      cvData.header.push(line);
+      i++;
+      continue;
+    }
+    
+    // Détecter les infos de contact
+    if (line.match(/^Téléphone/i)) {
+      const match = line.match(/^Téléphone\s*(.+)/i);
+      cvData.header.push(`Téléphone : ${match ? match[1] : line.substring(9)}`);
+      i++;
+      continue;
+    }
+    
+    if (line.match(/^Courriel/i)) {
+      const match = line.match(/^Courriel\s*(.+)/i);
+      cvData.header.push(`Courriel : ${match ? match[1] : line.substring(8)}`);
+      i++;
+      continue;
+    }
+    
+    if (line.match(/^Adresse/i)) {
+      const match = line.match(/^Adresse\s*(.+)/i);
+      cvData.header.push(`Adresse : ${match ? match[1] : line.substring(7)}`);
+      // Vérifier si la ligne suivante est le code postal
+      if (i + 1 < lines.length && lines[i + 1].trim().match(/^\d{5}\s+[A-Z]/)) {
+        i++;
+        cvData.header.push(lines[i].trim());
+      }
+      i++;
+      continue;
+    }
+    
+    // Si on trouve une entreprise ou une section, on sort du header
+    if (line.match(/^[A-Z][A-Z\s]+\s+(Développeur|Ingénieur|Formateur)/) ||
+        line === 'EXPÉRIENCES' || line === 'EXPERIENCE') {
+      break;
+    }
+    
+    i++;
+  }
+  
+  // Phase 2: Identifier et extraire chaque section
+  let sections = {
+    experiences: { keywords: ['EXPÉRIENCES', 'EXPERIENCE'], content: [] },
+    competences: { keywords: ['COMPÉTENCES', 'SKILLS'], content: [] },
+    formation: { keywords: ['FORMATION', 'EDUCATION'], content: [] },
+    langues: { keywords: ['LANGUES', 'LANGUAGES'], content: [] }
+  };
+  
+  let currentSection = null;
+  let currentContent = [];
+  
+  for (; i < lines.length; i++) {
+    const line = lines[i].trim();
+    if (!line) continue;
+    
+    // Vérifier si c'est un titre de section
+    let newSection = null;
+    for (const [key, section] of Object.entries(sections)) {
+      if (section.keywords.includes(line)) {
+        newSection = key;
+        break;
+      }
+    }
+    
+    if (newSection) {
+      // Sauvegarder le contenu de la section précédente
+      if (currentSection && currentContent.length > 0) {
+        if (currentSection === 'experiences') {
+          // Pour les expériences, on les a déjà organisées
+          sections[currentSection].content = sections[currentSection].content.concat(currentContent);
+        } else {
+          sections[currentSection].content = currentContent;
+        }
+        currentContent = [];
+      }
+      currentSection = newSection;
+    } else if (currentSection) {
+      // Ajouter le contenu à la section courante
+      if (currentSection === 'experiences') {
+        // Détecter une nouvelle expérience
+        const expMatch = line.match(/^([A-Z][A-Z\s&:,]+?)\s+(Développeur|Ingénieur|Formateur|Chef).*?(\d{4})/);
+        if (expMatch) {
+          if (currentContent.length > 0) {
+            sections.experiences.content.push(currentContent);
+            currentContent = [];
+          }
+          currentContent.push(`**${line}**`);
+        } else {
+          currentContent.push(line);
+        }
+      } else {
+        currentContent.push(line);
+      }
+    } else if (!currentSection) {
+      // Avant la première section, chercher les expériences
+      const expMatch = line.match(/^([A-Z][A-Z\s&:,]+?)\s+(Développeur|Ingénieur|Formateur|Chef).*?(\d{4})/);
+      if (expMatch) {
+        if (currentContent.length > 0) {
+          sections.experiences.content.push(currentContent);
+          currentContent = [];
+        }
+        currentContent.push(`**${line}**`);
+      } else {
+        currentContent.push(line);
+      }
+    }
+  }
+  
+  // Sauvegarder le dernier contenu
+  if (currentSection && currentContent.length > 0) {
+    if (currentSection === 'experiences') {
+      sections[currentSection].content.push(currentContent);
+    } else {
+      sections[currentSection].content = currentContent;
+    }
+  } else if (!currentSection && currentContent.length > 0) {
+    // Si pas de section définie, c'est probablement des expériences
+    sections.experiences.content.push(currentContent);
+  }
+  
+  // Phase 3: Construire le texte final structuré
+  let finalText = '';
+  
+  // Header
+  if (cvData.header.length > 0) {
+    finalText += cvData.header.join('  \n') + '\n\n';
+  }
+  
+  // Expériences
+  if (sections.experiences.content.length > 0) {
+    finalText += '---\n\n**EXPÉRIENCES**\n\n';
+    sections.experiences.content.forEach((exp, index) => {
+      if (Array.isArray(exp)) {
+        finalText += exp.join('  \n') + '\n\n';
+      } else {
+        finalText += exp + '\n\n';
+      }
+    });
+  }
+  
+  // Compétences
+  if (sections.competences.content.length > 0) {
+    finalText += '---\n\n**COMPÉTENCES**  \n';
+    sections.competences.content.forEach(line => {
+      finalText += line + '  \n';
+    });
+    finalText += '\n';
+  }
+  
+  // Formation
+  if (sections.formation.content.length > 0) {
+    finalText += '---\n\n**FORMATION**  \n';
+    sections.formation.content.forEach(line => {
+      finalText += line + '  \n';
+    });
+    finalText += '\n';
+  }
+  
+  // Langues
+  if (sections.langues.content.length > 0) {
+    finalText += '---\n\n**LANGUES**  \n';
+    sections.langues.content.forEach(line => {
+      finalText += line + '  \n';
+    });
+    finalText += '\n';
+  }
+  
+  // Nettoyage final
+  finalText = finalText
+    // Supprimer les lignes vides excessives
+    .replace(/\n{4,}/g, '\n\n\n')
+    // Supprimer les espaces en fin de ligne sauf les doubles espaces markdown
+    .replace(/ {3,}$/gm, '  ')
+    .trim();
+  
+  return finalText;
+}
+
 // Fonction d'extraction de texte optimisée avec gestion d'erreurs robuste
 async function extractTextFromFile(file, buffer) {
   try {
+    let rawText = '';
+    
     if (file.type === 'text/plain') {
-      return buffer.toString('utf-8');
+      rawText = buffer.toString('utf-8');
     } else if (file.type === 'application/pdf') {
-      // Extraction PDF avec méthode simplifiée et compatible
+      // Extraction PDF améliorée
       try {
-        // Méthode 1: pdf-parse avec configuration minimale
+        const pdfParse = (await import('pdf-parse')).default;
+        
+        // Options pour améliorer l'extraction
+        const options = {
+          pagerender: function(pageData) {
+            // Fonction personnalisée pour extraire le texte page par page
+            let render_options = {
+              normalizeWhitespace: false,
+              disableCombineTextItems: false
+            };
+            
+            return pageData.getTextContent(render_options)
+              .then(function(textContent) {
+                let text = '';
+                let lastY = null;
+                
+                // Reconstruire le texte en préservant la mise en page
+                for (let item of textContent.items) {
+                  // Détecter les sauts de ligne basés sur la position Y
+                  if (lastY !== null && Math.abs(lastY - item.transform[5]) > 5) {
+                    text += '\n';
+                  }
+                  text += item.str;
+                  lastY = item.transform[5];
+                }
+                
+                return text;
+              });
+          }
+        };
+        
+        const result = await pdfParse(buffer, options);
+        
+        if (result.text && result.text.trim().length > 0) {
+          console.log('Extraction PDF réussie avec pdf-parse amélioré');
+          rawText = result.text;
+        } else {
+          // Fallback sur extraction basique
+          const basicResult = await pdfParse(buffer);
+          rawText = basicResult.text || '';
+        }
+      } catch (pdfError) {
+        console.error('Erreur extraction PDF:', pdfError.message);
+        
+        // Tentative de fallback avec pdftotext si disponible
         try {
-          const pdfParse = (await import('pdf-parse')).default;
-          const result = await pdfParse(buffer);
+          const tempFile = path.join(os.tmpdir(), `cv_${Date.now()}.pdf`);
+          await fs.promises.writeFile(tempFile, buffer);
           
-          if (result.text && result.text.trim().length > 0) {
-            console.log('Extraction PDF réussie avec pdf-parse');
-            return result.text;
+          const { stdout, stderr } = await execAsync(`pdftotext -layout "${tempFile}" -`);
+          await fs.promises.unlink(tempFile);
+          
+          if (stdout && stdout.trim().length > 0) {
+            console.log('Extraction PDF réussie avec pdftotext');
+            rawText = stdout;
           }
-        } catch (pdfParseError) {
-          console.error('Erreur pdf-parse:', pdfParseError.message);
+        } catch (pdftotextError) {
+          console.error('pdftotext non disponible ou erreur:', pdftotextError.message);
         }
         
-        // Méthode 2: Lecture buffer brut comme fallback
-        try {
-          const bufferString = buffer.toString('utf8');
-          if (bufferString.includes('Antoine') || bufferString.includes('Lorence')) {
-            console.log('Contenu trouvé dans le buffer brut');
-            return bufferString;
-          }
-        } catch (bufferError) {
-          console.error('Erreur lecture buffer:', bufferError.message);
+        if (!rawText) {
+          return `Erreur d'extraction PDF: ${pdfError.message}\n\nMerci d'utiliser un fichier PDF avec du texte sélectionnable (non scanné).`;
         }
-        
-        // Si aucune méthode n'a fonctionné, essayer de lire le buffer directement
-        try {
-          const bufferString = buffer.toString('utf8');
-          if (bufferString.includes('Antoine') || bufferString.includes('Lorence')) {
-            console.log('Contenu trouvé dans le buffer brut');
-            return bufferString;
-          }
-        } catch (bufferError) {
-          console.error('Erreur lecture buffer:', bufferError.message);
-        }
-        
-        // Si aucune méthode n'a fonctionné
-        console.log('Aucune méthode d\'extraction PDF n\'a fonctionné');
-        return `CV ${file.name} - PDF détecté mais extraction échouée.
-
-INSTRUCTIONS POUR ANALYSER CE CV :
-1. Ouvrez le PDF dans un éditeur de texte ou Word
-2. Copiez tout le contenu texte
-3. Collez dans un fichier .txt et uploadez-le
-4. Ou convertissez le PDF en format .doc/.docx
-
-ALTERNATIVE :
-- Utilisez un outil en ligne pour convertir PDF en texte
-- Ou scannez le PDF avec un OCR si c'est une image`;
-        
-      } catch (error) {
-        console.error('Erreur extraction PDF générale:', error.message);
-        return `CV ${file.name} - Erreur d'extraction PDF: ${error.message}`;
       }
     } else if (file.type === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' || 
                file.type === 'application/msword') {
-      // Extraction réelle des documents Word
+      // Extraction Word améliorée
       try {
         const mammoth = (await import('mammoth')).default;
-        const result = await mammoth.extractRawText({ buffer });
-        return result.value || 'Contenu Word extrait mais vide';
+        const result = await mammoth.extractRawText({ 
+          buffer,
+          convertImage: mammoth.images.imgElement(function(image) {
+            return image.read("base64").then(function(imageBuffer) {
+              return {
+                src: "data:" + image.contentType + ";base64," + imageBuffer
+              };
+            });
+          })
+        });
+        
+        rawText = result.value || '';
+        
+        if (result.messages && result.messages.length > 0) {
+          console.log('Messages Mammoth:', result.messages);
+        }
       } catch (wordError) {
         console.error('Erreur extraction Word:', wordError.message);
-        return `CV ${file.name} - Document Word détecté mais extraction échouée: ${wordError.message}`;
+        return `Erreur d'extraction Word: ${wordError.message}`;
       }
     } else {
-      // Fallback pour les autres formats
-      return `CV de ${file.name} - Format non supporté. 
-      Veuillez utiliser PDF, DOC, DOCX ou TXT pour une meilleure analyse.`;
+      return 'Type de fichier non supporté. Utilisez PDF, DOCX, DOC ou TXT.';
     }
+    
+    // Appliquer le nettoyage et la structuration
+    const structuredText = cleanAndStructureText(rawText);
+    
+    // Vérifier que le texte extrait n'est pas vide
+    if (!structuredText || structuredText.trim().length < 50) {
+      return `Le fichier semble vide ou contient très peu de texte. Assurez-vous que le document contient du texte sélectionnable.`;
+    }
+    
+    return structuredText;
+    
   } catch (error) {
-    console.error('Erreur extraction texte générale:', error);
-    // Fallback en cas d'erreur
-    return `CV ${file.name} - Erreur d'extraction: ${error.message}. 
-    Veuillez vérifier le format du fichier.`;
+    console.error('Erreur extraction générale:', error);
+    return `Erreur lors de l'extraction du texte: ${error.message}`;
   }
 }
 
