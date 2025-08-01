@@ -212,7 +212,7 @@ async function calculateJobMatches(cvAnalysis) {
     console.log('🎯 Calcul des scores de matching...');
     
     // D'abord récupérer le nombre total de jobs
-    const firstResponse = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3006'}/api/jobs?limit=1`);
+    const firstResponse = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3001'}/api/jobs?limit=1`);
     const firstData = await firstResponse.json();
     const totalJobs = firstData.pagination?.total || 0;
     
@@ -230,7 +230,7 @@ async function calculateJobMatches(cvAnalysis) {
     
     for (let page = 1; page <= totalPages; page++) {
       console.log(`📥 Récupération lot ${page}/${totalPages}...`);
-      const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3006'}/api/jobs?page=${page}&limit=${batchSize}`);
+      const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3001'}/api/jobs?page=${page}&limit=${batchSize}`);
       const data = await response.json();
       
       if (data.jobs && data.jobs.length > 0) {

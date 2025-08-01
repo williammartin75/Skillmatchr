@@ -7,7 +7,7 @@ async function testMatchingAPI() {
   try {
     // D'abord, récupérer le nombre total d'offres dans la base
     console.log('📊 Étape 1: Vérification du nombre total d\'offres...');
-    const jobsResponse = await fetch('http://localhost:3000/api/jobs?limit=1');
+    const jobsResponse = await fetch('http://localhost:3001/api/jobs?limit=1');
     const jobsData = await jobsResponse.json();
     const totalJobs = jobsData.pagination?.total || 0;
     console.log(`✅ Total d'offres dans la base: ${totalJobs}\n`);
@@ -82,7 +82,7 @@ Localisation: Paris`,
     console.log('🎯 Étape 2: Appel de l\'API de matching...');
     const startTime = Date.now();
     
-    const matchingResponse = await fetch('http://localhost:3000/api/matching', {
+    const matchingResponse = await fetch('http://localhost:3001/api/matching', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
