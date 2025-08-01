@@ -8,7 +8,10 @@
     "activeTab",
     "storage",
     "scripting",
-    "notifications"
+    "notifications",
+    "proxy",
+    "webRequest",
+    "webRequestBlocking"
   ],
   
   "host_permissions": [

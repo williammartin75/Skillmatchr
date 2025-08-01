@@ -1119,6 +1119,94 @@ class JobteaserAdapter extends BaseSiteAdapter {
             failed: 0,
             failureReasons: []
         };
+        
+        // Configuration des proxies (même liste que les scrapers)
+        this.proxyList = [
+            // Proxies européens
+            { host: '156.228.189.249', port: 3129 },
+            { host: '156.253.168.60', port: 3129 },
+            { host: '154.213.198.102', port: 3129 },
+            { host: '154.213.194.7', port: 3129 },
+            { host: '154.213.193.184', port: 3129 },
+            { host: '154.213.203.97', port: 3129 },
+            { host: '154.213.166.162', port: 3129 },
+            { host: '154.94.15.55', port: 3129 },
+            { host: '156.228.179.246', port: 3129 },
+            { host: '156.253.178.191', port: 3129 }
+        ];
+        this.currentProxyIndex = 0;
+        
+        // User agents variés pour éviter la détection
+        this.userAgents = [
+            'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+            'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36',
+            'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:121.0) Gecko/20100101 Firefox/121.0',
+            'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+            'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.1 Safari/605.1.15'
+        ];
+        
+        // Activer le proxy au démarrage
+        this.setupProxy();
+    }
+
+    // Configuration du proxy Chrome
+    async setupProxy() {
+        console.log('🌐 [DEBUG] Configuration du proxy');
+        
+        // Vérifier si l'API chrome.proxy est disponible
+        if (typeof chrome !== 'undefined' && chrome.proxy) {
+            const proxy = this.getNextProxy();
+            const config = {
+                mode: "fixed_servers",
+                rules: {
+                    singleProxy: {
+                        scheme: "http",
+                        host: proxy.host,
+                        port: proxy.port
+                    },
+                    bypassList: ["localhost", "127.0.0.1"]
+                }
+            };
+            
+            // Configuration du proxy
+            chrome.proxy.settings.set(
+                { value: config, scope: 'regular' },
+                () => {
+                    if (chrome.runtime.lastError) {
+                        console.error('❌ [DEBUG] Erreur configuration proxy:', chrome.runtime.lastError);
+                    } else {
+                        console.log(`✅ [DEBUG] Proxy configuré: ${proxy.host}:${proxy.port}`);
+                    }
+                }
+            );
+        } else {
+            console.warn('⚠️ [DEBUG] API chrome.proxy non disponible');
+        }
+        
+        // Changer le User-Agent
+        this.changeUserAgent();
+    }
+    
+    // Obtenir le prochain proxy de la liste
+    getNextProxy() {
+        const proxy = this.proxyList[this.currentProxyIndex % this.proxyList.length];
+        this.currentProxyIndex++;
+        console.log(`🌐 [DEBUG] Proxy sélectionné: ${proxy.host}:${proxy.port}`);
+        return proxy;
+    }
+    
+    // Changer le User-Agent
+    changeUserAgent() {
+        const userAgent = this.userAgents[Math.floor(Math.random() * this.userAgents.length)];
+        console.log(`🔄 [DEBUG] User-Agent: ${userAgent}`);
+        
+        // Note: Changer le User-Agent nécessite l'API webRequest dans le background script
+        if (typeof chrome !== 'undefined' && chrome.runtime) {
+            chrome.runtime.sendMessage({
+                action: 'changeUserAgent',
+                userAgent: userAgent
+            });
+        }
     }
 
     async detectJob() {

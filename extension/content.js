@@ -39,6 +39,10 @@ class JobDetector {
             console.log('✅ [DEBUG] Site Pôle Emploi détecté');
             return 'poleemploi';
         }
+        if (hostname.includes('jobteaser.com')) {
+            console.log('✅ [DEBUG] Site Jobteaser détecté');
+            return 'jobteaser';
+        }
         
         console.log('⚠️ [DEBUG] Site inconnu détecté:', hostname);
         return 'unknown';

@@ -425,6 +425,51 @@ setInterval(async () => {
     }
 }, 24 * 60 * 60 * 1000); // Toutes les 24 heures
 
+// Gestion du User-Agent dynamique pour les requêtes vers Jobteaser
+let currentUserAgent = '';
+
+// Écouter les demandes de changement de User-Agent
+chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+    if (request.action === 'changeUserAgent') {
+        currentUserAgent = request.userAgent;
+        console.log('🔄 [BACKGROUND] User-Agent mis à jour:', currentUserAgent);
+        sendResponse({ success: true });
+    }
+});
+
+// Intercepter les requêtes HTTP pour modifier le User-Agent
+if (chrome.webRequest && chrome.webRequest.onBeforeSendHeaders) {
+    chrome.webRequest.onBeforeSendHeaders.addListener(
+        (details) => {
+            if (currentUserAgent) {
+                let headers = details.requestHeaders;
+                let userAgentFound = false;
+                
+                for (let i = 0; i < headers.length; i++) {
+                    if (headers[i].name.toLowerCase() === 'user-agent') {
+                        headers[i].value = currentUserAgent;
+                        userAgentFound = true;
+                        break;
+                    }
+                }
+                
+                // Si pas de User-Agent trouvé, l'ajouter
+                if (!userAgentFound) {
+                    headers.push({
+                        name: 'User-Agent',
+                        value: currentUserAgent
+                    });
+                }
+                
+                return { requestHeaders: headers };
+            }
+            return { requestHeaders: details.requestHeaders };
+        },
+        { urls: ["https://*.jobteaser.com/*"] },
+        ["blocking", "requestHeaders"]
+    );
+}
+
 // Export pour les tests
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = {
