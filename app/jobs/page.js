@@ -25,7 +25,8 @@ export default function Jobs() {
     skills: "",
     remoteOnly: false,
     newJobsOnly: false,
-    publicationDate: "" // Nouveau filtre de date de publication
+    publicationDate: "", // Nouveau filtre de date de publication
+    sortBy: "date" // Nouveau filtre de tri
   });
   const [isInitialLoad, setIsInitialLoad] = useState(true);
   const [locationSuggestions, setLocationSuggestions] = useState([]);
@@ -249,7 +250,8 @@ export default function Jobs() {
       skills: "",
       remoteOnly: false,
       newJobsOnly: false,
-      publicationDate: ""
+      publicationDate: "",
+      sortBy: "date"
     });
     setLocationSuggestions([]);
     setShowLocationSuggestions(false);
@@ -445,26 +447,48 @@ export default function Jobs() {
                 )}
               </div>
 
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Type de contrat</label>
-                <select 
+              {/* Type de contrat */}
+              <div className="bg-white rounded-lg shadow-sm p-4">
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Type de contrat
+                </label>
+                <select
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
                   value={filters.contractType}
                   onChange={(e) => setFilters(prev => ({ ...prev, contractType: e.target.value }))}
                 >
-                  <option value="">Tous les contrats</option>
-                  <option value="cdi">CDI</option>
-                  <option value="cdd / temporaire">CDD / Temporaire</option>
-                  <option value="alternance">Alternance</option>
-                  <option value="stage">Stage</option>
-                  <option value="freelance">Freelance</option>
-                  <option value="autres">Autres</option>
-                  <option value="temps partiel">Temps partiel</option>
-                  <option value="vie">VIE</option>
-                  <option value="bénévolat / service civique">Bénévolat / Service civique</option>
-                  <option value="graduate program">Graduate program</option>
+                  <option value="">Tous les types</option>
+                  <option value="CDI">CDI</option>
+                  <option value="CDD">CDD</option>
+                  <option value="Intérim">Intérim</option>
+                  <option value="Stage">Stage</option>
+                  <option value="Alternance">Alternance</option>
+                  <option value="Freelance">Freelance</option>
                 </select>
               </div>
+
+              {/* Tri des résultats */}
+              <div className="bg-white rounded-lg shadow-sm p-4">
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Trier par
+                </label>
+                <select
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                  value={filters.sortBy}
+                  onChange={(e) => setFilters(prev => ({ ...prev, sortBy: e.target.value }))}
+                >
+                  <option value="date">Date (plus récent)</option>
+                  <option value="date_asc">Date (plus ancien)</option>
+                  <option value="salary_desc">Salaire (décroissant)</option>
+                  <option value="salary_asc">Salaire (croissant)</option>
+                  <option value="company">Entreprise (A-Z)</option>
+                  <option value="location">Localisation (A-Z)</option>
+                  {filters.location && filters.radius > 0 && <option value="distance">Distance (plus proche)</option>}
+                  {hasCV && <option value="match">Compatibilité CV</option>}
+                </select>
+              </div>
+
+              {/* Source */}
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">Source</label>
                 <select 
@@ -757,7 +781,14 @@ export default function Jobs() {
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                           </svg>
-                          {job.location}
+                          <span>
+                            {job.location}
+                            {job.distance !== undefined && job.distance !== null && (
+                              <span className="text-indigo-600 font-medium ml-1">
+                                ({job.distance} km)
+                              </span>
+                            )}
+                          </span>
                         </div>
                         <div className="flex items-center">
                           <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
