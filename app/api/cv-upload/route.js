@@ -547,45 +547,64 @@ async function extractTextFromFile(file, buffer) {
           console.error('Erreur pdf-parse:', pdfParseError.message);
         }
         
-        // Méthode 2: Lecture buffer brut comme fallback
+        // Méthode 2: pdf-lib pour extraire métadonnées et formulaires
         try {
-          const bufferString = buffer.toString('utf8');
-          if (bufferString.includes('Antoine') || bufferString.includes('Lorence')) {
-            console.log('Contenu trouvé dans le buffer brut');
-            return bufferString;
+          const { PDFDocument } = await import('pdf-lib');
+          const pdfDoc = await PDFDocument.load(buffer, { ignoreEncryption: true });
+          
+          let extractedText = '';
+          
+          // Extraire les métadonnées
+          const title = pdfDoc.getTitle();
+          const author = pdfDoc.getAuthor();
+          const subject = pdfDoc.getSubject();
+          const keywords = pdfDoc.getKeywords();
+          
+          if (title) extractedText += `Titre: ${title}\n`;
+          if (author) extractedText += `Auteur: ${author}\n`;
+          if (subject) extractedText += `Sujet: ${subject}\n`;
+          if (keywords) extractedText += `Mots-clés: ${keywords}\n`;
+          
+          // Extraire les champs de formulaire
+          try {
+            const form = pdfDoc.getForm();
+            const fields = form.getFields();
+            
+            fields.forEach(field => {
+              const fieldName = field.getName();
+              let fieldValue = '';
+              
+              try {
+                if (field.constructor.name === 'PDFTextField') {
+                  fieldValue = field.getText() || '';
+                }
+                
+                if (fieldValue) {
+                  extractedText += `${fieldName}: ${fieldValue}\n`;
+                }
+              } catch (fieldError) {
+                console.error('Erreur lecture champ:', fieldError.message);
+              }
+            });
+          } catch (formError) {
+            console.error('Erreur lecture formulaire:', formError.message);
           }
-        } catch (bufferError) {
-          console.error('Erreur lecture buffer:', bufferError.message);
+          
+          if (extractedText.trim().length > 20) {
+            console.log('Extraction partielle réussie avec pdf-lib (métadonnées/formulaires)');
+            return extractedText;
+          }
+        } catch (pdfLibError) {
+          console.error('Erreur pdf-lib:', pdfLibError.message);
         }
         
-        // Si aucune méthode n'a fonctionné, essayer de lire le buffer directement
-        try {
-          const bufferString = buffer.toString('utf8');
-          if (bufferString.includes('Antoine') || bufferString.includes('Lorence')) {
-            console.log('Contenu trouvé dans le buffer brut');
-            return bufferString;
-          }
-        } catch (bufferError) {
-          console.error('Erreur lecture buffer:', bufferError.message);
-        }
-        
-        // Si aucune méthode n'a fonctionné
-        console.log('Aucune méthode d\'extraction PDF n\'a fonctionné');
-        return `CV ${file.name} - PDF détecté mais extraction échouée.
-
-INSTRUCTIONS POUR ANALYSER CE CV :
-1. Ouvrez le PDF dans un éditeur de texte ou Word
-2. Copiez tout le contenu texte
-3. Collez dans un fichier .txt et uploadez-le
-4. Ou convertissez le PDF en format .doc/.docx
-
-ALTERNATIVE :
-- Utilisez un outil en ligne pour convertir PDF en texte
-- Ou scannez le PDF avec un OCR si c'est une image`;
+        // Si toutes les méthodes échouent, retourner un message d'erreur clair
+        console.log('Extraction PDF échouée - le PDF pourrait être scanné ou protégé');
+        return `[Extraction PDF échouée]\n\nLe contenu de ce PDF n'a pas pu être extrait automatiquement.\n\nCela peut arriver si :\n- Le PDF est scanné (image au lieu de texte)\n- Le PDF est protégé ou corrompu\n- Le PDF utilise un encodage non standard\n\nVeuillez essayer de :\n1. Copier-coller manuellement le contenu du PDF dans un fichier texte\n2. Utiliser un autre format (DOCX, TXT)\n3. Convertir le PDF avec un outil en ligne`;
         
       } catch (error) {
-        console.error('Erreur extraction PDF générale:', error.message);
-        return `CV ${file.name} - Erreur d'extraction PDF: ${error.message}`;
+        console.error('Erreur lors de l\'extraction PDF:', error.message);
+        return `[Erreur d'extraction] ${file.name}: ${error.message}`;
       }
     } else if (file.type === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' || 
                file.type === 'application/msword') {

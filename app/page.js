@@ -29,54 +29,117 @@ export default function Home() {
   const [termsAccepted, setTermsAccepted] = useState(false);
   const fileInputRef = useRef(null);
 
-  // Fonction pour extraire les informations du CV
+  // Import dynamique de la fonction d'extraction robuste
+  const [extractPDFTextRobustFunc, setExtractPDFTextRobustFunc] = useState(null);
+  
+  useEffect(() => {
+    // Charger la fonction d'extraction robuste au montage du composant
+    import('./lib/robustPdfExtractor.js').then(module => {
+      setExtractPDFTextRobustFunc(() => module.extractPDFTextRobust);
+    }).catch(err => {
+      console.error("Erreur lors du chargement de robustPdfExtractor:", err);
+    });
+  }, []);
+  
+  // Fonction de nettoyage du texte
+  const cleanExtractedText = (text) => {
+    return text
+      .replace(/[﴾﴿]/g, (match) => match === '﴾' ? '(' : ')') // Parenthèses Unicode
+      .replace(/[–—‐]/g, '-') // Tirets Unicode
+      .replace(/[\u2018\u2019]/g, "'") // Apostrophes courbes
+      .replace(/[\u201C\u201D]/g, '"') // Guillemets courbes
+      .replace(/\u00A0/g, ' ') // Espaces insécables
+      .replace(/[\u200B\u200C\u200D\uFEFF]/g, '') // Caractères invisibles
+      .replace(/[•▪▫◦‣⁃]/g, '-') // Uniformiser les puces
+      .replace(/\n{3,}/g, '\n\n') // Supprimer les sauts de ligne excessifs
+      .replace(/\s{3,}/g, '  ') // Normaliser les espaces multiples
+      .trim();
+  };
+
   // Fonction pour extraire le PDF côté client
   const extractPDFText = async (file) => {
     if (file.type !== 'application/pdf') {
-      return null; // Pas un PDF
+      console.error("❌ Le fichier n'est pas un PDF");
+      return null;
     }
-
+    
     try {
       console.log("📄 Extraction PDF côté client...");
+      
+      // Utiliser la fonction d'extraction robuste si disponible
+      if (extractPDFTextRobustFunc) {
+        console.log("🚀 Utilisation de l'extraction robuste");
+        const extractedText = await extractPDFTextRobustFunc(file);
+        
+        if (extractedText) {
+          console.log("✅ Extraction PDF réussie avec la méthode robuste");
+          console.log("📝 Texte extrait (premiers 500 caractères):", extractedText.substring(0, 500));
+          return extractedText;
+        } else {
+          console.log("⚠️ L'extraction robuste n'a pas pu extraire de texte");
+        }
+      }
+      
+      // Fallback sur l'ancienne méthode si la robuste n'est pas disponible ou a échoué
+      console.log("⚠️ Fallback sur l'ancienne méthode d'extraction");
       
       // Importer pdfjs-dist dynamiquement
       const pdfjsLib = await import('pdfjs-dist');
       
-      // Configurer le worker pour éviter l'erreur
-      if (typeof window !== 'undefined') {
-        // Essayer d'abord avec le CDN
-        try {
-          pdfjsLib.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.js`;
-        } catch (e) {
-          // Si le CDN ne fonctionne pas, désactiver le worker
-          pdfjsLib.GlobalWorkerOptions.workerSrc = false;
-        }
-      }
+      // Configurer le worker
+      pdfjsLib.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.js`;
       
-      // Lire le fichier comme ArrayBuffer
+      // Charger le fichier PDF
       const arrayBuffer = await file.arrayBuffer();
-      
-      // Charger le PDF
-      const loadingTask = pdfjsLib.getDocument({
-        data: arrayBuffer,
-        verbosity: 0
-      });
+      const loadingTask = pdfjsLib.getDocument(arrayBuffer);
       
       const pdf = await loadingTask.promise;
       let fullText = '';
+      let hasExtractedText = false;
       
       // Extraire le texte de chaque page
       for (let i = 1; i <= pdf.numPages; i++) {
         const page = await pdf.getPage(i);
         const textContent = await page.getTextContent();
-        const pageText = textContent.items.map(item => item.str).join(' ');
-        fullText += pageText + '\n';
+        
+        // Vérifier si nous avons réellement extrait du texte
+        if (textContent.items && textContent.items.length > 0) {
+          const pageText = textContent.items
+            .map(item => item.str)
+            .filter(str => str && str.trim().length > 0)
+            .join(' ');
+          
+          if (pageText.trim()) {
+            fullText += pageText + '\n';
+            hasExtractedText = true;
+          }
+        }
       }
       
-      console.log("✅ Extraction PDF réussie côté client");
-      console.log("📝 Texte extrait (premiers 500 caractères):", fullText.substring(0, 500));
+      // Vérifier si nous avons extrait du texte valide
+      if (!hasExtractedText || fullText.trim().length < 10) {
+        console.warn("⚠️ Aucun texte valide extrait du PDF. Le PDF pourrait être scanné ou protégé.");
+        
+        // Essayer de détecter si c'est du contenu binaire
+        if (fullText.includes('endstream') || fullText.includes('endobj') || 
+            fullText.match(/[\x00-\x08\x0B-\x0C\x0E-\x1F]/)) {
+          console.error("❌ Le contenu extrait semble être du code PDF binaire, pas du texte");
+          return null;
+        }
+      }
       
-      return fullText;
+      // Nettoyer le texte extrait seulement s'il est valide
+      if (hasExtractedText && fullText.trim().length > 0) {
+        fullText = cleanExtractedText(fullText);
+        
+        console.log("✅ Extraction PDF réussie côté client avec nettoyage");
+        console.log("📝 Texte extrait et nettoyé (premiers 500 caractères):", fullText.substring(0, 500));
+        
+        return fullText;
+      } else {
+        console.error("❌ Impossible d'extraire du texte du PDF");
+        return null;
+      }
     } catch (error) {
       console.error("❌ Erreur extraction PDF côté client:", error);
       return null;
@@ -389,9 +452,10 @@ export default function Home() {
                     {extractedInfo && (
                       <div className="bg-white p-3 rounded-lg border text-left w-full max-w-xs">
                         <p className="text-xs text-gray-500 mb-1">Informations détectées :</p>
-                        {extractedInfo.firstName && <p className="text-sm">Prénom: {extractedInfo.firstName}</p>}
-                        {extractedInfo.lastName && <p className="text-sm">Nom: {extractedInfo.lastName}</p>}
-                        {extractedInfo.email && <p className="text-sm">Email: {extractedInfo.email}</p>}
+                        {extractedInfo.firstName && <p className="text-sm font-mono">Prénom: {extractedInfo.firstName}</p>}
+                        {extractedInfo.lastName && <p className="text-sm font-mono">Nom: {extractedInfo.lastName}</p>}
+                        {extractedInfo.email && <p className="text-sm font-mono">Email: {extractedInfo.email}</p>}
+                        {extractedInfo.phone && <p className="text-sm font-mono">Téléphone: {extractedInfo.phone}</p>}
                       </div>
                     )}
                     <button 
