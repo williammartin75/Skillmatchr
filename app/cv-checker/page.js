@@ -11,6 +11,72 @@ export default function CVChecker() {
   const [extractedText, setExtractedText] = useState(null);
   const fileInputRef = useRef(null);
 
+  // Fonction pour extraire le PDF côté client
+  const extractPDFText = async (file) => {
+    if (file.type !== 'application/pdf') {
+      return null; // Pas un PDF
+    }
+
+    try {
+      console.log("📄 Extraction PDF côté client...");
+      
+      // Importer pdfjs-dist dynamiquement
+      const pdfjsLib = await import('pdfjs-dist');
+      
+      // Configurer le worker pour éviter l'erreur
+      if (typeof window !== 'undefined') {
+        // Essayer d'abord avec le CDN
+        try {
+          pdfjsLib.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.js`;
+        } catch (e) {
+          // Si le CDN ne fonctionne pas, désactiver le worker
+          pdfjsLib.GlobalWorkerOptions.workerSrc = false;
+        }
+      }
+      
+      // Lire le fichier comme ArrayBuffer
+      const arrayBuffer = await file.arrayBuffer();
+      
+      // Charger le PDF
+      const loadingTask = pdfjsLib.getDocument({
+        data: arrayBuffer,
+        verbosity: 0
+      });
+      
+      const pdf = await loadingTask.promise;
+      let fullText = '';
+      
+      // Extraire le texte de chaque page
+      for (let i = 1; i <= pdf.numPages; i++) {
+        const page = await pdf.getPage(i);
+        const textContent = await page.getTextContent();
+        
+        // Construire le texte de la page en préservant les espaces et retours à la ligne
+        let pageText = '';
+        let lastY = -1;
+        
+        textContent.items.forEach((item) => {
+          // Si on change de ligne (différence Y significative)
+          if (lastY !== -1 && Math.abs(item.transform[5] - lastY) > 5) {
+            pageText += '\n';
+          }
+          
+          // Ajouter le texte avec un espace
+          pageText += item.str + ' ';
+          lastY = item.transform[5];
+        });
+        
+        fullText += pageText + '\n\n';
+      }
+      
+      console.log("✅ Extraction PDF réussie côté client");
+      return fullText;
+    } catch (error) {
+      console.error("❌ Erreur extraction PDF côté client:", error);
+      return null;
+    }
+  };
+
   // Données par défaut pour l'analyse
   const defaultAnalysis = {
     score: 85,
@@ -73,14 +139,24 @@ export default function CVChecker() {
     try {
       const formData = new FormData();
       formData.append('cv', file);
+      
+      // Extraire le texte côté client si c'est un PDF
+      let extractedTextClient = null;
+      if (file.type === 'application/pdf') {
+        extractedTextClient = await extractPDFText(file);
+        if (extractedTextClient) {
+          formData.append('extractedText', extractedTextClient);
+          console.log("📤 Envoi du texte extrait côté client à l'API");
+        }
+      }
 
       const response = await fetch('/api/cv-upload', {
         method: 'POST',
-        body: formData,
+        body: formData
       });
 
       const data = await response.json();
-
+      
       if (!response.ok) {
         throw new Error(data.error || 'Erreur lors de l\'upload');
       }

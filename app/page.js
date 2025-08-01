@@ -69,8 +69,23 @@ export default function Home() {
       for (let i = 1; i <= pdf.numPages; i++) {
         const page = await pdf.getPage(i);
         const textContent = await page.getTextContent();
-        const pageText = textContent.items.map(item => item.str).join(' ');
-        fullText += pageText + '\n';
+        
+        // Construire le texte de la page en préservant les espaces et retours à la ligne
+        let pageText = '';
+        let lastY = -1;
+        
+        textContent.items.forEach((item) => {
+          // Si on change de ligne (différence Y significative)
+          if (lastY !== -1 && Math.abs(item.transform[5] - lastY) > 5) {
+            pageText += '\n';
+          }
+          
+          // Ajouter le texte avec un espace
+          pageText += item.str + ' ';
+          lastY = item.transform[5];
+        });
+        
+        fullText += pageText + '\n\n';
       }
       
       console.log("✅ Extraction PDF réussie côté client");
