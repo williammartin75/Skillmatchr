@@ -6,6 +6,7 @@ export default function Navbar({ currentPage = "home" }) {
     { href: "/jobs", label: "Offres", page: "jobs" },
     { href: "/skills", label: "Compétences", page: "skills" },
     { href: "/cv-checker", label: "CV Checker", page: "cv-checker" },
+    { href: "/motivation-checker", label: "Motivation Checker", page: "motivation-checker" },
     { href: "/lettre-motivation", label: "Lettre de Motivation", page: "lettre-motivation" },
     { href: "/dashboard", label: "Dashboard", page: "dashboard" },
     { href: "/profile", label: "Profil", page: "profile" },

@@ -29,6 +29,7 @@
     "cities-list": "^1.0.3",
     "critters": "^0.0.23",
     "csv-parser": "^3.2.0",
+    "docx": "^9.5.1",
     "https-proxy-agent": "^7.0.6",
     "lucide-react": "^0.292.0",
     "mammoth": "^1.9.1",
@@ -45,6 +46,7 @@
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "tailwindcss": "^3.3.0",
+    "uuid": "^11.1.0",
     "xlsx": "^0.18.5"
   }
 }
