@@ -90,6 +90,17 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
             });
             return true;
             
+        case 'apply-to-job':
+            // Nouveau gestionnaire spécifique pour JobTeaser
+            console.log('[Background] Received apply-to-job request:', request);
+            applyToJobTeaser(request.data).then(result => {
+                sendResponse({ success: true, result });
+            }).catch(error => {
+                console.error('[Background] Apply-to-job error:', error);
+                sendResponse({ success: false, error: error.message });
+            });
+            return true;
+            
         case 'saveJob':
             saveJob(request.data).then(result => {
                 sendResponse({ success: true, result });
@@ -428,11 +439,40 @@ setInterval(async () => {
 // Gestion du User-Agent dynamique pour les requêtes vers Jobteaser
 let currentUserAgent = '';
 
-// Écouter les demandes de changement de User-Agent
+// Écouter les demandes de changement de User-Agent et autres messages
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     if (request.action === 'changeUserAgent') {
         currentUserAgent = request.userAgent;
-        console.log('🔄 [BACKGROUND] User-Agent mis à jour:', currentUserAgent);
+        console.log('[Background] User-Agent mis à jour:', currentUserAgent);
+        sendResponse({ success: true });
+    }
+    
+    if (request.action === 'injectInAllFrames') {
+        // Injecter les scripts dans tous les frames
+        console.log('[Background] Injection des scripts dans tous les frames');
+        chrome.tabs.query({ active: true, currentWindow: true }, async (tabs) => {
+            if (tabs[0]) {
+                try {
+                    await chrome.scripting.executeScript({
+                        target: { tabId: tabs[0].id, allFrames: true },
+                        files: ['site-adapters.js', 'content.js']
+                    });
+                    console.log('[Background] Scripts injectés dans tous les frames');
+                } catch (error) {
+                    console.error('[Background] Erreur injection frames:', error);
+                }
+            }
+        });
+        sendResponse({ success: true });
+    }
+    
+    if (request.action === 'applicationComplete') {
+        // Notification de candidature terminée
+        console.log('[Background] Candidature terminée:', request);
+        sendNotification(
+            request.success ? 'Candidature réussie' : 'Candidature échouée',
+            `URL: ${request.url}\nStatistiques: ${request.stats?.successful || 0} réussies, ${request.stats?.failed || 0} échouées`
+        );
         sendResponse({ success: true });
     }
 });
@@ -470,6 +510,132 @@ if (chrome.webRequest && chrome.webRequest.onBeforeSendHeaders) {
     );
 }
 
+// Fonction spécifique pour JobTeaser avec timeout et gestion avancée
+async function applyToJobTeaser(data) {
+    console.log('[Background] Starting JobTeaser application process');
+    
+    const timeout = 30000; // 30 secondes max par offre
+    const startTime = Date.now();
+    
+    try {
+        // Vérifier l'URL
+        if (!data.url || !data.url.includes('jobteaser.com')) {
+            throw new Error('URL invalide ou non JobTeaser');
+        }
+        
+        // Obtenir l'onglet actif ou créer un nouvel onglet
+        const tabs = await chrome.tabs.query({ active: true, currentWindow: true });
+        let targetTab = tabs[0];
+        
+        // Si l'onglet actuel n'est pas JobTeaser, créer un nouvel onglet
+        if (!targetTab.url.includes('jobteaser.com')) {
+            targetTab = await chrome.tabs.create({ url: data.url, active: false });
+            await new Promise(resolve => setTimeout(resolve, 3000)); // Attendre le chargement
+        }
+        
+        // Injecter le content script sur tous les frames
+        console.log('[Background] Injecting content scripts into tab:', targetTab.id);
+        await chrome.scripting.executeScript({
+            target: { tabId: targetTab.id, allFrames: true },
+            files: ['site-adapters.js', 'content.js']
+        });
+        
+        // Créer une promesse avec timeout
+        const applicationPromise = new Promise(async (resolve, reject) => {
+            try {
+                // Envoyer le message au content script
+                const response = await chrome.tabs.sendMessage(targetTab.id, {
+                    action: 'navigateAndApply',
+                    data: {
+                        url: data.url,
+                        credentials: {
+                            jobteaser: {
+                                email: 'wawawawa1001100110011001@proton.me',
+                                password: 'Wawawawa1001100110011001'
+                            }
+                        },
+                        profile: {
+                            name: 'Lorence Antoine',
+                            email: 'lorence.antoine@email.com',
+                            phone: '0123456789',
+                            cv: `Lorence Antoine
+Développeur Full Stack
+
+Email: lorence.antoine@email.com
+Téléphone: 0123456789
+
+EXPERIENCE PROFESSIONNELLE
+Développeur JavaScript - Entreprise ABC (2020-2023)
+- Développement d'applications React et Node.js
+- Augmentation des performances de 25%
+- Gestion d'une équipe de 3 développeurs
+
+FORMATION
+Master en Informatique - Université XYZ (2018-2020)
+Licence en Mathématiques - Université ABC (2015-2018)
+
+COMPETENCES TECHNIQUES
+JavaScript, Python, Java, React, Angular, Vue, Node.js, SQL, Docker, Git
+
+PROJETS
+- Application e-commerce avec React (5000 utilisateurs)
+- API REST avec Node.js et Express
+- Base de données PostgreSQL optimisée`
+                        }
+                    }
+                });
+                
+                if (response && response.success) {
+                    console.log('[Background] Application successful:', response.result);
+                    resolve(response.result);
+                } else {
+                    reject(new Error(response?.error || 'Application failed'));
+                }
+            } catch (error) {
+                reject(error);
+            }
+        });
+        
+        // Créer une promesse de timeout
+        const timeoutPromise = new Promise((_, reject) => {
+            setTimeout(() => {
+                reject(new Error(`Timeout après ${timeout/1000} secondes`));
+            }, timeout);
+        });
+        
+        // Attendre la première qui se termine
+        const result = await Promise.race([applicationPromise, timeoutPromise]);
+        
+        const duration = Date.now() - startTime;
+        console.log(`[Background] Application completed in ${duration}ms`);
+        
+        // Ajouter à l'historique
+        await addToApplicationHistory({
+            url: data.url,
+            appliedAt: new Date().toISOString(),
+            status: 'success',
+            duration: duration
+        });
+        
+        return result;
+        
+    } catch (error) {
+        const duration = Date.now() - startTime;
+        console.error('[Background] JobTeaser application failed:', error);
+        
+        // Ajouter l'échec à l'historique
+        await addToApplicationHistory({
+            url: data.url,
+            appliedAt: new Date().toISOString(),
+            status: 'failed',
+            error: error.message,
+            duration: duration
+        });
+        
+        throw error;
+    }
+}
+
 // Export pour les tests
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = {
@@ -477,6 +643,7 @@ if (typeof module !== 'undefined' && module.exports) {
         extensionState,
         detectJobOffer,
         applyToJob,
+        applyToJobTeaser,
         saveJob,
         getApplicationHistory,
         addToApplicationHistory,

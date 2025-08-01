@@ -1149,9 +1149,9 @@ class JobteaserAdapter extends BaseSiteAdapter {
         this.setupProxy();
     }
 
-    // Configuration du proxy Chrome
+    // Configuration du proxy Chrome avec rotation
     async setupProxy() {
-        console.log('🌐 [DEBUG] Configuration du proxy');
+        console.log('[JobteaserAdapter] Configuration du proxy avec rotation');
         
         // Vérifier si l'API chrome.proxy est disponible
         if (typeof chrome !== 'undefined' && chrome.proxy) {
@@ -1173,18 +1173,18 @@ class JobteaserAdapter extends BaseSiteAdapter {
                 { value: config, scope: 'regular' },
                 () => {
                     if (chrome.runtime.lastError) {
-                        console.error('❌ [DEBUG] Erreur configuration proxy:', chrome.runtime.lastError);
+                        console.error('[JobteaserAdapter] Erreur configuration proxy:', chrome.runtime.lastError);
                     } else {
-                        console.log(`✅ [DEBUG] Proxy configuré: ${proxy.host}:${proxy.port}`);
+                        console.log(`[JobteaserAdapter] Proxy configuré: ${proxy.host}:${proxy.port}`);
                     }
                 }
             );
         } else {
-            console.warn('⚠️ [DEBUG] API chrome.proxy non disponible');
+            console.warn('[JobteaserAdapter] API chrome.proxy non disponible');
         }
         
-        // Changer le User-Agent
-        this.changeUserAgent();
+        // Changer le User-Agent pour chaque nouvelle page
+        await this.changeUserAgent();
     }
     
     // Obtenir le prochain proxy de la liste
@@ -1195,18 +1195,24 @@ class JobteaserAdapter extends BaseSiteAdapter {
         return proxy;
     }
     
-    // Changer le User-Agent
-    changeUserAgent() {
+    // Changer le User-Agent dynamiquement
+    async changeUserAgent() {
         const userAgent = this.userAgents[Math.floor(Math.random() * this.userAgents.length)];
-        console.log(`🔄 [DEBUG] User-Agent: ${userAgent}`);
+        console.log(`[JobteaserAdapter] Changement User-Agent: ${userAgent}`);
         
         // Note: Changer le User-Agent nécessite l'API webRequest dans le background script
         if (typeof chrome !== 'undefined' && chrome.runtime) {
-            chrome.runtime.sendMessage({
-                action: 'changeUserAgent',
-                userAgent: userAgent
-            });
+            try {
+                await chrome.runtime.sendMessage({
+                    action: 'changeUserAgent',
+                    userAgent: userAgent
+                });
+            } catch (error) {
+                console.error('[JobteaserAdapter] Erreur changement User-Agent:', error);
+            }
         }
+        
+        return userAgent;
     }
 
     async detectJob() {
@@ -1240,12 +1246,24 @@ class JobteaserAdapter extends BaseSiteAdapter {
     }
 
     async login(credentials = null) {
-        console.log('🔐 [DEBUG] Connexion Jobteaser');
+        console.log('[JobteaserAdapter] Step 1: Vérification du statut de connexion');
+        
+        // Vérifier si déjà connecté
+        if (await this.checkLoginStatus()) {
+            console.log('[JobteaserAdapter] Déjà connecté - Skip login');
+            return true;
+        }
+        
+        console.log('[JobteaserAdapter] Step 2: Début de la connexion');
         const creds = credentials || this.credentials;
         
         await this.waitForPageLoad();
         
+        // Rotation du proxy et user-agent avant connexion
+        await this.setupProxy();
+        
         // Chercher le bouton de connexion
+        console.log('[JobteaserAdapter] Step 3: Recherche du bouton de connexion');
         const loginButton = await this.waitForElement('a[href*="login"], button[data-testid="login"], .login-button, .btn-login');
         if (loginButton) {
             await this.humanBehavior.naturalClick(loginButton);
@@ -1253,9 +1271,11 @@ class JobteaserAdapter extends BaseSiteAdapter {
         }
 
         // Attendre le formulaire de connexion
+        console.log('[JobteaserAdapter] Step 4: Attente du formulaire');
         await this.waitForElement('form[action*="login"], #email, input[type="email"], input[name="email"]');
 
         // Remplir les identifiants
+        console.log('[JobteaserAdapter] Step 5: Remplissage des identifiants');
         const emailField = document.querySelector('input[type="email"], input[name="email"], #email');
         const passwordField = document.querySelector('input[type="password"], input[name="password"], #password');
 
@@ -1273,6 +1293,7 @@ class JobteaserAdapter extends BaseSiteAdapter {
         await this.humanBehavior.randomPause(500, 1000);
 
         // Soumettre le formulaire
+        console.log('[JobteaserAdapter] Step 6: Soumission du formulaire');
         const submitButton = document.querySelector('button[type="submit"], button[data-testid="login-submit"], .submit-button');
         if (submitButton) {
             await this.humanBehavior.naturalClick(submitButton);
@@ -1289,7 +1310,8 @@ class JobteaserAdapter extends BaseSiteAdapter {
             throw new Error('Échec de la connexion Jobteaser');
         }
 
-        console.log('✅ [DEBUG] Connexion Jobteaser réussie');
+        console.log('[JobteaserAdapter] Step 7: Connexion réussie');
+        return true;
     }
 
     async checkLoginStatus() {
@@ -1350,111 +1372,188 @@ PROJETS
     }
 
     async applyToJob(applicationData) {
-        console.log('📝 [DEBUG] Début de la candidature Jobteaser');
+        console.log('[JobteaserAdapter] Début de la candidature automatique');
+        
+        const startTime = Date.now();
+        const timeout = 30000; // 30 secondes
         
         try {
-            await this.waitForPageLoad();
-
-            // S'assurer d'être connecté
-            if (!await this.checkLoginStatus()) {
-                console.log('🔐 [DEBUG] Non connecté, tentative de connexion...');
-                await this.login();
-            }
-
-            // Charger le CV si pas déjà fait
-            if (!this.cvData) {
-                await this.loadCVFromServer();
-            }
-
-            // Chercher le bouton "Postuler"
-            const applyButtonSelectors = [
-                'button[data-testid="apply-button"]',
-                '.apply-button',
-                'button:contains("Postuler")',
-                'a:contains("Postuler")',
-                '.btn-apply',
-                'button.apply',
-                '[data-action="apply"]'
-            ];
-
-            let applyButton = null;
-            for (const selector of applyButtonSelectors) {
-                applyButton = document.querySelector(selector);
-                if (!applyButton && selector.includes(':contains')) {
-                    // Gérer le cas :contains
-                    const searchText = selector.match(/:contains\("(.+)"\)/)?.[1];
-                    if (searchText) {
-                        const buttons = document.querySelectorAll('button, a');
-                        applyButton = Array.from(buttons).find(btn => 
-                            btn.textContent.toLowerCase().includes(searchText.toLowerCase())
-                        );
-                    }
-                }
-                if (applyButton) break;
-            }
-
-            if (!applyButton) {
-                throw new Error('Bouton de candidature non trouvé');
-            }
-
-            console.log('✅ [DEBUG] Bouton de candidature trouvé, clic...');
-            await this.humanBehavior.naturalClick(applyButton);
-            await this.humanBehavior.randomPause(2000, 3000);
-
-            // Attendre le formulaire de candidature
-            await this.waitForElement('form, .application-form, [data-testid="application-form"]', 15000);
-
-            // Remplir le formulaire
-            await this.fillApplicationForm(applicationData);
-
-            // Soumettre la candidature
-            const submitButton = document.querySelector(
-                'button[type="submit"]:not([disabled])',
-                'button[data-testid="submit-application"]',
-                '.submit-application',
-                'button:contains("Envoyer")'
-            );
-
-            if (submitButton) {
-                console.log('📤 [DEBUG] Soumission de la candidature...');
-                await this.humanBehavior.naturalClick(submitButton);
-                await this.humanBehavior.randomPause(3000, 5000);
-                
-                // Vérifier le succès
-                const successIndicators = [
-                    '.success-message',
-                    '.application-success',
-                    '[data-testid="success-message"]',
-                    '.confirmation'
-                ];
-
-                let success = false;
-                for (const selector of successIndicators) {
-                    if (document.querySelector(selector)) {
-                        success = true;
-                        break;
-                    }
-                }
-
-                if (success || window.location.href.includes('success') || window.location.href.includes('confirmation')) {
-                    this.applicationStats.successful++;
-                    console.log('✅ [DEBUG] Candidature envoyée avec succès');
-                    return true;
-                } else {
-                    throw new Error('Confirmation de candidature non détectée');
-                }
-            } else {
-                throw new Error('Bouton de soumission non trouvé');
-            }
-
+            // Créer une promesse avec timeout
+            const applicationPromise = this._performApplication(applicationData);
+            const timeoutPromise = new Promise((_, reject) => {
+                setTimeout(() => reject(new Error('Timeout après 30 secondes')), timeout);
+            });
+            
+            // Attendre la première qui se termine
+            const result = await Promise.race([applicationPromise, timeoutPromise]);
+            
+            const duration = Date.now() - startTime;
+            console.log(`[JobteaserAdapter] Candidature terminée en ${duration}ms`);
+            
+            return result;
+            
         } catch (error) {
-            console.error('❌ [DEBUG] Erreur lors de la candidature:', error);
+            console.error('[JobteaserAdapter] Erreur lors de la candidature:', error);
             this.applicationStats.failed++;
             this.applicationStats.failureReasons.push({
                 url: window.location.href,
-                error: error.message
+                error: error.message,
+                duration: Date.now() - startTime
             });
             throw error;
+        }
+    }
+    
+    async _performApplication(applicationData) {
+        console.log('[JobteaserAdapter] Step 1: Préparation de la candidature');
+        
+        await this.waitForPageLoad();
+        
+        // Rotation du proxy et user-agent pour chaque candidature
+        await this.setupProxy();
+
+        // S'assurer d'être connecté
+        console.log('[JobteaserAdapter] Step 2: Vérification connexion');
+        if (!await this.checkLoginStatus()) {
+            console.log('[JobteaserAdapter] Non connecté, tentative de connexion...');
+            await this.login();
+        }
+
+        // Charger le CV si pas déjà fait
+        if (!this.cvData) {
+            await this.loadCVFromServer();
+        }
+
+        // Gérer les iframes ou redirections
+        console.log('[JobteaserAdapter] Step 3: Détection iframe/redirection');
+        await this.handleIframesAndRedirects();
+
+        // Chercher le bouton "Postuler"
+        console.log('[JobteaserAdapter] Step 4: Recherche bouton Postuler');
+        const applyButtonSelectors = [
+            'button[data-testid="apply-button"]',
+            '.apply-button',
+            'button:contains("Postuler")',
+            'a:contains("Postuler")',
+            '.btn-apply',
+            'button.apply',
+            '[data-action="apply"]'
+        ];
+
+        let applyButton = null;
+        for (const selector of applyButtonSelectors) {
+            applyButton = document.querySelector(selector);
+            if (!applyButton && selector.includes(':contains')) {
+                // Gérer le cas :contains
+                const searchText = selector.match(/:contains\("(.+)"\)/)?.[1];
+                if (searchText) {
+                    const buttons = document.querySelectorAll('button, a');
+                    applyButton = Array.from(buttons).find(btn => 
+                        btn.textContent.toLowerCase().includes(searchText.toLowerCase())
+                    );
+                }
+            }
+            if (applyButton) break;
+        }
+
+        if (!applyButton) {
+            throw new Error('Bouton de candidature non trouvé');
+        }
+
+        console.log('[JobteaserAdapter] Step 5: Clic sur le bouton Postuler');
+        await this.humanBehavior.naturalClick(applyButton);
+        await this.humanBehavior.randomPause(2000, 3000);
+
+        // Attendre le formulaire de candidature
+        console.log('[JobteaserAdapter] Step 6: Attente du formulaire');
+        await this.waitForElement('form, .application-form, [data-testid="application-form"]', 15000);
+
+        // Gérer à nouveau les iframes si nécessaire
+        await this.handleIframesAndRedirects();
+
+        // Remplir le formulaire
+        console.log('[JobteaserAdapter] Step 7: Remplissage du formulaire');
+        await this.fillApplicationForm(applicationData);
+
+        // Soumettre la candidature
+        console.log('[JobteaserAdapter] Step 8: Soumission de la candidature');
+        const submitButton = document.querySelector(
+            'button[type="submit"]:not([disabled])',
+            'button[data-testid="submit-application"]',
+            '.submit-application',
+            'button:contains("Envoyer")'
+        );
+
+        if (submitButton) {
+            await this.humanBehavior.naturalClick(submitButton);
+            await this.humanBehavior.randomPause(3000, 5000);
+            
+            // Vérifier le succès
+            console.log('[JobteaserAdapter] Step 9: Vérification du succès');
+            const successIndicators = [
+                '.success-message',
+                '.application-success',
+                '[data-testid="success-message"]',
+                '.confirmation'
+            ];
+
+            let success = false;
+            for (const selector of successIndicators) {
+                if (document.querySelector(selector)) {
+                    success = true;
+                    break;
+                }
+            }
+
+            if (success || window.location.href.includes('success') || window.location.href.includes('confirmation')) {
+                this.applicationStats.successful++;
+                console.log('[JobteaserAdapter] Step 10: Candidature envoyée avec succès!');
+                
+                // Envoyer le résultat au dashboard
+                if (chrome.runtime) {
+                    chrome.runtime.sendMessage({
+                        action: 'applicationComplete',
+                        success: true,
+                        url: window.location.href,
+                        stats: this.applicationStats
+                    });
+                }
+                
+                return { success: true, message: 'Candidature envoyée avec succès' };
+            } else {
+                throw new Error('Confirmation de candidature non détectée');
+            }
+        } else {
+            throw new Error('Bouton de soumission non trouvé');
+        }
+    }
+    
+    // Gestion des iframes et redirections
+    async handleIframesAndRedirects() {
+        console.log('[JobteaserAdapter] Vérification des iframes et redirections');
+        
+        // Vérifier si on est dans un iframe
+        if (window !== window.top) {
+            console.log('[JobteaserAdapter] Détecté dans un iframe');
+            // Injecter le script dans l'iframe parent si possible
+            if (chrome.runtime) {
+                chrome.runtime.sendMessage({
+                    action: 'injectInAllFrames'
+                });
+            }
+        }
+        
+        // Vérifier les iframes dans la page
+        const iframes = document.querySelectorAll('iframe');
+        if (iframes.length > 0) {
+            console.log(`[JobteaserAdapter] ${iframes.length} iframe(s) détecté(s)`);
+            // Les scripts seront injectés par background.js avec allFrames: true
+        }
+        
+        // Détecter les redirections
+        const currentUrl = window.location.href;
+        if (!currentUrl.includes('jobteaser.com') && currentUrl.includes('career') || currentUrl.includes('job')) {
+            console.log('[JobteaserAdapter] Redirection vers site entreprise détectée:', currentUrl);
         }
     }
 

@@ -89,12 +89,12 @@ class JobDetector {
                     return true;
                 
                 case 'navigateAndApply':
-                    console.log('🚀 [DEBUG] Navigation et candidature demandées');
+                    console.log('[Content] Navigation et candidature demandées');
                     this.navigateAndApply(request.data).then(result => {
-                        console.log('✅ [DEBUG] Navigation et candidature réussies:', result);
+                        console.log('[Content] Navigation et candidature réussies:', result);
                         sendResponse({ success: true, result });
                     }).catch(error => {
-                        console.error('❌ [DEBUG] Erreur lors de la navigation et candidature:', error);
+                        console.error('[Content] Erreur lors de la navigation et candidature:', error);
                         sendResponse({ success: false, error: error.message });
                     });
                     return true;
