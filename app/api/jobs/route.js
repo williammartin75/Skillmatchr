@@ -12,6 +12,43 @@ const pool = new Pool({
   ssl: false,
 });
 
+// Fonction pour calculer la distance entre deux points (formule de Haversine)
+function calculateDistance(lat1, lng1, lat2, lng2) {
+  const R = 6371; // Rayon de la Terre en km
+  const dLat = (lat2 - lat1) * Math.PI / 180;
+  const dLng = (lng2 - lng1) * Math.PI / 180;
+  const a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+            Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+            Math.sin(dLng/2) * Math.sin(dLng/2);
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+  return R * c;
+}
+
+// Cache pour les coordonnées des villes
+const cityCoordinatesCache = new Map();
+
+// Fonction pour obtenir les coordonnées d'une ville à partir de son nom
+async function getCityCoordinates(cityName) {
+  if (!cityName) return null;
+  
+  const normalizedName = cityName.toLowerCase().trim();
+  
+  // Vérifier le cache
+  if (cityCoordinatesCache.has(normalizedName)) {
+    return cityCoordinatesCache.get(normalizedName);
+  }
+  
+  // Chercher la ville
+  const city = await findCityByName(cityName);
+  if (city && city.lat && city.lng) {
+    const coordinates = { lat: city.lat, lng: city.lng };
+    cityCoordinatesCache.set(normalizedName, coordinates);
+    return coordinates;
+  }
+  
+  return null;
+}
+
 export async function GET(request) {
   const { searchParams } = new URL(request.url);
   const page = parseInt(searchParams.get('page')) || 1;
@@ -32,6 +69,8 @@ export async function GET(request) {
 
   console.log('🔍 API Debug - Connexion PostgreSQL pour récupérer les offres unifiées');
   console.log('🔍 API Debug - Paramètres:', { page, limit, location, radius, searchQuery, contractType, minSalary, skills, remoteOnly, newJobsOnly, source, hasCV, userId, sortBy });
+
+  let selectedCity = null; // Déclarer selectedCity au niveau de la fonction
 
   try {
     // Construction de la requête SQL pour la base unifiée
@@ -78,7 +117,7 @@ export async function GET(request) {
     if (location) {
       console.log(`📍 Recherche pour localisation: "${location}" avec rayon: ${radius} km`);
       
-      const selectedCity = await findCityByName(location);
+      selectedCity = await findCityByName(location); // Utiliser la variable déclarée plus haut
       console.log(`🏙️ Ville trouvée:`, selectedCity);
       
       if (selectedCity && radius > 0) {
@@ -219,6 +258,11 @@ export async function GET(request) {
       case 'location':
         query += ` ORDER BY LOWER(location) ASC NULLS LAST, published_at DESC`;
         break;
+      case 'distance':
+        // Pour le tri par distance, on le fera après avoir calculé les distances
+        // Donc on met un tri par défaut ici
+        query += ` ORDER BY published_at DESC NULLS LAST`;
+        break;
       case 'match':
         // Pour le tri par compatibilité, on garde l'ordre actuel si hasCV est true
         // car les résultats sont déjà triés par matchPercentage dans le code plus bas
@@ -242,8 +286,18 @@ export async function GET(request) {
     let jobs = result.rows;
     console.log(`🔍 API Debug - ${jobs.length} offres récupérées de la base unifiée`);
 
+    // Obtenir les coordonnées de la ville de recherche si elle est spécifiée
+    let searchCityCoordinates = null;
+    if (location && selectedCity && selectedCity.lat && selectedCity.lng) {
+      searchCityCoordinates = {
+        lat: selectedCity.lat,
+        lng: selectedCity.lng
+      };
+      console.log(`📍 Coordonnées de la ville de recherche (${location}):`, searchCityCoordinates);
+    }
+
     // Traitement des données récupérées
-    jobs = jobs.map(job => {
+    jobs = await Promise.all(jobs.map(async (job) => {
       // Gérer les compétences selon le format (string ou JSON)
       let skills = [];
       if (job.skills) {
@@ -287,6 +341,21 @@ export async function GET(request) {
             .replace(/</g, '<');
         }
       }
+
+      // Calculer la distance si on a une ville de recherche et les coordonnées
+      let distance = null;
+      if (searchCityCoordinates && job.location) {
+        const jobCityCoords = await getCityCoordinates(job.location);
+        if (jobCityCoords) {
+          distance = Math.round(calculateDistance(
+            searchCityCoordinates.lat,
+            searchCityCoordinates.lng,
+            jobCityCoords.lat,
+            jobCityCoords.lng
+          ));
+          console.log(`📏 Distance ${job.location} - ${location}: ${distance} km`);
+        }
+      }
       
       return {
         id: job.id,
@@ -294,6 +363,7 @@ export async function GET(request) {
         title: job.title,
         company: job.company,
         location: job.location,
+        distance: distance, // Ajouter la distance en km
         description: job.description,
         salary: formattedSalary,
         type: job.contract_type || 'Non spécifié',
@@ -305,7 +375,7 @@ export async function GET(request) {
         createdAt: job.created_at,
         updatedAt: job.updated_at
       };
-    });
+    }));
 
     // Ajouter le pourcentage de matching si un CV est disponible
     if (hasCV && userId) {
@@ -559,6 +629,26 @@ export async function GET(request) {
       console.log(`⏱️ Matching CV terminé en ${matchingDuration}ms`);
       console.log(`📊 Performance: ${(jobs.length / (matchingDuration / 1000)).toFixed(2)} offres/seconde`);
       console.log(`🎯 Scores de matching: ${jobs.slice(0, 5).map(job => `${job.title.substring(0, 30)}...: ${job.matchPercentage}%`).join(', ')}`);
+    }
+
+    // Appliquer le tri par distance si demandé
+    if (sortBy === 'distance' && searchCityCoordinates) {
+      console.log('📏 Tri par distance activé');
+      
+      // Filtrer les offres sans distance (null) et les mettre à la fin
+      const jobsWithDistance = jobs.filter(job => job.distance !== null);
+      const jobsWithoutDistance = jobs.filter(job => job.distance === null);
+      
+      // Trier les offres avec distance par ordre croissant (plus proche en premier)
+      jobsWithDistance.sort((a, b) => a.distance - b.distance);
+      
+      // Recombiner: d'abord celles avec distance, puis celles sans
+      jobs = [...jobsWithDistance, ...jobsWithoutDistance];
+      
+      console.log(`📏 Jobs triés par distance: ${jobsWithDistance.length} avec distance, ${jobsWithoutDistance.length} sans distance`);
+      if (jobsWithDistance.length > 0) {
+        console.log(`📏 Distances: ${jobsWithDistance.slice(0, 5).map(job => `${job.location}: ${job.distance}km`).join(', ')}`);
+      }
     }
 
     // Récupérer le nombre total d'offres pour la pagination

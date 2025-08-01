@@ -483,6 +483,7 @@ export default function Jobs() {
                   <option value="salary_asc">Salaire (croissant)</option>
                   <option value="company">Entreprise (A-Z)</option>
                   <option value="location">Localisation (A-Z)</option>
+                  {filters.location && filters.radius > 0 && <option value="distance">Distance (plus proche)</option>}
                   {hasCV && <option value="match">Compatibilité CV</option>}
                 </select>
               </div>
@@ -780,7 +781,14 @@ export default function Jobs() {
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                           </svg>
-                          {job.location}
+                          <span>
+                            {job.location}
+                            {job.distance !== undefined && job.distance !== null && (
+                              <span className="text-indigo-600 font-medium ml-1">
+                                ({job.distance} km)
+                              </span>
+                            )}
+                          </span>
                         </div>
                         <div className="flex items-center">
                           <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
