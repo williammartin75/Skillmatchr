@@ -412,9 +412,10 @@ export default function Home() {
                     {extractedInfo && (
                       <div className="bg-white p-3 rounded-lg border text-left w-full max-w-xs">
                         <p className="text-xs text-gray-500 mb-1">Informations détectées :</p>
-                        {extractedInfo.firstName && <p className="text-sm">Prénom: {extractedInfo.firstName}</p>}
-                        {extractedInfo.lastName && <p className="text-sm">Nom: {extractedInfo.lastName}</p>}
-                        {extractedInfo.email && <p className="text-sm">Email: {extractedInfo.email}</p>}
+                        {extractedInfo.firstName && <p className="text-sm font-mono">Prénom: {extractedInfo.firstName}</p>}
+                        {extractedInfo.lastName && <p className="text-sm font-mono">Nom: {extractedInfo.lastName}</p>}
+                        {extractedInfo.email && <p className="text-sm font-mono">Email: {extractedInfo.email}</p>}
+                        {extractedInfo.phone && <p className="text-sm font-mono">Téléphone: {extractedInfo.phone}</p>}
                       </div>
                     )}
                     <button 

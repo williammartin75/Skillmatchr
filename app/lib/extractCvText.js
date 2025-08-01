@@ -106,27 +106,34 @@ export default async function extractCvText(file) {
       let pageText = '';
       let currentSection = null;
       
-      lines.forEach(lineItems => {
-        // Joindre les éléments de la ligne avec des espaces appropriés
-        const lineText = lineItems
-          .map((item, index) => {
-            const text = item.str;
-            
-            // Ajouter un espace si nécessaire entre les éléments
-            if (index > 0 && lineItems[index - 1]) {
-              const prevItem = lineItems[index - 1];
-              const gap = item.transform[4] - (prevItem.transform[4] + prevItem.width);
+              lines.forEach(lineItems => {
+          // Joindre les éléments de la ligne avec des espaces appropriés
+          const lineText = lineItems
+            .map((item, index) => {
+              // Nettoyer le texte dès l'extraction
+              let text = item.str
+                .replace(/[﴾﴿]/g, (match) => match === '﴾' ? '(' : ')') // Parenthèses Unicode
+                .replace(/[–—‐]/g, '-') // Tirets Unicode
+                .replace(/[\u2018\u2019]/g, "'") // Apostrophes courbes
+                .replace(/[\u201C\u201D]/g, '"') // Guillemets courbes
+                .replace(/\u00A0/g, ' ') // Espaces insécables
+                .replace(/[\u200B\u200C\u200D\uFEFF]/g, ''); // Caractères invisibles
               
-              // Si l'écart est significatif, ajouter des espaces supplémentaires
-              if (gap > item.height * 0.5) {
-                return '  ' + text;
+              // Ajouter un espace si nécessaire entre les éléments
+              if (index > 0 && lineItems[index - 1]) {
+                const prevItem = lineItems[index - 1];
+                const gap = item.transform[4] - (prevItem.transform[4] + prevItem.width);
+                
+                // Si l'écart est significatif, ajouter des espaces supplémentaires
+                if (gap > item.height * 0.5) {
+                  return '  ' + text;
+                }
               }
-            }
-            
-            return text;
-          })
-          .join(' ')
-          .trim();
+              
+              return text;
+            })
+            .join(' ')
+            .trim();
         
         if (lineText) {
           // Détecter si c'est une section
@@ -162,7 +169,12 @@ export default async function extractCvText(file) {
       .replace(/\n{3,}/g, '\n\n') // Supprimer les sauts de ligne excessifs
       .replace(/\s{3,}/g, '  ') // Normaliser les espaces multiples
       .replace(/[•▪▫◦‣⁃]/g, '-') // Uniformiser les puces
-      .replace(/[–—]/g, '-') // Uniformiser les tirets
+      .replace(/[–—‐]/g, '-') // Uniformiser les tirets (incluant le tiret Unicode)
+      .replace(/[﴾﴿]/g, (match) => match === '﴾' ? '(' : ')') // Remplacer les parenthèses Unicode
+      .replace(/[\u2018\u2019]/g, "'") // Remplacer les apostrophes courbes
+      .replace(/[\u201C\u201D]/g, '"') // Remplacer les guillemets courbes
+      .replace(/\u00A0/g, ' ') // Remplacer les espaces insécables
+      .replace(/[\u200B\u200C\u200D\uFEFF]/g, '') // Supprimer les caractères invisibles
       .trim();
     
     return {
