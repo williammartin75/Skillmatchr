@@ -288,10 +288,17 @@ export default function Skills() {
                 />
                 {filteredRomeJobs.length > 0 && (
                   <div className="mt-4 space-y-2">
-                    {filteredRomeJobs.slice(0, 5).map((job, index) => (
-                      <div key={index} className="p-3 bg-gray-50 rounded-lg cursor-pointer hover:bg-gray-100">
-                        <div className="font-medium text-gray-900">{job.title}</div>
-                        <div className="text-sm text-gray-600">{job.match} compétences correspondantes</div>
+                    {filteredRomeJobs.slice(0, 5).map((job) => (
+                      <div key={job.code} className="p-3 bg-gray-50 rounded-lg cursor-pointer hover:bg-gray-100">
+                        <div className="flex justify-between items-start">
+                          <div>
+                            <div className="font-medium text-gray-900">{job.title}</div>
+                            <div className="text-sm text-gray-600">{job.match} compétences correspondantes</div>
+                          </div>
+                          <span className="text-xs bg-gray-200 text-gray-600 px-2 py-1 rounded">
+                            {job.code}
+                          </span>
+                        </div>
                       </div>
                     ))}
                   </div>
@@ -310,15 +317,22 @@ export default function Skills() {
                 />
                 {filteredByDiploma.length > 0 && (
                   <div className="mt-4 space-y-2">
-                    {filteredByDiploma.slice(0, 5).map((job, index) => (
-                      <div key={index} className="p-3 bg-gray-50 rounded-lg cursor-pointer hover:bg-gray-100">
-                        <div className="font-medium text-gray-900">{job.title}</div>
-                        <div className="text-sm text-gray-600">{job.match} diplômes/certifications correspondants</div>
-                        {job.education && job.education.length > 0 && (
-                          <div className="text-xs text-gray-500 mt-1">
-                            {job.education.slice(0, 2).join(', ')}
+                    {filteredByDiploma.slice(0, 5).map((job) => (
+                      <div key={job.code} className="p-3 bg-gray-50 rounded-lg cursor-pointer hover:bg-gray-100">
+                        <div className="flex justify-between items-start">
+                          <div>
+                            <div className="font-medium text-gray-900">{job.title}</div>
+                            <div className="text-sm text-gray-600">{job.match} diplômes/certifications correspondants</div>
+                            {job.education && job.education.length > 0 && (
+                              <div className="text-xs text-gray-500 mt-1">
+                                {job.education.slice(0, 2).join(', ')}
+                              </div>
+                            )}
                           </div>
-                        )}
+                          <span className="text-xs bg-gray-200 text-gray-600 px-2 py-1 rounded">
+                            {job.code}
+                          </span>
+                        </div>
                       </div>
                     ))}
                   </div>
@@ -340,11 +354,16 @@ export default function Skills() {
                   </div>
                 ) : (
                   <div className="space-y-6">
-                    {compatibleRomeJobs.slice(0, jobsToShow).map((job, index) => (
-                      <div key={index} className="border border-gray-200 rounded-lg p-6">
+                    {compatibleRomeJobs.slice(0, jobsToShow).map((job) => (
+                      <div key={job.code} className="border border-gray-200 rounded-lg p-6">
                         <div className="flex justify-between items-start mb-4">
                           <div className="flex-1">
-                            <h4 className="text-xl font-semibold text-gray-900 mb-2">{job.title}</h4>
+                            <div className="flex items-center gap-3 mb-2">
+                              <h4 className="text-xl font-semibold text-gray-900">{job.title}</h4>
+                              <span className="text-sm bg-gray-100 text-gray-600 px-2 py-1 rounded">
+                                Code ROME: {job.code}
+                              </span>
+                            </div>
                             <p className="text-sm text-gray-600 mb-3">{job.description}</p>
                             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
                               <div>

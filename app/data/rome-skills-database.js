@@ -34457,12 +34457,16 @@ function calculateCompatibility(userSkills, jobSkills) {
   
   if (allJobSkills.length === 0) return 0;
   
-  const matchingSkills = userSkills.filter(skill => 
-    allJobSkills.some(jobSkill => 
-      jobSkill.toLowerCase().includes(skill.toLowerCase()) ||
-      skill.toLowerCase().includes(jobSkill.toLowerCase())
-    )
-  );
+  const matchingSkills = userSkills.filter(skill => {
+    // Gérer le cas où skill est un objet avec une propriété name
+    const skillName = typeof skill === 'string' ? skill : skill.name;
+    if (!skillName) return false;
+    
+    return allJobSkills.some(jobSkill => 
+      jobSkill.toLowerCase().includes(skillName.toLowerCase()) ||
+      skillName.toLowerCase().includes(jobSkill.toLowerCase())
+    );
+  });
   
   return Math.round((matchingSkills.length / allJobSkills.length) * 100);
 }

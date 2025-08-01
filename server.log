@@ -1,50 +1,36 @@
-nohup: ignoring input
 
 > skillmatchr-clean@1.0.0 dev
 > next dev -p 3000
 
   ▲ Next.js 14.2.30
   - Local:        http://localhost:3000
+  - Environments: .env.local
+  - Experiments (use with caution):
+    · optimizeCss
 
  ✓ Starting...
- ✓ Ready in 1018ms
- ○ Compiling / ...
- ✓ Compiled / in 1380ms (434 modules)
- GET / 200 in 16ms
- ✓ Compiled in 142ms (218 modules)
- ⨯ Error: The default export is not a React Component in page: "/"
-    at async Promise.all (index 0)
-digest: "2753839066"
- ⨯ Error: The default export is not a React Component in page: "/"
-    at async Promise.all (index 0)
-digest: "2753839066"
- GET / 500 in 92ms
- ⨯ Error: The default export is not a React Component in page: "/"
-    at async Promise.all (index 0)
-digest: "2753839066"
- ⨯ Error: The default export is not a React Component in page: "/"
-    at async Promise.all (index 0)
-digest: "2753839066"
- HEAD / 500 in 21ms
- ⨯ Error: The default export is not a React Component in page: "/"
-    at async Promise.all (index 0)
-digest: "2753839066"
- ⨯ Error: The default export is not a React Component in page: "/"
-    at async Promise.all (index 0)
-digest: "2753839066"
- GET / 500 in 35ms
- ⨯ Error: The default export is not a React Component in page: "/"
-    at async Promise.all (index 0)
-digest: "3749750141"
- HEAD / 500 in 22ms
- ⨯ Error: The default export is not a React Component in page: "/"
-    at async Promise.all (index 0)
-digest: "3749750141"
- ✓ Compiled in 129ms (218 modules)
- GET / 200 in 94ms
- ✓ Compiled in 81ms (218 modules)
- GET / 200 in 75ms
- ✓ Compiled in 61ms (218 modules)
- GET / 200 in 86ms
- GET / 200 in 22ms
- GET / 200 in 23ms
+ ✓ Ready in 915ms
+ ○ Compiling /skills ...
+ ✓ Compiled /skills in 1205ms (475 modules)
+ ⨯ app/data/rome-skills-database.js (34462:45) @ toLowerCase
+ ⨯ TypeError: skill.toLowerCase is not a function
+    at eval (./app/data/rome-skills-database.js:34461:123)
+    at Array.some (<anonymous>)
+    at eval (./app/data/rome-skills-database.js:34461:68)
+    at Array.filter (<anonymous>)
+    at calculateCompatibility (./app/data/rome-skills-database.js:34461:39)
+    at eval (./app/data/rome-skills-database.js:34395:28)
+    at Array.map (<anonymous>)
+    at getAllJobsWithCompatibility (./app/data/rome-skills-database.js:34393:46)
+    at Skills (./app/skills/page.js:73:112)
+digest: "1544890574"
+[0m [90m 34460 |[39m   [36mconst[39m matchingSkills [33m=[39m userSkills[33m.[39mfilter(skill [33m=>[39m [0m
+[0m [90m 34461 |[39m     allJobSkills[33m.[39msome(jobSkill [33m=>[39m [0m
+[0m[31m[1m>[22m[39m[90m 34462 |[39m       jobSkill[33m.[39mtoLowerCase()[33m.[39mincludes(skill[33m.[39mtoLowerCase()) [33m||[39m[0m
+[0m [90m       |[39m                                             [31m[1m^[22m[39m[0m
+[0m [90m 34463 |[39m       skill[33m.[39mtoLowerCase()[33m.[39mincludes(jobSkill[33m.[39mtoLowerCase())[0m
+[0m [90m 34464 |[39m     )[0m
+[0m [90m 34465 |[39m   )[33m;[39m[0m
+ GET /skills 500 in 1520ms
+ ✓ Compiled in 88ms (245 modules)
+[?25h
