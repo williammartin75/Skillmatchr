@@ -75,12 +75,41 @@ function detectSections(line) {
 // Fonction principale d'extraction
 export default async function extractCvText(file) {
   try {
-    // Importer dynamiquement pdfjs-dist
+    // Dans un environnement Node.js, utiliser pdf-parse directement
+    if (typeof window === 'undefined') {
+      const pdfParse = await import('pdf-parse');
+      const buffer = Buffer.from(await file.arrayBuffer());
+      const data = await pdfParse.default(buffer);
+      
+      // Nettoyer le texte extrait
+      let fullText = data.text
+        .replace(/[﴾﴿]/g, (match) => match === '﴾' ? '(' : ')') // Parenthèses Unicode
+        .replace(/[–—‐]/g, '-') // Tirets Unicode
+        .replace(/[\u2018\u2019]/g, "'") // Apostrophes courbes
+        .replace(/[\u201C\u201D]/g, '"') // Guillemets courbes
+        .replace(/\u00A0/g, ' ') // Espaces insécables
+        .replace(/[\u200B\u200C\u200D\uFEFF]/g, '') // Caractères invisibles
+        .replace(/[•▪▫◦‣⁃]/g, '-') // Uniformiser les puces
+        .replace(/\n{3,}/g, '\n\n') // Supprimer les sauts de ligne excessifs
+        .replace(/\s{3,}/g, '  ') // Normaliser les espaces multiples
+        .trim();
+      
+      return {
+        text: fullText,
+        structuredData: { pages: [], sections: {} },
+        metadata: {
+          numPages: data.numpages || 1,
+          extractedAt: new Date().toISOString(),
+          method: 'pdf-parse'
+        }
+      };
+    }
+    
+    // Dans le navigateur, utiliser pdfjs-dist
     const pdfjsLib = await import('pdfjs-dist');
     
-    // Configurer le worker
-    if (typeof window !== 'undefined' && !pdfjsLib.GlobalWorkerOptions.workerSrc) {
-      // Configuration côté client
+    // Configurer le worker pour le navigateur
+    if (pdfjsLib.GlobalWorkerOptions && !pdfjsLib.GlobalWorkerOptions.workerSrc) {
       pdfjsLib.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.js`;
     }
     

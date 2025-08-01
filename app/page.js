@@ -29,17 +29,20 @@ export default function Home() {
   const [termsAccepted, setTermsAccepted] = useState(false);
   const fileInputRef = useRef(null);
 
-  // Import dynamique de notre fonction d'extraction améliorée
-  const [extractCvTextSimpleFunc, setExtractCvTextSimpleFunc] = useState(null);
-  
-  useEffect(() => {
-    // Charger la fonction d'extraction au montage du composant
-    import('./lib/extractCvText.js').then(module => {
-      setExtractCvTextSimpleFunc(() => module.extractCvTextSimple);
-    }).catch(err => {
-      console.error("Erreur lors du chargement de extractCvText:", err);
-    });
-  }, []);
+  // Fonction de nettoyage du texte
+  const cleanExtractedText = (text) => {
+    return text
+      .replace(/[﴾﴿]/g, (match) => match === '﴾' ? '(' : ')') // Parenthèses Unicode
+      .replace(/[–—‐]/g, '-') // Tirets Unicode
+      .replace(/[\u2018\u2019]/g, "'") // Apostrophes courbes
+      .replace(/[\u201C\u201D]/g, '"') // Guillemets courbes
+      .replace(/\u00A0/g, ' ') // Espaces insécables
+      .replace(/[\u200B\u200C\u200D\uFEFF]/g, '') // Caractères invisibles
+      .replace(/[•▪▫◦‣⁃]/g, '-') // Uniformiser les puces
+      .replace(/\n{3,}/g, '\n\n') // Supprimer les sauts de ligne excessifs
+      .replace(/\s{3,}/g, '  ') // Normaliser les espaces multiples
+      .trim();
+  };
 
   // Fonction pour extraire le PDF côté client
   const extractPDFText = async (file) => {
@@ -50,17 +53,7 @@ export default function Home() {
     try {
       console.log("📄 Extraction PDF côté client...");
       
-      // Utiliser notre fonction d'extraction améliorée si disponible
-      if (extractCvTextSimpleFunc) {
-        console.log("🚀 Utilisation de la fonction d'extraction améliorée");
-        const fullText = await extractCvTextSimpleFunc(file);
-        console.log("✅ Extraction PDF réussie avec fonction améliorée");
-        console.log("📝 Texte extrait (premiers 500 caractères):", fullText.substring(0, 500));
-        return fullText;
-      }
-      
-      // Fallback sur l'ancienne méthode si la nouvelle n'est pas chargée
-      console.log("⚠️ Fallback sur l'ancienne méthode d'extraction");
+
       
       // Importer pdfjs-dist dynamiquement
       const pdfjsLib = await import('pdfjs-dist');
@@ -96,8 +89,11 @@ export default function Home() {
         fullText += pageText + '\n';
       }
       
-      console.log("✅ Extraction PDF réussie côté client");
-      console.log("📝 Texte extrait (premiers 500 caractères):", fullText.substring(0, 500));
+      // Nettoyer le texte extrait
+      fullText = cleanExtractedText(fullText);
+      
+      console.log("✅ Extraction PDF réussie côté client avec nettoyage");
+      console.log("📝 Texte extrait et nettoyé (premiers 500 caractères):", fullText.substring(0, 500));
       
       return fullText;
     } catch (error) {
