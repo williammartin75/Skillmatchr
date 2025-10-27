@@ -1,0 +1,67 @@
+🚀 Début des candidatures automatiques Jobteaser
+🌐 Utilisation du proxy: 154.213.193.184:3129
+🔄 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36
+📄 Navigation vers Jobteaser...
+🔐 Recherche du bouton de connexion...
+📄 Navigation directe vers la page de connexion...
+📝 Remplissage du formulaire de connexion...
+📤 Soumission du formulaire...
+⚠️ Statut de connexion incertain, continuation...
+📋 Navigation vers la page des offres...
+📸 Capture d'écran sauvegardée: jobteaser-page.png
+🔗 URL actuelle: https://www.jobteaser.com/fr/job-offers
+🔍 Recherche des offres d'emploi...
+📄 Longueur du contenu de la page: 797746
+✅ Trouvé 22 liens avec le sélecteur: a[href*="/job-offers/"]
+📊 5 offres trouvées
+
+📍 Traitement de l'offre 1/5
+🔗 URL: https://www.jobteaser.com/fr/job-offers/d4fef48e-e526-47e8-9902-a2b8710b9580-shiseido-emea-alternance-security-awareness-assistant-h-f
+📋 Offre: Un problème technique est survenu. Veuillez essayer de rafraîchir votre navigateur. 
+Si le problème persiste, nous allons réparer tout ça au plus vite ! chez Entreprise inconnue
+❌ Échec de la candidature: Bouton "Postuler" non trouvé
+
+📍 Traitement de l'offre 2/5
+🔗 URL: https://www.jobteaser.com/fr/job-offers/9e267e30-4e32-4bfb-bd21-6cbeed12ce7a-animalis-stage-assistant-chef-de-produit-mdd-h-f
+📋 Offre: Un problème technique est survenu. Veuillez essayer de rafraîchir votre navigateur. 
+Si le problème persiste, nous allons réparer tout ça au plus vite ! chez Entreprise inconnue
+❌ Échec de la candidature: Bouton "Postuler" non trouvé
+
+📍 Traitement de l'offre 3/5
+🔗 URL: https://www.jobteaser.com/fr/job-offers/d2ee5374-0a2f-43c2-89d6-c18be421d627-societe-generale-assistant-transformation-cloud
+📋 Offre: Un problème technique est survenu. Veuillez essayer de rafraîchir votre navigateur. 
+Si le problème persiste, nous allons réparer tout ça au plus vite ! chez Entreprise inconnue
+❌ Échec de la candidature: Bouton "Postuler" non trouvé
+
+📍 Traitement de l'offre 4/5
+🔗 URL: https://www.jobteaser.com/fr/job-offers/21596dba-5bed-4dfe-94c5-5c3a79ac3ef6-raiffeisenlandesbank-no-wien-spezialist-in-vertriebs-und-produktkoordination-versicherungen-w-m-d
+📋 Offre: Un problème technique est survenu. Veuillez essayer de rafraîchir votre navigateur. 
+Si le problème persiste, nous allons réparer tout ça au plus vite ! chez Entreprise inconnue
+❌ Échec de la candidature: Bouton "Postuler" non trouvé
+
+📍 Traitement de l'offre 5/5
+🔗 URL: https://www.jobteaser.com/fr/job-offers/5f173272-5122-42f7-a156-bfab10f96b11-raiffeisenlandesbank-no-wien-bankenbetreuer-in-versicherung-m-w-d
+📋 Offre: Un problème technique est survenu. Veuillez essayer de rafraîchir votre navigateur. 
+Si le problème persiste, nous allons réparer tout ça au plus vite ! chez Entreprise inconnue
+❌ Échec de la candidature: Bouton "Postuler" non trouvé
+
+==================================================
+📊 RÉSUMÉ DES CANDIDATURES
+==================================================
+✅ Candidatures réussies: 0
+❌ Candidatures échouées: 5
+📊 Taux de réussite: 0.0%
+
+❌ Détail des échecs:
+1. https://www.jobteaser.com/fr/job-offers/d4fef48e-e526-47e8-9902-a2b8710b9580-shiseido-emea-alternance-security-awareness-assistant-h-f
+   Raison: Bouton "Postuler" non trouvé
+2. https://www.jobteaser.com/fr/job-offers/9e267e30-4e32-4bfb-bd21-6cbeed12ce7a-animalis-stage-assistant-chef-de-produit-mdd-h-f
+   Raison: Bouton "Postuler" non trouvé
+3. https://www.jobteaser.com/fr/job-offers/d2ee5374-0a2f-43c2-89d6-c18be421d627-societe-generale-assistant-transformation-cloud
+   Raison: Bouton "Postuler" non trouvé
+4. https://www.jobteaser.com/fr/job-offers/21596dba-5bed-4dfe-94c5-5c3a79ac3ef6-raiffeisenlandesbank-no-wien-spezialist-in-vertriebs-und-produktkoordination-versicherungen-w-m-d
+   Raison: Bouton "Postuler" non trouvé
+5. https://www.jobteaser.com/fr/job-offers/5f173272-5122-42f7-a156-bfab10f96b11-raiffeisenlandesbank-no-wien-bankenbetreuer-in-versicherung-m-w-d
+   Raison: Bouton "Postuler" non trouvé
+
+✅ Script terminé

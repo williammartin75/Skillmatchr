@@ -39,6 +39,10 @@ class JobDetector {
             console.log('✅ [DEBUG] Site Pôle Emploi détecté');
             return 'poleemploi';
         }
+        if (hostname.includes('jobteaser.com')) {
+            console.log('✅ [DEBUG] Site Jobteaser détecté');
+            return 'jobteaser';
+        }
         
         console.log('⚠️ [DEBUG] Site inconnu détecté:', hostname);
         return 'unknown';
@@ -85,12 +89,12 @@ class JobDetector {
                     return true;
                 
                 case 'navigateAndApply':
-                    console.log('🚀 [DEBUG] Navigation et candidature demandées');
+                    console.log('[Content] Navigation et candidature demandées');
                     this.navigateAndApply(request.data).then(result => {
-                        console.log('✅ [DEBUG] Navigation et candidature réussies:', result);
+                        console.log('[Content] Navigation et candidature réussies:', result);
                         sendResponse({ success: true, result });
                     }).catch(error => {
-                        console.error('❌ [DEBUG] Erreur lors de la navigation et candidature:', error);
+                        console.error('[Content] Erreur lors de la navigation et candidature:', error);
                         sendResponse({ success: false, error: error.message });
                     });
                     return true;
@@ -299,6 +303,9 @@ class JobDetector {
                 break;
             case 'poleemploi':
                 adapter = new PoleEmploiAdapter(this.humanBehavior);
+                break;
+            case 'jobteaser':
+                adapter = new JobteaserAdapter(this.humanBehavior);
                 break;
             default:
                 adapter = new GenericAdapter(this.humanBehavior);
