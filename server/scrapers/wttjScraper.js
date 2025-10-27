@@ -221,9 +221,14 @@ class WTTJScraper {
   }
 
   parseRelativeDate(dateText) {
-    if (!dateText) return null;
-    
     const now = new Date();
+    
+    // Si pas de texte, retourner la date actuelle au lieu de null
+    if (!dateText) {
+      console.log('⚠️ Pas de date fournie, utilisation de la date actuelle');
+      return now;
+    }
+    
     const text = dateText.toLowerCase().trim();
     
     if (text.includes('aujourd\'hui') || text.includes('today')) {
@@ -272,6 +277,24 @@ class WTTJScraper {
         date.setMinutes(date.getMinutes() - minutes);
         return date;
       }
+      
+      // Gérer les semaines
+      const weekMatch = text.match(/il y a (\d+) semaine/);
+      if (weekMatch) {
+        const weeks = parseInt(weekMatch[1]);
+        const date = new Date(now);
+        date.setDate(date.getDate() - (weeks * 7));
+        return date;
+      }
+      
+      // Gérer les mois
+      const monthMatch = text.match(/il y a (\d+) mois/);
+      if (monthMatch) {
+        const months = parseInt(monthMatch[1]);
+        const date = new Date(now);
+        date.setMonth(date.getMonth() - months);
+        return date;
+      }
     }
     
     // Essayer de parser une date complète
@@ -281,7 +304,9 @@ class WTTJScraper {
       return new Date(year, month - 1, day);
     }
     
-    return null;
+    // Si rien ne marche, retourner la date actuelle avec un avertissement
+    console.log(`⚠️ Impossible de parser la date: "${dateText}", utilisation de la date actuelle`);
+    return now;
   }
 
   async testDatabaseConnection() {
@@ -956,6 +981,28 @@ class WTTJScraper {
     }
   }
 
+  // Fonction pour valider et corriger les dates
+  ensureValidDate(date, fallbackDate = new Date()) {
+    if (!date) return fallbackDate;
+    
+    const parsedDate = date instanceof Date ? date : new Date(date);
+    
+    // Vérifier si la date est valide
+    if (isNaN(parsedDate.getTime())) {
+      console.log(`⚠️ Date invalide détectée: ${date}, utilisation du fallback`);
+      return fallbackDate;
+    }
+    
+    // Vérifier si la date est dans le futur (probablement une erreur)
+    const now = new Date();
+    if (parsedDate > now) {
+      console.log(`⚠️ Date future détectée: ${parsedDate.toISOString()}, utilisation de la date actuelle`);
+      return now;
+    }
+    
+    return parsedDate;
+  }
+
   async insertJobsToDatabase(jobs) {
     if (jobs.length === 0) return;
     
@@ -967,8 +1014,9 @@ class WTTJScraper {
                       // Normaliser le type de contrat (sans limitation de longueur)
             job.contract = this.normalizeContractType(job.contract);
           
-          // Parser la date de publication
-          const publishedAt = this.parseRelativeDate(job.published_date);
+          // Parser la date de publication avec validation
+          const rawDate = this.parseRelativeDate(job.published_date);
+          const publishedAt = this.ensureValidDate(rawDate, new Date());
           
           await client.query(`
             INSERT INTO wttj_jobs 
@@ -1042,6 +1090,9 @@ class WTTJScraper {
 
       for (const job of wttjJobs.rows) {
         try {
+          // Valider la date avant la synchronisation
+          const validatedDate = this.ensureValidDate(job.published_at, new Date());
+          
           await unifiedPool.query(`
             INSERT INTO jobs 
             (title, company, location, description, contract_type, salary, remote, source, original_id, url, published_at, created_at)
@@ -1068,7 +1119,7 @@ class WTTJScraper {
             'wttj',
             job.source_id,
             job.url,
-            job.published_at
+            validatedDate
           ]);
           
           syncedCount++;

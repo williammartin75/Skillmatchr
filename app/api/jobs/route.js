@@ -206,18 +206,35 @@ export async function GET(request) {
       }
       
       // Formater la date (28/07/2025 au lieu de 2025-07-28T13:34:55.636Z)
-      let formattedDate = 'Date non spécifiée';
-      if (job.published_at) {
-        try {
-          const date = new Date(job.published_at);
+      let formattedDate = '';
+      
+      // Essayer plusieurs sources de dates dans l'ordre de priorité
+      const dateSource = job.published_at || job.posted_date || job.created_at || new Date();
+      
+      try {
+        const date = new Date(dateSource);
+        // Vérifier que la date est valide
+        if (!isNaN(date.getTime())) {
           formattedDate = date.toLocaleDateString('fr-FR', {
             day: '2-digit',
             month: '2-digit',
             year: 'numeric'
           });
-        } catch (e) {
-          formattedDate = 'Date non spécifiée';
+        } else {
+          // Si la date n'est pas valide, utiliser la date du jour
+          formattedDate = new Date().toLocaleDateString('fr-FR', {
+            day: '2-digit',
+            month: '2-digit',
+            year: 'numeric'
+          });
         }
+      } catch (e) {
+        // En cas d'erreur, utiliser la date du jour
+        formattedDate = new Date().toLocaleDateString('fr-FR', {
+          day: '2-digit',
+          month: '2-digit',
+          year: 'numeric'
+        });
       }
       
       // Formater le salaire
